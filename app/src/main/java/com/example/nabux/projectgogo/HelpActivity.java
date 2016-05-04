@@ -3,7 +3,7 @@ package com.example.nabux.projectgogo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class help extends AppCompatActivity {
+public class HelpActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

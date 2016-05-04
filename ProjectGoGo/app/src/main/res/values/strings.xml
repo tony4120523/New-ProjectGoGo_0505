@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">ProjectGoGo</string>
-    <string name="loginlabel">登入</string>
-    <string name="registlabel">註冊</string>
-    <string name="action_logout">登出</string>
-    <string name="title_activity_step">step</string>
-</resources>

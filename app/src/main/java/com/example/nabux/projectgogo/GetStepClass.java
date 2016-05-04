@@ -51,7 +51,7 @@ public class GetStepClass {
 
 
     /**
-     * Background Async Task to Get User step details
+     * Background Async Task to Get User StepActivity details
      * */
     class GetUserSteps extends AsyncTask<String, String, String> {
 
@@ -69,7 +69,7 @@ public class GetStepClass {
         }
 
         /**
-         * Getting User step details in background thread
+         * Getting User StepActivity details in background thread
          * */
         protected String doInBackground(String... args) {
 
@@ -82,7 +82,7 @@ public class GetStepClass {
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("id", id));
                 Log.d("Obov", "!!!!!!!!!!!!");
-                // getting user step details by making HTTP request
+                // getting user StepActivity details by making HTTP request
                 // Note that user details url will use GET request
                 JSONObject json = jsonParser.makeHttpRequest(
                         url_step_detials, "GET", params);
@@ -94,10 +94,10 @@ public class GetStepClass {
                 int success;
                 success = json.getInt("success");
                 if (success == 1) {
-                    // successfully received user step details
+                    // successfully received user StepActivity details
                     JSONArray userObj = json.getJSONArray("steps"); // JSON Array
 
-                    // get first user step object from JSON Array
+                    // get first user StepActivity object from JSON Array
                     JSONObject userstep = userObj.getJSONObject(0);
 
 
@@ -109,7 +109,7 @@ public class GetStepClass {
 
                 }else{
                     // user with id not found
-                    Log.d("Account step Not found", "user step id not in database");
+                    Log.d("Account StepActivity Not found", "user StepActivity id not in database");
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

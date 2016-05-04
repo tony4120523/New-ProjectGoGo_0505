@@ -6,7 +6,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class report extends AppCompatActivity {
+public class ReportActivity extends AppCompatActivity {
     WebView webreport;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

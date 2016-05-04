@@ -157,7 +157,7 @@ public class RegistActivity extends AppCompatActivity {
                     // successfully created product
 
                     /*******
-                     * Note!!! Think about that after create user what is the next step.....
+                     * Note!!! Think about that after create user what is the next StepActivity.....
                      * Intent i = new Intent(getApplicationContext(), AllProductsActivity.class);
                      * startActivity(i);
                      ********/

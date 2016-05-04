@@ -7,7 +7,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-public class hg extends AppCompatActivity {
+public class BPActivity extends AppCompatActivity {
     WebView webhg;
     TextView tvtime,tvhigh,tvavg;
     @Override

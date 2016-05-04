@@ -105,7 +105,7 @@ public class JSONParser {
             Log.e("JSON Parser", "Error parsing data " + e.toString() + "     " + json);
         }
 
-        // return JSON String
+        // return JSON Object
         return jObj;
 
     }

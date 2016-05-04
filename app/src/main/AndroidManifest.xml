@@ -32,12 +32,12 @@
         <!-- Home Activity -->
         <activity
             android:name=".HomeActivity"
-            android:label="主畫面" />
-        <activity android:name=".step" />
-        <activity android:name=".bmi" />
-        <activity android:name=".hg" />
-        <activity android:name=".report" />
-        <activity android:name=".help"></activity>
+            android:label="@string/homelabel" />
+        <activity android:name=".StepActivity" />
+        <activity android:name=".BMIActivity" />
+        <activity android:name=".BPActivity" />
+        <activity android:name=".ReportActivity" />
+        <activity android:name=".HelpActivity"></activity>
     </application>
 
 </manifest>

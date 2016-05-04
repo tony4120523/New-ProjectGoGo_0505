@@ -44,9 +44,9 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                Intent in = new Intent(getApplicationContext(), step.class);
+                Intent in = new Intent(getApplicationContext(), StepActivity.class);
                 startActivity(in);
-                finish();
+
             }
         });
 
@@ -54,9 +54,9 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                Intent in = new Intent(getApplicationContext(), bmi.class);
+                Intent in = new Intent(getApplicationContext(), BMIActivity.class);
                 startActivity(in);
-                finish();
+
             }
         });
 
@@ -64,9 +64,9 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                Intent in = new Intent(getApplicationContext(), hg.class);
+                Intent in = new Intent(getApplicationContext(), BPActivity.class);
                 startActivity(in);
-                finish();
+
             }
         });
 
@@ -74,9 +74,9 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                Intent in = new Intent(getApplicationContext(), report.class);
+                Intent in = new Intent(getApplicationContext(), ReportActivity.class);
                 startActivity(in);
-                finish();
+
             }
         });
 
@@ -84,9 +84,9 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                Intent in = new Intent(getApplicationContext(), help.class);
+                Intent in = new Intent(getApplicationContext(), HelpActivity.class);
                 startActivity(in);
-                finish();
+
             }
         });
 
@@ -131,10 +131,6 @@ public class HomeActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
     }
-
-
-
-
 
 
 
