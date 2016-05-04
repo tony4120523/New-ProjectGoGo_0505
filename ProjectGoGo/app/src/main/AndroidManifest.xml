@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.nabux.projectgogo">
+
+    <!-- Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Log in Activity -->
+        <activity
+            android:name=".LogInActivity"
+            android:label="@string/loginlabel" />
+
+        <!-- Regist Activity -->
+        <activity
+            android:name=".RegistActivity"
+            android:label="@string/registlabel" />
+
+        <!-- Home Activity -->
+        <activity
+            android:name=".HomeActivity"
+            android:label="主畫面" />
+        <activity android:name=".step"></activity>
+    </application>
+
+</manifest>
