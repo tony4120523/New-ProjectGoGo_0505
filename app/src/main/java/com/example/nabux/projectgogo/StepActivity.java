@@ -12,6 +12,10 @@ import android.widget.TextView;
 public class StepActivity extends AppCompatActivity {
     WebView webstep;
     TextView tvtime,tvhigh,tvavg;
+
+    int[] step_buffer;
+    private static final String htmlurl = "http://www.hth96.me/nabu_connect/steps.html";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +24,20 @@ public class StepActivity extends AppCompatActivity {
         tvtime= (TextView) findViewById(R.id.tvtime);
         tvhigh= (TextView) findViewById(R.id.tvhigh);
         tvavg= (TextView) findViewById(R.id.tvavg);
-        webstep.loadUrl("http://home1.usc.edu.tw/a0261038/steps.html");
+
+
+        Intent in = getIntent();
+        step_buffer = in.getIntArrayExtra("step_buffer");
+        String para = "aa="+step_buffer[0]+"&&"+
+                "bb="+step_buffer[1]+"&&"+
+                "cc="+step_buffer[2]+"&&"+
+                "dd="+step_buffer[3]+"&&"+
+                "ee="+step_buffer[4]+"&&"+
+                "ff="+step_buffer[5]+"&&"+
+                "gg="+step_buffer[6];
+
+        String url_ref = htmlurl + "?" + para;
+        webstep.loadUrl(url_ref);
         webstep.setWebViewClient(new WebViewClient());
         WebSettings webSettings = webstep.getSettings();
         webSettings.setJavaScriptEnabled(true);

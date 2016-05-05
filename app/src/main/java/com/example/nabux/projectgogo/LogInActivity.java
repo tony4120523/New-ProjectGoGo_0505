@@ -44,11 +44,12 @@ public class LogInActivity extends AppCompatActivity {
     String usernickname, userAccount, userpsd, userID;
     String global_Account;
 
-    // JSON Node names
+    // JSON Node names(depend on php)
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_USER = "user";
     private static final String TAG_ACCOUNT = "account";
     private static final String TAG_PSD = "psd";
+    private static final String TAG_ID = "id";
     private static final String TAG_NICKNAME = "nickname";
 
 
@@ -118,7 +119,7 @@ public class LogInActivity extends AppCompatActivity {
                             case 0:
                                 // calling to this function from onPostExecute
                                 if (Account.equals(userAccount) && psd.equals(userpsd)) {
-
+                                    Log.d("USERID HERE",userID);
                                     session.setUserID(userID);
                                     session.setUserAccount(userAccount);
                                     session.setUserPSD(userpsd);
@@ -228,7 +229,7 @@ public class LogInActivity extends AppCompatActivity {
                             userAccount = user.getString(TAG_ACCOUNT);
                             userpsd = user.getString(TAG_PSD);
                             usernickname = user.getString(TAG_NICKNAME);
-
+                            userID = user.getString(TAG_ID);
 
 
 
