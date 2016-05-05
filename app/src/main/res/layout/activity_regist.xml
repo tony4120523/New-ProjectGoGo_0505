@@ -122,17 +122,20 @@
         android:layout_toStartOf="@+id/linearLayout14"
         android:layout_alignBottom="@+id/linearLayout14"
         android:gravity="center_vertical"
-        android:layout_below="@+id/linearLayout12">
+        android:layout_below="@+id/linearLayout12"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="115dp"
             android:layout_height="wrap_content"
-            android:text="暱稱："
+            android:text="暱           稱："
             android:id="@+id/tvrgnickname"
             android:textSize="20sp"
             android:layout_gravity="right"
             android:layout_below="@+id/linearLayout13"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:gravity="left" />
     </LinearLayout>
 
     <LinearLayout

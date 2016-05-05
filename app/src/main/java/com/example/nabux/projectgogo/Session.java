@@ -16,14 +16,14 @@ public class Session {
 
     }
 
-    public void setUserID(String userid) {
-        prefs.edit().putString("userid", userid).commit();
+    public void setUserAccount(String userAccount) {
+        prefs.edit().putString("userAccount", userAccount).commit();
         //prefsCommit();
     }
 
-    public String getUserID() {
-        String userid = prefs.getString("userid","");
-        return userid;
+    public String getUserAccount() {
+        String userAccount = prefs.getString("userAccount","");
+        return userAccount;
     }
 
     public void setUserPSD(String userpsd) {
@@ -36,5 +36,13 @@ public class Session {
         return userpsd;
     }
 
+    public void setUserID(String userID) {
+        prefs.edit().putString("userID",userID).commit();
+    }
+
+    public String getUserID() {
+        String userID = prefs.getString("userID","");
+        return userID;
+    }
 }
 

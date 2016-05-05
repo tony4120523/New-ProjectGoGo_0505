@@ -39,15 +39,15 @@ public class LogInActivity extends AppCompatActivity {
     // single user url
     private static final String url_user_detials = "http://45.55.213.89/nabu_connect/query_login.php";
 
-    EditText edtid, edtpsd;
+    EditText edtAccount, edtpsd;
     Button btnLog, btnRes;
-    String usernickname, userid, userpsd;
-    String global_id;
+    String usernickname, userAccount, userpsd, userID;
+    String global_Account;
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_USER = "user";
-    private static final String TAG_ID = "id";
+    private static final String TAG_ACCOUNT = "account";
     private static final String TAG_PSD = "psd";
     private static final String TAG_NICKNAME = "nickname";
 
@@ -59,27 +59,27 @@ public class LogInActivity extends AppCompatActivity {
 
         session = new Session(getApplicationContext());
 
-        userid = null;
+        userAccount = null;
         userpsd = null;
         usernickname = null;
         btnLog = (Button) findViewById(R.id.btnlogin);
         btnRes = (Button) findViewById(R.id.btnregist);
-        edtid = (EditText) findViewById(R.id.ed1);
+        edtAccount = (EditText) findViewById(R.id.ed1);
         edtpsd = (EditText) findViewById(R.id.ed2);
 
         Intent intent = getIntent();
-        if(intent.hasExtra("userID")) {
-            final String uID = intent.getStringExtra("userID");
+        if(intent.hasExtra("userAccount")) {
+            final String uAccount = intent.getStringExtra("userAccount");
             final String uPSD = intent.getStringExtra("userPSD");
-            global_id = uID;
-            Log.d("0410", uID+"..");
+            global_Account = uAccount;
+            Log.d("0410", uAccount+"..");
             myHandler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     switch (msg.what) {
                         case 0:
                             // calling to this function from onPostExecute
-                            if (uID.equals(userid) && uPSD.equals(userpsd)) {
+                            if (uAccount.equals(userAccount) && uPSD.equals(userpsd)) {
                                 Intent homein = new Intent(getApplicationContext(), HomeActivity.class);
                                 homein.putExtra(TAG_NICKNAME, usernickname);
                                 homein.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -106,9 +106,9 @@ public class LogInActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                final String id = edtid.getText().toString();
+                final String Account = edtAccount.getText().toString();
                 final String psd = edtpsd.getText().toString();
-                global_id = edtid.getText().toString();
+                global_Account = edtAccount.getText().toString();
 
                 myHandler = new Handler() {
 
@@ -117,9 +117,10 @@ public class LogInActivity extends AppCompatActivity {
                         switch (msg.what) {
                             case 0:
                                 // calling to this function from onPostExecute
-                                if (id.equals(userid) && psd.equals(userpsd)) {
+                                if (Account.equals(userAccount) && psd.equals(userpsd)) {
 
-                                    session.setUserID(userid);
+                                    session.setUserID(userID);
+                                    session.setUserAccount(userAccount);
                                     session.setUserPSD(userpsd);
 
 
@@ -195,14 +196,14 @@ public class LogInActivity extends AppCompatActivity {
             // updating UI from Background Thread
             //runOnUiThread(new Runnable() {
                 //public void run() {
-                    String id = global_id;
+                    String Account = global_Account;
 
                     Log.d("Test", "!!!!!!!!!!!!");
                     try {
                         // Building Parameters
                         List<NameValuePair> params = new ArrayList<NameValuePair>();
-                        params.add(new BasicNameValuePair("id", id));
-                        Log.d("ObOv", "!!!!!!!!!!!!");
+                        params.add(new BasicNameValuePair("Account", Account));
+                        Log.d("ob'_'ov", "!!!!!!!!!!!!");
                         // getting user details by making HTTP request
                         // Note that user details url will use GET request
                         JSONObject json = jsonParser.makeHttpRequest(
@@ -224,7 +225,7 @@ public class LogInActivity extends AppCompatActivity {
 
 
                             // user detail
-                            userid = user.getString(TAG_ID);
+                            userAccount = user.getString(TAG_ACCOUNT);
                             userpsd = user.getString(TAG_PSD);
                             usernickname = user.getString(TAG_NICKNAME);
 
@@ -233,8 +234,8 @@ public class LogInActivity extends AppCompatActivity {
 
 
                         }else{
-                            // user with id not found
-                            Log.d("Account Not found", "user id not in database");
+                            // user with Account not found
+                            Log.d("Account Not found", "user Account not in database");
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

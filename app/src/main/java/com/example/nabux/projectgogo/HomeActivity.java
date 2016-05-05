@@ -111,8 +111,9 @@ public class HomeActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement, Log out...
         if (id == R.id.action_logout) {
 
-            session.setUserID("");
+            session.setUserAccount("");
             session.setUserPSD("");
+            session.setUserID("");
 
 
             // Launching MainScreen Activity

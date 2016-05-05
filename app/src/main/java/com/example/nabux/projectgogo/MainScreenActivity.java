@@ -20,10 +20,10 @@ public class MainScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_screen);
 
         session = new Session(getApplicationContext());
-        Log.d("Message", session.getUserID()+"GGGG");
-        if( !(session.getUserID().equals("") && session.getUserPSD().equals("")) ) {
+        Log.d("Message", session.getUserAccount()+"GGGG");
+        if( !(session.getUserAccount().equals("") && session.getUserPSD().equals("")) ) {
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
-            intent.putExtra("userID", session.getUserID());
+            intent.putExtra("userAccount", session.getUserAccount());
             intent.putExtra("userPSD", session.getUserPSD());
             startActivity(intent);
         }
