@@ -4,5 +4,6 @@
     <string name="regist_label">註冊</string>
     <string name="home_label">主畫面</string>
     <string name="step_label">步數圖</string>
+    <string name="bmi_label">BMI變化圖</string>
     <string name="action_logout">登出</string>
 </resources>

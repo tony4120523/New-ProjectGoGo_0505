@@ -37,7 +37,10 @@
         <activity
             android:name=".StepActivity"
             android:label="@string/step_label"/>
-        <activity android:name=".BMIActivity" />
+
+        <activity
+            android:name=".BMIActivity"
+            android:label="@string/bmi_label"/>
         <activity android:name=".BPActivity" />
         <activity android:name=".ReportActivity" />
         <activity android:name=".HelpActivity"></activity>
