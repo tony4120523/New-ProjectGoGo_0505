@@ -41,7 +41,9 @@
         <activity
             android:name=".BMIActivity"
             android:label="@string/bmi_label"/>
-        <activity android:name=".BPActivity" />
+
+        <activity android:name=".BPActivity"
+            android:label="@string/bp_label"/>
         <activity android:name=".ReportActivity" />
         <activity android:name=".HelpActivity"></activity>
     </application>
