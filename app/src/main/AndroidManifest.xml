@@ -22,18 +22,21 @@
         <!-- Log in Activity -->
         <activity
             android:name=".LogInActivity"
-            android:label="@string/loginlabel" />
+            android:label="@string/login_label" />
 
         <!-- Regist Activity -->
         <activity
             android:name=".RegistActivity"
-            android:label="@string/registlabel" />
+            android:label="@string/regist_label" />
 
         <!-- Home Activity -->
         <activity
             android:name=".HomeActivity"
-            android:label="@string/homelabel" />
-        <activity android:name=".StepActivity" />
+            android:label="@string/home_label" />
+
+        <activity
+            android:name=".StepActivity"
+            android:label="@string/step_label"/>
         <activity android:name=".BMIActivity" />
         <activity android:name=".BPActivity" />
         <activity android:name=".ReportActivity" />
