@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nabux.projectgogo">
 
-    <!-- Internet Permissions -->
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -33,23 +30,41 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/home_label" />
-
         <activity
             android:name=".StepActivity"
-            android:label="@string/step_label"/>
-
+            android:label="@string/step_label" />
         <activity
             android:name=".BMIActivity"
-            android:label="@string/bmi_label"/>
+            android:label="@string/bmi_label" />
+        <activity
+            android:name=".BPActivity"
+            android:label="@string/bp_label" />
+        <activity
+            android:name=".ReportActivity"
+            android:label="@string/report_label" />
+        <activity
+            android:name=".HelpActivity"
+            android:label="@string/helper_label" />
 
-        <activity android:name=".BPActivity"
-            android:label="@string/bp_label"/>
+        <activity android:name=".ocr.CaptureActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            >
+        </activity>
+        <activity android:name=".ocr.HelpActivity"
+            android:screenOrientation="user">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
 
-        <activity android:name=".ReportActivity"
-            android:label="@string/report_label"/>
-
-        <activity android:name=".HelpActivity"
-            android:label="@string/helper_label"></activity>
+        <activity android:name=".ocr.PreferencesActivity" />
     </application>
-
+    <!-- Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 </manifest>
