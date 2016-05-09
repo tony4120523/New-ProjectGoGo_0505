@@ -35,7 +35,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final String url_bp_detials = "";
 
     TextView txvhi;
-    Button btnstep,btnbmi,btnhg,btnreport,btnhelp;
+    Button btnstep,btnbmi,btnhg,btnreport,btnhelp, btn_ocr;
     int[] step_buffer;
 
     @Override
@@ -50,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
         btnhg= (Button) findViewById(R.id.btnhg);
         btnreport= (Button) findViewById(R.id.btnreport);
         btnhelp= (Button) findViewById(R.id.btnhelp);
+        btn_ocr = (Button) findViewById(R.id.btn_ocr);
         Intent in = getIntent();
         String nickname = in.getStringExtra("nickname");
         Log.d("....", nickname);
@@ -69,7 +70,7 @@ public class HomeActivity extends AppCompatActivity {
                     public void handleMessage(Message msg) {
                         switch (msg.what) {
                             case 0:
-                                Log.d("Now step_buffer",""+step_buffer[0]);
+                                Log.d("Now step_buffer", "" + step_buffer[0]);
                                 Intent in = new Intent(getApplicationContext(), StepActivity.class);
                                 in.putExtra("step_buffer", step_buffer);
                                 startActivity(in);
@@ -122,6 +123,16 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 Intent in = new Intent(getApplicationContext(), HelpActivity.class);
+                startActivity(in);
+
+            }
+        });
+
+        btn_ocr.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent in = new Intent(getApplicationContext(), com.example.nabux.projectgogo.ocr.CaptureActivity.class);
                 startActivity(in);
 
             }

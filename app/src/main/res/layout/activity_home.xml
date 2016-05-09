@@ -81,4 +81,16 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/btnbmi"
         android:layout_alignEnd="@+id/btnbmi" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="辨識功能"
+        android:id="@+id/btn_ocr"
+        android:layout_below="@+id/btnhelp"
+        android:layout_marginTop="33dp"
+        android:layout_alignRight="@+id/btnhelp"
+        android:layout_alignEnd="@+id/btnhelp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
