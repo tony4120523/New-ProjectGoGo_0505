@@ -25,7 +25,6 @@ public class StepActivity extends AppCompatActivity {
         tvhigh= (TextView) findViewById(R.id.tvhigh);
         tvavg= (TextView) findViewById(R.id.tvavg);
 
-
         Intent in = getIntent();
         step_buffer = in.getIntArrayExtra("step_buffer");
         String para = "aa="+step_buffer[0]+"&&"+

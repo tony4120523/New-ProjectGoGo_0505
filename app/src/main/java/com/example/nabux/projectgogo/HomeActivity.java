@@ -31,12 +31,15 @@ public class HomeActivity extends AppCompatActivity {
     Handler myHandler;
     JSONParser jsonParser = new JSONParser();
     private static final String url_step_detials = "http://www.hth96.me/nabu_connect/query_steps.php";
-    private static final String url_bmi_detials = "";
-    private static final String url_bp_detials = "";
+    private static final String url_bmi_detials = "http://www.hth96.me/nabu_connect/query_bmi.php";
+    private static final String url_bp_detials = "http://www.hth96.me/nabu_connect/query_bp.php";
 
     TextView txvhi;
     Button btnstep,btnbmi,btnhg,btnreport,btnhelp, btn_ocr;
     int[] step_buffer;
+    double[] bmi_buffer;
+    double[] bp_sys_buffer;
+    double[] bp_dia_buffer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +62,6 @@ public class HomeActivity extends AppCompatActivity {
         txvhi.setText("Hola~" + nickname);
 
 
-
         btnstep.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -70,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
                     public void handleMessage(Message msg) {
                         switch (msg.what) {
                             case 0:
-                                Log.d("Now step_buffer", "" + step_buffer[0]);
+                                Log.d("NOW STEP_BUFFER", "" + step_buffer[0]);
                                 Intent in = new Intent(getApplicationContext(), StepActivity.class);
                                 in.putExtra("step_buffer", step_buffer);
                                 startActivity(in);
@@ -82,7 +84,7 @@ public class HomeActivity extends AppCompatActivity {
                 };
 
                 // Getting data in background thread
-                new Getdata().execute();
+                new Getdata("step").execute();
 
 
             }
@@ -92,9 +94,28 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                Intent in = new Intent(getApplicationContext(), BMIActivity.class);
-                startActivity(in);
+                //Intent in = new Intent(getApplicationContext(), BMIActivity.class);
+                //startActivity(in);
 
+                myHandler = new Handler() {
+
+                    @Override
+                    public void handleMessage(Message msg) {
+                        switch (msg.what) {
+                            case 0:
+                                Log.d("NOW BMI_BUFFER", "" + bmi_buffer[0]);
+                                Intent in = new Intent(getApplicationContext(), BMIActivity.class);
+                                in.putExtra("bmi_buffer", bmi_buffer);
+                                startActivity(in);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                };
+
+                // Getting data in background thread
+                new Getdata("bmi").execute();
             }
         });
 
@@ -102,8 +123,29 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                Intent in = new Intent(getApplicationContext(), BPActivity.class);
-                startActivity(in);
+                //Intent in = new Intent(getApplicationContext(), BPActivity.class);
+                //startActivity(in);
+                myHandler = new Handler() {
+
+                    @Override
+                    public void handleMessage(Message msg) {
+                        switch (msg.what) {
+                            case 0:
+                                Log.d("NOW BP_SYS_BUFFER", "" + bp_sys_buffer[0]);
+                                Log.d("NOW BP_DIA_BUFFER", "" + bp_dia_buffer[0]);
+                                Intent in = new Intent(getApplicationContext(), BPActivity.class);
+                                in.putExtra("bp_sys_buffer", bp_sys_buffer);
+                                in.putExtra("bp_dia_buffer", bp_dia_buffer);
+                                startActivity(in);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                };
+
+                // Getting data in background thread
+                new Getdata("bp").execute();
 
             }
         });
@@ -182,6 +224,10 @@ public class HomeActivity extends AppCompatActivity {
 
 
     class Getdata extends AsyncTask<String, String, String> {
+        String describe;
+        Getdata(String desc) {
+            describe = desc;
+        }
 
         @Override
         protected void onPreExecute() {
@@ -205,35 +251,89 @@ public class HomeActivity extends AppCompatActivity {
                 // Building Parameters
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("id", id));
-                Log.d("ob'_'ov", "!!!!!!!!!!!!");
 
+                Log.d("DESCRIBE", describe);
 
-                JSONObject json = jsonParser.makeHttpRequest(
-                        url_step_detials, "GET", params);
+                if(describe.equals("step")) {
+                    JSONObject json = jsonParser.makeHttpRequest(url_step_detials, "GET", params);
+                    // check your log for json response
+                    Log.d("RETURN JSON", json.toString());
+                    // json success tag
+                    int success;
+                    success = json.getInt("success");
+                    if (success == 1) {
+                        // successfully received json
+                        JSONArray userArr = json.getJSONArray("steps"); // JSON Array
+                        Log.d("The userArr is", userArr.toString());
 
-                // check your log for json response
-                Log.d("User Step Details", json.toString());
+                        //each step is here
+                        step_buffer = new int[userArr.length()];
+                        for(int i=0; i<userArr.length(); i++) {
 
-                // json success tag
-                int success;
-                success = json.getInt("success");
-                if (success == 1) {
-                    // successfully received user step details
-                    JSONArray userArr = json.getJSONArray("steps"); // JSON Array
-                    Log.d("The userArr is", userArr.toString());
+                            step_buffer[i] = Integer.parseInt(userArr.getString(i));
+                            Log.d("EVERY STEP SHOW HERE", Integer.toString(step_buffer[i]));
+                        }
 
-                    //each step is here
-                    step_buffer = new int[userArr.length()];
-                    for(int i=0; i<userArr.length(); i++) {
-                        //Log.d("helloworld",userArr.getString(i));
-                        step_buffer[i] = Integer.parseInt(userArr.getString(i));
-                        Log.d("asdf", Integer.toString(step_buffer[i]));
+                    }else{
+                        // user with id not found
+                        Log.d("QUERY STEP NOT FOUND", "user data not in database");
                     }
+                }else if(describe.equals("bmi")) {
+                    JSONObject json = jsonParser.makeHttpRequest(url_bmi_detials, "GET", params);
+                    // check your log for json response
+                    Log.d("RETURN JSON", json.toString());
+                    // json success tag
+                    int success;
+                    success = json.getInt("success");
+                    if (success == 1) {
+                        // successfully received json
+                        JSONArray userArr = json.getJSONArray("bmi"); // JSON Array
+                        Log.d("The userArr is", userArr.toString());
 
-                }else{
-                    // user with id not found
-                    Log.d("Account steps Not found", "user step id not in database");
+                        //each bmi is here
+                        bmi_buffer = new double[userArr.length()];
+                        for(int i=0; i<userArr.length(); i++) {
+
+                            bmi_buffer[i] = Double.parseDouble(userArr.getString(i));
+                            Log.d("EVERY BMI SHOW HERE", Double.toString(bmi_buffer[i]));
+                        }
+
+                    }else{
+                        // user with id not found
+                        Log.d("QUERY BMI NOT FOUND", "user data not in database");
+                    }
+                }else if(describe.equals("bp")) {
+                    JSONObject json = jsonParser.makeHttpRequest(url_bp_detials, "GET", params);
+                    // check your log for json response
+                    Log.d("RETURN JSON", json.toString());
+                    // json success tag
+                    int success;
+                    success = json.getInt("success");
+                    if (success == 1) {
+                        // successfully received json
+                        JSONArray bp_sys_Arr = json.getJSONArray("bp_sys"); // JSON Array
+                        JSONArray bp_dia_Arr = json.getJSONArray("bp_dia");
+                        Log.d("BP SYS ARR", bp_sys_Arr.toString());
+                        Log.d("BP DIA ARR", bp_dia_Arr.toString());
+
+                        bp_sys_buffer = new double[bp_sys_Arr.length()];
+                        bp_dia_buffer = new double[bp_dia_Arr.length()];
+                        for(int i=0; i<bp_sys_Arr.length(); i++) {
+
+                            bp_sys_buffer[i] = Double.parseDouble(bp_sys_Arr.getString(i));
+                            bp_dia_buffer[i] = Double.parseDouble(bp_dia_Arr.getString(i));
+                            Log.d("EVERY SYS BP SHOW HERE", Double.toString(bp_sys_buffer[i]));
+                            Log.d("EVERY DIA BP SHOW HERE", Double.toString(bp_dia_buffer[i]));
+                        }
+
+                    }else{
+                        // user with id not found
+                        Log.d("QUERY BP NOT FOUND", "user data not in database");
+                    }
+                }else {
+                    //wait to add...
                 }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
