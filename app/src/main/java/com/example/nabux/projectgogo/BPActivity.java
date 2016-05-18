@@ -33,11 +33,21 @@ public class BPActivity extends AppCompatActivity {
 
         para = "hmon=" + bp_sys_buffer[0] + "&&" +
                 "htue=" + bp_sys_buffer[1] + "&&" +
-                "hwed=" + bp_sys_buffer[2] + "&&";
+                "hwed=" + bp_sys_buffer[2] + "&&" +
+                "hthr=" + bp_sys_buffer[3] + "&&" +
+                "hfri=" + bp_sys_buffer[4] + "&&" +
+                "hsat=" + bp_sys_buffer[5] + "&&" +
+                "hsun=" + bp_sys_buffer[6] + "&&";
 
         para += "lmon=" + bp_dia_buffer[0] + "&&" +
                 "ltue=" + bp_dia_buffer[1] + "&&" +
-                "lwed=" + bp_dia_buffer[2];
+                "lwed=" + bp_dia_buffer[2] + "&&" +
+                "lthr=" + bp_dia_buffer[3] + "&&" +
+                "lfri=" + bp_dia_buffer[4] + "&&" +
+                "lsat=" + bp_dia_buffer[5] + "&&" +
+                "lsun=" + bp_dia_buffer[6] ;
+
+
         String url_ref = htmlurl + "?" + para;
         Log.d("STR URL REF", url_ref);
 
