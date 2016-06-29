@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nabux.projectgogo">
+    <!-- Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -8,6 +13,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+
         <activity android:name=".MainScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,26 +52,23 @@
         <activity
             android:name=".HelpActivity"
             android:label="@string/helper_label" />
-
-        <activity android:name=".ocr.CaptureActivity"
-            android:screenOrientation="landscape"
+        <activity
+            android:name=".ocr.CaptureActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            >
-        </activity>
-        <activity android:name=".ocr.HelpActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity
+            android:name=".ocr.HelpActivity"
             android:screenOrientation="user">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name=".ocr.PreferencesActivity" />
+        <activity android:name=".ReceiverActivity"></activity>
     </application>
-    <!-- Internet Permissions -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
 </manifest>

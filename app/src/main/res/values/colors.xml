@@ -18,8 +18,8 @@
 
 <!-- For color names, see http://en.wikipedia.org/wiki/HTML_color_names -->
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#3CB371</color>
+    <color name="colorPrimaryDark">#2E8B57</color>
     <color name="colorAccent">#FF4081</color>
     <color name="help_button_view">#ffcccccc</color> <!-- help button view background color -->
     <color name="help_view">#ff404040</color> <!-- background color for entire help view -->

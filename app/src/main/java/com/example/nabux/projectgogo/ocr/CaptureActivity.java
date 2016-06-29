@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -39,7 +40,10 @@ import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.ClipboardManager;
+import android.text.InputType;
 import android.text.SpannableStringBuilder;
+import android.text.method.DigitsKeyListener;
+import android.text.method.KeyListener;
 import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
@@ -56,6 +60,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -754,6 +759,24 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     sourceLanguageTextView.setText(sourceLanguageReadable);
     TextView ocrResultTextView = (TextView) findViewById(R.id.ocr_result_text_view);
     ocrResultTextView.setText(ocrResult.getText());
+    Log.e(TAG, ocrResult.getText());
+    final EditText edittext = new EditText(getApplicationContext());
+    edittext.setKeyListener(DigitsKeyListener.getInstance(true, true));
+    edittext.setText(ocrResult.getText());
+    DialogInterface.OnClickListener mylistener = new DialogInterface.OnClickListener(){
+      @Override
+      public void onClick(DialogInterface dialog, int which) {
+        if(which == DialogInterface.BUTTON_POSITIVE){
+          Toast.makeText(getApplicationContext(), "Value saved successfully.", Toast.LENGTH_LONG).show();
+          finish();
+        }
+        else{
+          resumeContinuousDecoding();
+        }
+      }
+    };
+    new AlertDialog.Builder(this).setView(edittext).setTitle("Saved this value ???").setPositiveButton("OK", mylistener).
+            setNegativeButton("Try again", mylistener).show();
     // Crudely scale betweeen 22 and 32 -- bigger font for shorter text
     int scaledSize = Math.max(22, 32 - ocrResult.getText().length() / 4);
     ocrResultTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, scaledSize);
