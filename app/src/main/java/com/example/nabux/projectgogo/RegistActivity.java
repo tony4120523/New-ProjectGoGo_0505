@@ -38,7 +38,8 @@ public class RegistActivity extends AppCompatActivity {
     private static final String TAG_SUCCESS = "success";
 
     // url to create new product
-    private static String url_create_user = "http://45.55.213.89/nabu_connect/create_user.php";
+    private static String url_create_user = "http://www.hth96.me/nabu_connect/create_user.php";
+    private static final String TAG = RegistActivity.class.getSimpleName();
 
     TextView tvrgid,tvrgpsd,tvrgpsd2,tvrgnickname;
     Button btnrgsubmit,btnrgreset;
@@ -134,7 +135,7 @@ public class RegistActivity extends AppCompatActivity {
             String id = edrgid.getText().toString();
             String psd = edrgpsd.getText().toString();
             String nickname = edrgnickname.getText().toString();
-            Log.d("Test Error", id);
+            Log.d(TAG, "Input ID : " + id);
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("id", id));
@@ -147,7 +148,7 @@ public class RegistActivity extends AppCompatActivity {
                     "POST", params);
 
             // check log cat for response
-            Log.d("Create Response", json.toString());
+            Log.d(TAG, "JSON : " + json.toString());
 
             // check for success tag
             try {

@@ -9,4 +9,5 @@
     <string name="report_label">健康報告</string>
     <string name="helper_label">健康小幫手</string>
     <string name="action_logout">登出</string>
+    <string name="input_data_label">輸入資料</string>
 </resources>

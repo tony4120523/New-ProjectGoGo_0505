@@ -38,6 +38,7 @@ public class LogInActivity extends AppCompatActivity {
 
     // single user url
     private static final String url_user_detials = "http://45.55.213.89/nabu_connect/query_login.php";
+    private static final String TAG = LogInActivity.class.getSimpleName();
 
     EditText edtAccount, edtpsd;
     Button btnLog, btnRes;
@@ -73,7 +74,7 @@ public class LogInActivity extends AppCompatActivity {
             final String uAccount = intent.getStringExtra("userAccount");
             final String uPSD = intent.getStringExtra("userPSD");
             global_Account = uAccount;
-            Log.d("0410", uAccount+"..");
+            Log.d(TAG, "AutoLogIn_uAccount : " + uAccount);
             myHandler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
@@ -119,7 +120,7 @@ public class LogInActivity extends AppCompatActivity {
                             case 0:
                                 // calling to this function from onPostExecute
                                 if (Account.equals(userAccount) && psd.equals(userpsd)) {
-                                    Log.d("USERID HERE",userID);
+
                                     session.setUserID(userID);
                                     session.setUserAccount(userAccount);
                                     session.setUserPSD(userpsd);
@@ -199,19 +200,19 @@ public class LogInActivity extends AppCompatActivity {
                 //public void run() {
                     String Account = global_Account;
 
-                    Log.d("Test", "!!!!!!!!!!!!");
+                    Log.d(TAG, "In doInBackground");
                     try {
                         // Building Parameters
                         List<NameValuePair> params = new ArrayList<NameValuePair>();
                         params.add(new BasicNameValuePair("Account", Account));
-                        Log.d("ob'_'ov", "!!!!!!!!!!!!");
+
                         // getting user details by making HTTP request
                         // Note that user details url will use GET request
                         JSONObject json = jsonParser.makeHttpRequest(
                                 url_user_detials, "GET", params);
 
                         // check your log for json response
-                        Log.d("User Details", json.toString());
+                        Log.d(TAG, "JSON : " + json.toString());
 
                         // json success tag
                         int success;
@@ -236,7 +237,7 @@ public class LogInActivity extends AppCompatActivity {
 
                         }else{
                             // user with Account not found
-                            Log.d("Account Not found", "user Account not in database");
+                            Log.d(TAG, "Success is 0");
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

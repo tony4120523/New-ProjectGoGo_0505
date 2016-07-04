@@ -16,6 +16,7 @@ public class BPActivity extends AppCompatActivity {
     double[] bp_sys_buffer;
     double[] bp_dia_buffer;
     private static final String htmlurl = "http://www.hth96.me/nabu_connect/mmhg.html";
+    private static final String TAG = BPActivity.class.getSimpleName();
     String para = "";
 
     @Override
@@ -49,7 +50,7 @@ public class BPActivity extends AppCompatActivity {
 
 
         String url_ref = htmlurl + "?" + para;
-        Log.d("STR URL REF", url_ref);
+        Log.d(TAG, "URL REF : " + url_ref);
 
         //webhg.loadUrl("http://45.55.213.89/nabu_connect/mmhg.html?hmon=200&htue=225&hwed=240&hthr=260&hfri=215&hsat=270&hsun=234&lmon=100&ltue=125&lwed=140&lthr=160&lfri=115&lsat=170&lsun=134");
         webhg.loadUrl(url_ref);

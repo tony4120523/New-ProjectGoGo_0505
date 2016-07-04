@@ -50,6 +50,9 @@ public class MainScreenActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
                     intent.putExtra("userAccount", session.getUserAccount());
                     intent.putExtra("userPSD", session.getUserPSD());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                 }
 

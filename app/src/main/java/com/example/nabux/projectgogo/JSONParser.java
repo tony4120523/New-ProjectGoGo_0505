@@ -29,6 +29,7 @@ public class JSONParser {
     static InputStream is = null;
     static JSONObject jObj = null;
     static String json = "";
+    private static final String TAG = JSONParser.class.getSimpleName();
 
     // constructor
     public JSONParser() {
@@ -59,7 +60,7 @@ public class JSONParser {
                 // request method is GET
                 DefaultHttpClient httpClient = new DefaultHttpClient();
                 String paramString = URLEncodedUtils.format(params, "utf-8");
-                Log.d("PARAMSTR",paramString);
+                Log.d(TAG, "PARA : " + paramString);
                 url += "?" + paramString;
                 HttpGet httpGet = new HttpGet(url);
 
@@ -78,8 +79,7 @@ public class JSONParser {
         }
 
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    is, "UTF-8"), 8);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"), 8);
             StringBuilder sb = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {

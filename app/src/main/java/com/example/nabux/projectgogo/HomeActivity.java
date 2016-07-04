@@ -1,6 +1,12 @@
 package com.example.nabux.projectgogo;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,16 +32,18 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    //GetStepClass getstepclass = new GetStepClass();
+    private ProgressDialog pDialog;
+    private MyReceiver receiver;
     private Session session;
     Handler myHandler;
     JSONParser jsonParser = new JSONParser();
-    private static final String url_step_detials = "http://www.hth96.me/nabu_connect/query_steps.php";
+    private static final String url_step_detials = "http://www.hth96.me/nabu_connect/query_steps_weekly.php";
+    private static final String url_bp_detials = "http://www.hth96.me/nabu_connect/query_bp_weekly.php";
     private static final String url_bmi_detials = "http://www.hth96.me/nabu_connect/query_bmi.php";
-    private static final String url_bp_detials = "http://www.hth96.me/nabu_connect/query_bp.php";
+    private static final String TAG = HomeActivity.class.getSimpleName();
 
     TextView txvhi;
-    Button btnstep,btnbmi,btnhg,btnreport,btnhelp, btn_ocr;
+    Button btnstep,btnbmi,btnhg,btnreport,btnhelp, btn_ocr, btn_input;
     int[] step_buffer;
     double[] bmi_buffer;
     double[] bp_sys_buffer;
@@ -45,6 +53,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        receiver = new MyReceiver(new Handler());
+        registerReceiver(receiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+
         session = new Session(getApplicationContext());
 
         txvhi = (TextView) findViewById(R.id.txv_hi);
@@ -54,12 +66,16 @@ public class HomeActivity extends AppCompatActivity {
         btnreport= (Button) findViewById(R.id.btnreport);
         btnhelp= (Button) findViewById(R.id.btnhelp);
         btn_ocr = (Button) findViewById(R.id.btn_ocr);
+        btn_input = (Button) findViewById(R.id.btn_input);
         Intent in = getIntent();
         String nickname = in.getStringExtra("nickname");
-        Log.d("....", nickname);
+        Log.d(TAG, "Nickname : " + nickname);
+        step_buffer = new int[7];
+        bmi_buffer = new double[12];
+        bp_sys_buffer = new double[7];
+        bp_dia_buffer = new double[7];
 
-
-        txvhi.setText("Hola~" + nickname);
+        txvhi.setText("HOLA！！！" + nickname + " 尼好");
 
 
         btnstep.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +88,7 @@ public class HomeActivity extends AppCompatActivity {
                     public void handleMessage(Message msg) {
                         switch (msg.what) {
                             case 0:
-                                Log.d("NOW STEP_BUFFER", "" + step_buffer[0]);
+
                                 Intent in = new Intent(getApplicationContext(), StepActivity.class);
                                 in.putExtra("step_buffer", step_buffer);
                                 startActivity(in);
@@ -103,7 +119,7 @@ public class HomeActivity extends AppCompatActivity {
                     public void handleMessage(Message msg) {
                         switch (msg.what) {
                             case 0:
-                                Log.d("NOW BMI_BUFFER", "" + bmi_buffer[0]);
+                                Log.d(TAG, "NOW BMI_BUFFER[0] : " + bmi_buffer[0]);
                                 Intent in = new Intent(getApplicationContext(), BMIActivity.class);
                                 in.putExtra("bmi_buffer", bmi_buffer);
                                 startActivity(in);
@@ -131,8 +147,8 @@ public class HomeActivity extends AppCompatActivity {
                     public void handleMessage(Message msg) {
                         switch (msg.what) {
                             case 0:
-                                Log.d("NOW BP_SYS_BUFFER", "" + bp_sys_buffer[0]);
-                                Log.d("NOW BP_DIA_BUFFER", "" + bp_dia_buffer[0]);
+                                Log.d(TAG, "NOW BP_SYS_BUFFER[0] : " + bp_sys_buffer[0]);
+                                Log.d(TAG, "NOW BP_DIA_BUFFER[0] : " + bp_dia_buffer[0]);
                                 Intent in = new Intent(getApplicationContext(), BPActivity.class);
                                 in.putExtra("bp_sys_buffer", bp_sys_buffer);
                                 in.putExtra("bp_dia_buffer", bp_dia_buffer);
@@ -180,6 +196,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        btn_input.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent in = new Intent(getApplicationContext(), InputDataActivity.class);
+                startActivity(in);
+            }
+        });
     }
 
     @Override
@@ -232,18 +256,18 @@ public class HomeActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            /*pDialog = new ProgressDialog();//???!!!!!!!!!
+            pDialog = new ProgressDialog(HomeActivity.this);
             pDialog.setMessage("Loading ...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
-            pDialog.show();*/
+            pDialog.show();
         }
 
 
         protected String doInBackground(String... args) {
 
             String id = session.getUserID();
-            Log.d("SESSION ID", id);
+            Log.d(TAG, "SESSION ID : " + id);
 
 
             try {
@@ -252,60 +276,60 @@ public class HomeActivity extends AppCompatActivity {
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("id", id));
 
-                Log.d("DESCRIBE", describe);
+                Log.d(TAG, "DESCRIBE : " + describe);
 
                 if(describe.equals("step")) {
                     JSONObject json = jsonParser.makeHttpRequest(url_step_detials, "GET", params);
                     // check your log for json response
-                    Log.d("RETURN JSON", json.toString());
+                    Log.d(TAG, "RETURN JSON : " + json.toString());
                     // json success tag
                     int success;
                     success = json.getInt("success");
                     if (success == 1) {
                         // successfully received json
                         JSONArray userArr = json.getJSONArray("steps"); // JSON Array
-                        Log.d("The userArr is", userArr.toString());
+                        Log.d(TAG, "The userArr is " + userArr.toString());
 
                         //each step is here
                         step_buffer = new int[userArr.length()];
                         for(int i=0; i<userArr.length(); i++) {
 
                             step_buffer[i] = Integer.parseInt(userArr.getString(i));
-                            Log.d("EVERY STEP SHOW HERE", Integer.toString(step_buffer[i]));
+                            Log.d(TAG, "EVERY STEP SHOW HERE : " + Integer.toString(step_buffer[i]));
                         }
 
                     }else{
                         // user with id not found
-                        Log.d("QUERY STEP NOT FOUND", "user data not in database");
+                        Log.d(TAG, "QUERY STEP NOT FOUND");
                     }
                 }else if(describe.equals("bmi")) {
                     JSONObject json = jsonParser.makeHttpRequest(url_bmi_detials, "GET", params);
                     // check your log for json response
-                    Log.d("RETURN JSON", json.toString());
+                    Log.d(TAG, "RETURN JSON : " + json.toString());
                     // json success tag
                     int success;
                     success = json.getInt("success");
                     if (success == 1) {
                         // successfully received json
                         JSONArray userArr = json.getJSONArray("bmi"); // JSON Array
-                        Log.d("The userArr is", userArr.toString());
+                        Log.d(TAG, "The userArr is" + userArr.toString());
 
                         //each bmi is here
                         bmi_buffer = new double[userArr.length()];
                         for(int i=0; i<userArr.length(); i++) {
 
                             bmi_buffer[i] = Double.parseDouble(userArr.getString(i));
-                            Log.d("EVERY BMI SHOW HERE", Double.toString(bmi_buffer[i]));
+                            Log.d(TAG, "EVERY BMI SHOW HERE : " + Double.toString(bmi_buffer[i]));
                         }
 
                     }else{
                         // user with id not found
-                        Log.d("QUERY BMI NOT FOUND", "user data not in database");
+                        Log.d(TAG, "QUERY BMI NOT FOUND");
                     }
                 }else if(describe.equals("bp")) {
                     JSONObject json = jsonParser.makeHttpRequest(url_bp_detials, "GET", params);
                     // check your log for json response
-                    Log.d("RETURN JSON", json.toString());
+                    Log.d(TAG, "RETURN JSON : " + json.toString());
                     // json success tag
                     int success;
                     success = json.getInt("success");
@@ -313,8 +337,8 @@ public class HomeActivity extends AppCompatActivity {
                         // successfully received json
                         JSONArray bp_sys_Arr = json.getJSONArray("bp_sys"); // JSON Array
                         JSONArray bp_dia_Arr = json.getJSONArray("bp_dia");
-                        Log.d("BP SYS ARR", bp_sys_Arr.toString());
-                        Log.d("BP DIA ARR", bp_dia_Arr.toString());
+                        Log.d(TAG, "BP SYS ARR" + bp_sys_Arr.toString());
+                        Log.d(TAG ,"BP DIA ARR" + bp_dia_Arr.toString());
 
                         bp_sys_buffer = new double[bp_sys_Arr.length()];
                         bp_dia_buffer = new double[bp_dia_Arr.length()];
@@ -322,13 +346,13 @@ public class HomeActivity extends AppCompatActivity {
 
                             bp_sys_buffer[i] = Double.parseDouble(bp_sys_Arr.getString(i));
                             bp_dia_buffer[i] = Double.parseDouble(bp_dia_Arr.getString(i));
-                            Log.d("EVERY SYS BP SHOW HERE", Double.toString(bp_sys_buffer[i]));
-                            Log.d("EVERY DIA BP SHOW HERE", Double.toString(bp_dia_buffer[i]));
+                            Log.d(TAG, "EVERY SYS BP SHOW HERE : " + Double.toString(bp_sys_buffer[i]));
+                            Log.d(TAG ,"EVERY DIA BP SHOW HERE : " + Double.toString(bp_dia_buffer[i]));
                         }
 
                     }else{
                         // user with id not found
-                        Log.d("QUERY BP NOT FOUND", "user data not in database");
+                        Log.d(TAG, "QUERY BP NOT FOUND");
                     }
                 }else {
                     //wait to add...
@@ -344,9 +368,39 @@ public class HomeActivity extends AppCompatActivity {
 
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once got all details
-            //pDialog.dismiss();
+            pDialog.dismiss();
             myHandler.sendEmptyMessage(0);
 
+        }
+    }
+
+    public class MyReceiver extends BroadcastReceiver {
+
+        private final Handler handler; // Handler used to execute code on the UI thread
+        private boolean firstDisConnect = true;
+
+        public MyReceiver(Handler handler) {
+            this.handler = handler;
+        }
+
+        @Override
+        public void onReceive(final Context context, Intent intent) {
+
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    IsNetworkConnected inc = new IsNetworkConnected(getApplicationContext());
+                    if (!inc.isOnline() && firstDisConnect) {
+                        firstDisConnect = false;
+                        finish();
+                        Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
+                    }
+                }
+            });
         }
     }
 
