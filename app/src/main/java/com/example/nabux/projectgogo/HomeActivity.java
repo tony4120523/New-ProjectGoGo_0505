@@ -65,15 +65,14 @@ public class HomeActivity extends AppCompatActivity {
         btnhg= (Button) findViewById(R.id.btnhg);
         btnreport= (Button) findViewById(R.id.btnreport);
         btnhelp= (Button) findViewById(R.id.btnhelp);
-        btn_ocr = (Button) findViewById(R.id.btn_ocr);
         btn_input = (Button) findViewById(R.id.btn_input);
         Intent in = getIntent();
         String nickname = in.getStringExtra("nickname");
         Log.d(TAG, "Nickname : " + nickname);
-        step_buffer = new int[7];
-        bmi_buffer = new double[12];
-        bp_sys_buffer = new double[7];
-        bp_dia_buffer = new double[7];
+        step_buffer = new int[100];
+        bmi_buffer = new double[100];
+        bp_sys_buffer = new double[100];
+        bp_dia_buffer = new double[100];
 
         txvhi.setText("HOLA！！！" + nickname + " 尼好");
 
@@ -176,7 +175,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-         btnhelp.setOnClickListener(new View.OnClickListener() {
+        btnhelp.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -186,15 +185,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        btn_ocr.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                Intent in = new Intent(getApplicationContext(), com.example.nabux.projectgogo.ocr.CaptureActivity.class);
-                startActivity(in);
-
-            }
-        });
 
         btn_input.setOnClickListener(new View.OnClickListener() {
 
@@ -291,7 +281,6 @@ public class HomeActivity extends AppCompatActivity {
                         Log.d(TAG, "The userArr is " + userArr.toString());
 
                         //each step is here
-                        step_buffer = new int[userArr.length()];
                         for(int i=0; i<userArr.length(); i++) {
 
                             step_buffer[i] = Integer.parseInt(userArr.getString(i));
@@ -315,7 +304,6 @@ public class HomeActivity extends AppCompatActivity {
                         Log.d(TAG, "The userArr is" + userArr.toString());
 
                         //each bmi is here
-                        bmi_buffer = new double[userArr.length()];
                         for(int i=0; i<userArr.length(); i++) {
 
                             bmi_buffer[i] = Double.parseDouble(userArr.getString(i));
@@ -340,8 +328,7 @@ public class HomeActivity extends AppCompatActivity {
                         Log.d(TAG, "BP SYS ARR" + bp_sys_Arr.toString());
                         Log.d(TAG ,"BP DIA ARR" + bp_dia_Arr.toString());
 
-                        bp_sys_buffer = new double[bp_sys_Arr.length()];
-                        bp_dia_buffer = new double[bp_dia_Arr.length()];
+
                         for(int i=0; i<bp_sys_Arr.length(); i++) {
 
                             bp_sys_buffer[i] = Double.parseDouble(bp_sys_Arr.getString(i));

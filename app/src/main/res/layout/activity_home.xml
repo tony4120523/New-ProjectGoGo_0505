@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +11,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.nabux.projectgogo.HomeActivity">
+    tools:context="com.example.nabux.projectgogo.HomeActivity"
+    android:orientation="vertical">
 
 
 
@@ -28,7 +29,7 @@
         android:layout_alignParentEnd="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="步數里程圖"
         android:id="@+id/btnstep"
@@ -39,7 +40,7 @@
         android:layout_alignParentEnd="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="bmi變化圖"
         android:id="@+id/btnbmi"
@@ -51,7 +52,7 @@
         android:layout_alignEnd="@+id/btnstep" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="血壓記錄圖"
         android:id="@+id/btnhg"
@@ -63,7 +64,7 @@
         android:layout_alignEnd="@+id/btnhelp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="我的健康報告"
         android:id="@+id/btnreport"
@@ -75,7 +76,7 @@
         android:layout_alignEnd="@+id/btnhelp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="我的健康小幫手"
         android:id="@+id/btnhelp"
@@ -87,7 +88,7 @@
         android:layout_alignEnd="@+id/btnbmi" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="輸入資料"
         android:id="@+id/btn_input"
@@ -98,16 +99,5 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="辨識功能"
-        android:id="@+id/btn_ocr"
-        android:layout_marginTop="27dp"
-        android:layout_below="@+id/btn_input"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/btn_input"
-        android:layout_alignEnd="@+id/btn_input" />
-</RelativeLayout>
+</LinearLayout>
 </ScrollView>

@@ -767,7 +767,11 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
       @Override
       public void onClick(DialogInterface dialog, int which) {
         if(which == DialogInterface.BUTTON_POSITIVE){
-          Toast.makeText(getApplicationContext(), "Value saved successfully.", Toast.LENGTH_LONG).show();
+          //Toast.makeText(getApplicationContext(), "Value saved successfully.", Toast.LENGTH_LONG).show();
+          String result = edittext.getText().toString();
+          Intent intent = new Intent();
+          intent.putExtra("result", result);
+          setResult(RESULT_OK, intent);
           finish();
         }
         else{

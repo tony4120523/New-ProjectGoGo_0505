@@ -30,7 +30,7 @@ public class InputDataActivity extends AppCompatActivity {
     private static final String url_insertdata = "http://www.hth96.me/nabu_connect/insert_data.php";
     private static final String TAG_SUCCESS = "success";
 
-    ImageView ima_step, ima_sys, ima_dia, ima_bs;
+    ImageView ima_step, ima_sys, ima_dia, ima_bs, ima_pulse;
     EditText edit_step, edit_bp_sys, edit_bp_dia, edit_pulse, edit_bs;
     Button btn_save;
     Handler handler;
@@ -47,6 +47,7 @@ public class InputDataActivity extends AppCompatActivity {
         ima_step = (ImageView) findViewById(R.id.ima_step);
         ima_sys = (ImageView) findViewById(R.id.ima_sys);
         ima_dia = (ImageView) findViewById(R.id.ima_dia);
+        ima_pulse = (ImageView) findViewById(R.id.ima_pulse);
         ima_bs = (ImageView) findViewById(R.id.ima_bs);
         edit_step = (EditText) findViewById(R.id.edit_step);
         edit_bp_sys = (EditText) findViewById(R.id.edit_sys);
@@ -59,7 +60,7 @@ public class InputDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), com.example.nabux.projectgogo.ocr.CaptureActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 11);
             }
         });
 
@@ -67,7 +68,7 @@ public class InputDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), com.example.nabux.projectgogo.ocr.CaptureActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 22);
             }
         });
 
@@ -75,7 +76,15 @@ public class InputDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), com.example.nabux.projectgogo.ocr.CaptureActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 33);
+            }
+        });
+
+        ima_pulse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), com.example.nabux.projectgogo.ocr.CaptureActivity.class);
+                startActivityForResult(intent, 44);
             }
         });
 
@@ -83,7 +92,7 @@ public class InputDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), com.example.nabux.projectgogo.ocr.CaptureActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 55);
             }
         });
 
@@ -113,6 +122,29 @@ public class InputDataActivity extends AppCompatActivity {
                 new InsertData().execute();
             }
         });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+        if(resultCode == RESULT_OK) {
+            String result = intent.getStringExtra("result");
+            switch(requestCode) {
+                case 11 :
+                    edit_step.setText(result);
+                    break;
+                case 22 :
+                    edit_bp_sys.setText(result);
+                    break;
+                case 33 :
+                    edit_bp_dia.setText(result);
+                    break;
+                case 44 :
+                    edit_pulse.setText(result);
+                    break;
+                case 55 :
+                    edit_bs.setText(result);
+                    break;
+            }
+        }
     }
 
     class InsertData extends AsyncTask<String, String, String> {

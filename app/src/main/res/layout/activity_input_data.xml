@@ -32,7 +32,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/edit_step"
             android:layout_weight="1"
@@ -62,7 +62,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/edit_sys"
             android:layout_weight="1"
@@ -93,7 +93,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/edit_dia"
             android:layout_weight="1"
@@ -124,7 +124,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/edit_pulse"
             android:layout_weight="1"
@@ -155,7 +155,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/edit_bs"
             android:layout_weight="1"
