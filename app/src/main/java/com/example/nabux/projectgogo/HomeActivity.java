@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final String TAG = HomeActivity.class.getSimpleName();
 
     TextView txvhi;
-    Button btnstep,btnbmi,btnhg,btnreport,btnhelp, btn_ocr, btn_input;
+    Button btnstep,btnbmi,btnhg,btnreport,btnhelp, btn_ocr, btn_input,btnreportpage;
     int[] step_buffer;
     double[] bmi_buffer;
     double[] bp_sys_buffer;
@@ -66,6 +66,7 @@ public class HomeActivity extends AppCompatActivity {
         btnreport= (Button) findViewById(R.id.btnreport);
         btnhelp= (Button) findViewById(R.id.btnhelp);
         btn_input = (Button) findViewById(R.id.btn_input);
+        btnreportpage= (Button) findViewById(R.id.btnreportpage);
         Intent in = getIntent();
         String nickname = in.getStringExtra("nickname");
         Log.d(TAG, "Nickname : " + nickname);
@@ -191,6 +192,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 Intent in = new Intent(getApplicationContext(), InputDataActivity.class);
+                startActivity(in);
+            }
+        });
+
+       btnreportpage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent in = new Intent(getApplicationContext(), report_tab.class);
                 startActivity(in);
             }
         });
