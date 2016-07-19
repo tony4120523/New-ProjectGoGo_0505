@@ -68,8 +68,10 @@
         </activity>
         <activity android:name=".ocr.PreferencesActivity" />
         <activity android:name=".ReceiverActivity" />
-        <activity android:name=".InputDataActivity"
-                  android:label="@string/input_data_label"></activity>
+        <activity
+            android:name=".InputDataActivity"
+            android:label="@string/input_data_label" />
+        <activity android:name=".report_tab"></activity>
     </application>
 
 </manifest>

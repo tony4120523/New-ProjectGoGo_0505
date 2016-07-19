@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.webkit.WebSettings;
@@ -47,6 +48,8 @@ public class ReportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
+        ActionBar actionBar = this.getSupportActionBar();
+        actionBar.setTitle("我的健康報告");
         avgbmishow= (TextView) findViewById(R.id.avgbmishow);
         avgstepshow= (TextView) findViewById(R.id.avgstepshow);
         avgdiabpshow= (TextView) findViewById(R.id.avgdiabpshow);
