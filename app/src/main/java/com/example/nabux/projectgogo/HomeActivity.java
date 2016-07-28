@@ -200,7 +200,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                Intent in = new Intent(getApplicationContext(), report_tab.class);
+                Intent in = new Intent(getApplicationContext(), tabbed.class);
                 startActivity(in);
             }
         });
