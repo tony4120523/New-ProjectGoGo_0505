@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,13 +39,15 @@ public class RegistActivity extends AppCompatActivity {
     private static final String TAG_SUCCESS = "success";
 
     // url to create new product
-    private static String url_create_user = "http://www.hth96.me/nabu_connect/create_user.php";
+    private static final String url_create_user = "http://www.hth96.me/nabu_connect/create_user.php";
     private static final String TAG = RegistActivity.class.getSimpleName();
 
     TextView tvrgid,tvrgpsd,tvrgpsd2,tvrgnickname;
     Button btnrgsubmit,btnrgreset;
-    EditText edrgid,edrgpsd,edrgpsd2,edrgnickname;
+    EditText edrgid,edrgpsd,edrgpsd2,edrgnickname, edit_cp_email;
+    CheckBox chk_hyper, chk_diabetes, chk_heart;
 
+    String id, psd, nickname, cp_email, hypertension, diabetes, heart_disease;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,10 @@ public class RegistActivity extends AppCompatActivity {
         edrgpsd= (EditText) findViewById(R.id.edrgpsd);
         edrgpsd2= (EditText) findViewById(R.id.edrgpsd2);
         edrgnickname= (EditText) findViewById(R.id.edrgnickname);
+        edit_cp_email = (EditText) findViewById(R.id.edit_cp_email);
+        chk_hyper = (CheckBox) findViewById(R.id.chk_hyper);
+        chk_diabetes = (CheckBox) findViewById(R.id.chk_diabetes);
+        chk_heart = (CheckBox) findViewById(R.id.chk_heart);
 
         btnrgreset.setOnClickListener(new View.OnClickListener() {
 
@@ -71,6 +78,7 @@ public class RegistActivity extends AppCompatActivity {
                 edrgpsd.setText("");
                 edrgpsd2.setText("");
                 edrgnickname.setText("");
+                edit_cp_email.setText("");
             }
         });
 
@@ -81,6 +89,13 @@ public class RegistActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                id = edrgid.getText().toString();
+                psd = edrgpsd.getText().toString();
+                nickname = edrgnickname.getText().toString();
+                cp_email = edit_cp_email.getText().toString();
+                hypertension = chk_hyper.isChecked() ? "TRUE" : "FALSE";
+                diabetes = chk_diabetes.isChecked() ? "TRUE" : "FALSE";
+                heart_disease = chk_heart.isChecked() ? "TRUE" : "FALSE";
 
                 myHandler = new Handler() {
 
@@ -132,15 +147,17 @@ public class RegistActivity extends AppCompatActivity {
          * Creating User
          * */
         protected String doInBackground(String... args) {
-            String id = edrgid.getText().toString();
-            String psd = edrgpsd.getText().toString();
-            String nickname = edrgnickname.getText().toString();
-            Log.d(TAG, "Input ID : " + id);
+
+            Log.d(TAG, "DoInBackground ID : " + id);
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("id", id));
             params.add(new BasicNameValuePair("psd", psd));
             params.add(new BasicNameValuePair("nickname", nickname));
+            params.add(new BasicNameValuePair("cp_email", cp_email));
+            params.add(new BasicNameValuePair("isHyper", hypertension));
+            params.add(new BasicNameValuePair("isDiabetes", diabetes));
+            params.add(new BasicNameValuePair("isHeart", heart_disease));
 
             // getting JSON Object
             // Note that create_user url accepts POST method
@@ -156,12 +173,6 @@ public class RegistActivity extends AppCompatActivity {
 
                 if (success == 1) {
                     // successfully created product
-
-                    /*******
-                     * Note!!! Think about that after create user what is the next StepActivity.....
-                     * Intent i = new Intent(getApplicationContext(), AllProductsActivity.class);
-                     * startActivity(i);
-                     ********/
 
                     // closing this screen
                     finish();
