@@ -76,16 +76,14 @@
             android:name=".InputDataActivity"
             android:parentActivityName=".HomeActivity"
             android:label="@string/input_data_label" />
-<<<<<<< HEAD
+
         <activity android:name=".report_tab" />
         <activity
             android:name=".tabbed"
             android:label="@string/title_activity_tabbed"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-=======
 
-        <activity android:name=".report_tab" />
-
+                
         <receiver android:name=".AlarmReceiver" />
 
         <!--
@@ -96,7 +94,7 @@
         </receiver>
         -->
 
->>>>>>> adc25c9557417345c53af8587dd53ac2d6cba973
+
     </application>
 
 </manifest>
