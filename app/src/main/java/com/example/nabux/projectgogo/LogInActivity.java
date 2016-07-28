@@ -124,7 +124,7 @@ public class LogInActivity extends AppCompatActivity {
                                     session.setUserID(userID);
                                     session.setUserAccount(userAccount);
                                     session.setUserPSD(userpsd);
-
+                                    session.setNickName(usernickname);
 
                                     Intent homein = new Intent(getApplicationContext(), HomeActivity.class);
                                     homein.putExtra(TAG_NICKNAME, usernickname);

@@ -1,6 +1,8 @@
 package com.example.nabux.projectgogo;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -28,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
@@ -41,6 +44,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final String url_bp_detials = "http://www.hth96.me/nabu_connect/query_bp_weekly.php";
     private static final String url_bmi_detials = "http://www.hth96.me/nabu_connect/query_bmi.php";
     private static final String TAG = HomeActivity.class.getSimpleName();
+    private static final int requistCode = 100;
 
     TextView txvhi;
     Button btnstep,btnbmi,btnhg,btnreport,btnhelp, btn_ocr, btn_input,btnreportpage;
@@ -68,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
         btn_input = (Button) findViewById(R.id.btn_input);
         btnreportpage= (Button) findViewById(R.id.btnreportpage);
         Intent in = getIntent();
-        String nickname = in.getStringExtra("nickname");
+        String nickname = session.getNickName();
         Log.d(TAG, "Nickname : " + nickname);
         step_buffer = new int[100];
         bmi_buffer = new double[100];
@@ -204,6 +208,18 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(in);
             }
         });
+
+        //通知
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 14);
+        calendar.set(Calendar.MINUTE, 13);
+        calendar.set(Calendar.SECOND, 0);
+
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pi = PendingIntent.getBroadcast(this, requistCode, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 , pi);
     }
 
     @Override

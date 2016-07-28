@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -25,11 +26,13 @@
         <!-- Log in Activity -->
         <activity
             android:name=".LogInActivity"
+            android:parentActivityName=".MainScreenActivity"
             android:label="@string/login_label" />
 
         <!-- Regist Activity -->
         <activity
             android:name=".RegistActivity"
+            android:parentActivityName=".MainScreenActivity"
             android:label="@string/regist_label" />
 
         <!-- Home Activity -->
@@ -68,14 +71,32 @@
         </activity>
         <activity android:name=".ocr.PreferencesActivity" />
         <activity android:name=".ReceiverActivity" />
+
         <activity
             android:name=".InputDataActivity"
+            android:parentActivityName=".HomeActivity"
             android:label="@string/input_data_label" />
+<<<<<<< HEAD
         <activity android:name=".report_tab" />
         <activity
             android:name=".tabbed"
             android:label="@string/title_activity_tabbed"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+=======
+
+        <activity android:name=".report_tab" />
+
+        <receiver android:name=".AlarmReceiver" />
+
+        <!--
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" >
+        </receiver>
+        -->
+
+>>>>>>> adc25c9557417345c53af8587dd53ac2d6cba973
     </application>
 
 </manifest>
