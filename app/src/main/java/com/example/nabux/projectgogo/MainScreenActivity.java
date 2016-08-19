@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.media.Image;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,7 +33,8 @@ public class MainScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-
+        ActionBar actionBar = this.getSupportActionBar();
+        actionBar.setTitle("銀髮族健康管理app");
         receiver = new MyReceiver(new Handler());
         registerReceiver(receiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
         network_image = (ImageView) findViewById(R.id.network);

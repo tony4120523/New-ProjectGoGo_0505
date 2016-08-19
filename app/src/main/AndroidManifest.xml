@@ -24,7 +24,7 @@
         </activity>
 
         <!-- Log in Activity -->
-        <activity
+       <activity
             android:name=".LogInActivity"
             android:parentActivityName=".MainScreenActivity"
             android:label="@string/login_label" />
