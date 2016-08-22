@@ -150,7 +150,8 @@
             android:id="@+id/textView_bs"
             android:hint="請輸入血糖"
             android:layout_weight="1"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:text="請輸入血糖(飯後2小時)" />
 
         <EditText
             android:layout_width="match_parent"
