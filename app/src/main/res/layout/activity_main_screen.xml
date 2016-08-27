@@ -32,7 +32,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_gravity="center_horizontal">
 
         <LinearLayout
             android:orientation="horizontal"

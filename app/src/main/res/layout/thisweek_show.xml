@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="98dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/ly1"
+        android:background="@drawable/border1">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:id="@+id/thisweekbmi_show"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:id="@+id/thisweekbmi_vs"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="98dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/ly2"
+        android:background="@drawable/border1">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:id="@+id/thisweekstep_show"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:id="@+id/thisweekstep_vs"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="98dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/ly3"
+        android:background="@drawable/border1">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:id="@+id/thisweeksysbp_show"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:id="@+id/thisweeksysbp_vs"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="98dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/ly4"
+        android:background="@drawable/border1">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:id="@+id/thisweekdiabp_show"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:id="@+id/thisweekdiabp_vs"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="98dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/ly5"
+        android:background="@drawable/border1">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:id="@+id/thisweekbs_show"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:id="@+id/thisweekbs_vs"
+            android:textSize="20sp" />
+    </LinearLayout>
+</LinearLayout>

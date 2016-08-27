@@ -77,7 +77,6 @@
             android:parentActivityName=".HomeActivity"
             android:label="@string/input_data_label" />
 
-        <activity android:name=".report_tab" />
         <activity
             android:name=".tabbed"
             android:label="@string/title_activity_tabbed"

@@ -18,7 +18,7 @@
         android:id="@+id/linearLayout18">
 
         <WebView
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/webbmi"
             android:layout_gravity="center_horizontal" />

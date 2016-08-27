@@ -1,6 +1,7 @@
 package com.example.nabux.projectgogo;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,11 +9,15 @@ import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -34,6 +39,7 @@ public class ReportActivity extends AppCompatActivity {
     double[] bp_sys_buffer;
     double[] bp_dia_buffer;
     private Session session;
+    LinearLayout ly1;
     double sumbmi,avgbmi,sumsysbp,sumdiabp,avgsysbp,avgdiabp = 0;
     int sumstep,avgstep = 0;
 
@@ -54,6 +60,31 @@ public class ReportActivity extends AppCompatActivity {
         avgstepshow= (TextView) findViewById(R.id.avgstepshow);
         avgdiabpshow= (TextView) findViewById(R.id.avgdiabpshow);
         avgsysbpshow= (TextView) findViewById(R.id.avgsysbpshow);
+        ly1= (LinearLayout) findViewById(R.id.ly1);
+        /*ly1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "hello world", Toast.LENGTH_SHORT).show();
+            }
+        });*/
+        ly1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN)
+                {
+                   ly1.setBackgroundColor(0x00000000);
+                    Toast.makeText(getApplicationContext(), "hello world", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                else if (event.getAction() == MotionEvent.ACTION_UP)
+                {
+                    ly1.setBackgroundResource(R.drawable.border1);
+                    return true;
+                }
+
+                return false;
+            }
+        });
         session = new Session(getApplicationContext());
 
         step_buffer = new int[100];

@@ -362,7 +362,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
       surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     }
     
-    // Comment out the following block to test non-OCR functions without an SD card
+    // Comment out the following block to border1 non-OCR functions without an SD card
     
     // Do OCR engine initialization, if necessary
     boolean doNewInit = (baseApi == null) || !sourceLanguageCodeOcr.equals(previousSourceLanguageCodeOcr) || 

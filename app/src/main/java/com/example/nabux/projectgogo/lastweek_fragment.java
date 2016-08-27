@@ -1,4 +1,5 @@
 package com.example.nabux.projectgogo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,16 +21,17 @@ import java.util.HashMap;
  * Created by ITM Admin on 2016/7/28.
  */
 public class lastweek_fragment extends Fragment{
+
     private SimpleAdapter adapter;
     ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
     double[] lastweek_ans = new double[]{36.0,12796.0,143.0,88.0};
-    String[] lastweek_item=new String[]{"本週平均bmi為："+lastweek_ans[0],"本週平均步數為："+lastweek_ans[1],"本週平均心肌收縮壓為："+lastweek_ans[2],"本週平均平均心肌舒張壓為："+lastweek_ans[3],};
+    String[] lastweek_item=new String[]{"上週平均bmi為："+lastweek_ans[0],"上週平均步數為："+lastweek_ans[1],"上週平均心肌收縮壓為："+lastweek_ans[2],"上週平均平均心肌舒張壓為："+lastweek_ans[3],};
     //double[] lastweek_ans = new double[]{28.17,22796.0,144.0,77.0};
     //String[] compare=new String[]{"比上週平均bmi少了："+(lastweek_ans[0]-thisweek_ans[0]),"比上週平均步數少了："+(lastweek_ans[1]-thisweek_ans[1]),"比上週平均心肌收縮壓少了："+(lastweek_ans[2]-thisweek_ans[2]),"比上週平均平均心肌舒張少了："+(lastweek_ans[3]-thisweek_ans[3]),};
     String[]compare=new String[]{"","","",""};
     String bmians,stepans,sysbpans,diabpans,bsans;
     ListView list1;
-
+    int aa1=0;
     public static lastweek_fragment newInstance() {
 
         lastweek_fragment fragment = new lastweek_fragment();
@@ -40,10 +42,12 @@ public class lastweek_fragment extends Fragment{
     }
 
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.lastweek_show, container, false);
+        final View rootView = inflater.inflate(R.layout.lastweek_show, container, false);
         list1= (ListView) rootView.findViewById(R.id.list1);
+
         count_bmi();
         count_step();
         count_sysbp();
@@ -59,15 +63,20 @@ public class lastweek_fragment extends Fragment{
                 list,
                 android.R.layout.simple_list_item_2,
                 new String[] { "thisweek","compared" },
-                new int[] { android.R.id.text1, android.R.id.text2 } );
+                new int[] { android.R.id.text1, android.R.id.text2 }
+                        );
 
                 list1.setAdapter(adapter);
+
         list1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getActivity(), "顯示"+lastweek_item[position], Toast.LENGTH_SHORT).show();
+                //TextView kk= (TextView) view.findViewById(android.R.id.text1);
+                //kk.setTextColor(Color.BLUE);
             }
         });
+
         return rootView;
     }
 
@@ -88,6 +97,7 @@ public String count_bmi(){
 
     }
     else if(lastweek_ans[0]>=27.0 && lastweek_ans[0]<30.0){
+        aa1=1;
         bmians="您的體位為 輕度肥胖";
         compare[0]=bmians;
     }
@@ -129,12 +139,12 @@ public String count_bmi(){
 
     public String count_diabp(){
         if(lastweek_ans[3]>=67.0 &&lastweek_ans[2]<=87.0){
-            sysbpans="心肌舒張壓正常!! 正常值為 77 + - 10 (即67~87)";
-            compare[3]=sysbpans;
+            diabpans="心肌舒張壓正常!! 正常值為 77 + - 10 (即67~87)";
+            compare[3]=diabpans;
         }
         else{
-            sysbpans="心肌舒張壓異常!! 正常值為 77 + - 10 (即67~87)";
-            compare[3]=sysbpans;
+            diabpans="心肌舒張壓異常!! 正常值為 77 + - 10 (即67~87)";
+            compare[3]=diabpans;
         }
 
 

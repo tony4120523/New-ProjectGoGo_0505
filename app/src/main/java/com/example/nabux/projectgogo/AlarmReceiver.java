@@ -57,7 +57,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
             notification = new NotificationCompat.Builder(context)
                     .setColor(Color.rgb(0, 204, 102))
-                    .setVibrate(new long[]{0, 300, 200, 100, 100, 100, 100, 100})
+                    //.setVibrate(new long[]{0, 300, 200, 100, 100, 100, 100, 100})
                     .setSmallIcon(R.drawable.house)
                     .setContentTitle("Notification")
                     .setContentText("~ Haven't Input Data ~")

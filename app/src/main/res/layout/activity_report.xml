@@ -1,52 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ReportActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="false"
+    android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/avgbmishow"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/ly1"
+        android:clickable="true"
+        android:background="@drawable/border1">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/avgstepshow"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/avgbmishow"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/avgbmishow"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:editable="false"
+            android:clickable="false" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/avgdiabpshow"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/avgsysbpshow" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:text="          您的體位為：過胖"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:textColor="#000000" />
+    </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_below="@+id/avgstepshow"
-        android:layout_alignLeft="@+id/avgstepshow"
-        android:layout_alignStart="@+id/avgstepshow"
-        android:layout_marginTop="40dp"
-        android:id="@+id/avgdiabpshow" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/avgstepshow"
+            android:layout_below="@+id/avgbmishow"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/border1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_below="@+id/avgdiabpshow"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/avgsysbpshow"
+            android:background="@drawable/border1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:clickable="false"
+        android:focusable="true"
+        android:focusableInTouchMode="false"
+        android:contextClickable="false"
+        android:touchscreenBlocksFocus="false"
+        android:baselineAligned="false">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_below="@+id/avgstepshow"
+            android:layout_alignLeft="@+id/avgstepshow"
+            android:layout_alignStart="@+id/avgstepshow"
+            android:id="@+id/avgdiabpshow"
+            android:background="@drawable/border1" />
+    </LinearLayout>
 
 </LinearLayout>

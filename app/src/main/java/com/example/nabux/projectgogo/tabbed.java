@@ -111,7 +111,7 @@ public class tabbed extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch(position) {
-                case 0:return PlaceholderFragment.newInstance(position + 1);
+                case 0:return thisweek_fragment.newInstance();
                 case 1:return lastweek_fragment.newInstance();
                 case 2:return PlaceholderFragment.newInstance(position + 1);
             }

@@ -74,7 +74,7 @@ public class GetStepClass {
         protected String doInBackground(String... args) {
 
 
-            String id = "1"; // Just a test
+            String id = "1"; // Just a border1
 
             Log.d("Test", "!!!!!!!!!!!!");
             try {
