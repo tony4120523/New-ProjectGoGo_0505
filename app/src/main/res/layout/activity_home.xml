@@ -15,7 +15,6 @@
     android:orientation="vertical">
 
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,6 +28,18 @@
         android:layout_alignParentEnd="true" />
 
     <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="輸入資料"
+        android:id="@+id/btn_input"
+        android:layout_marginTop="1dp"
+        android:layout_below="@+id/btnhelp"
+        android:layout_alignRight="@+id/btnhelp"
+        android:layout_alignEnd="@+id/btnhelp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="步數里程圖"
@@ -37,7 +48,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp" />
 
     <Button
         android:layout_width="match_parent"
@@ -66,19 +79,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="我的健康報告"
-        android:id="@+id/btnreport"
-        android:layout_below="@+id/btnhg"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="27dp"
-        android:layout_alignRight="@+id/btnhelp"
-        android:layout_alignEnd="@+id/btnhelp" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="我的健康小幫手"
+        android:text="健康小知識"
         android:id="@+id/btnhelp"
         android:layout_marginTop="27dp"
         android:layout_below="@+id/btnreport"
@@ -90,14 +91,14 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="輸入資料"
-        android:id="@+id/btn_input"
-        android:layout_marginTop="27dp"
-        android:layout_below="@+id/btnhelp"
-        android:layout_alignRight="@+id/btnhelp"
-        android:layout_alignEnd="@+id/btnhelp"
+        android:text="我的健康報告"
+        android:id="@+id/btnreport"
+        android:layout_below="@+id/btnhg"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp"
+        android:layout_alignRight="@+id/btnhelp"
+        android:layout_alignEnd="@+id/btnhelp" />
 
     <Button
         android:layout_width="fill_parent"

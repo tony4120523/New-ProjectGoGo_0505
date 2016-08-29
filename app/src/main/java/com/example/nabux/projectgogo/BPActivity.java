@@ -11,10 +11,11 @@ import android.widget.TextView;
 
 public class BPActivity extends AppCompatActivity {
     WebView webhg;
-    TextView tvtime,tvhigh,tvavg;
-
+    TextView tvtime,tvavgsys,tvavgdia;
+    double avgsys,avgdia,sumsys,sumdia;
     double[] bp_sys_buffer;
     double[] bp_dia_buffer;
+
     private static final String htmlurl = "http://www.hth96.me/nabu_connect/mmhg.html";
     private static final String TAG = BPActivity.class.getSimpleName();
     String para = "";
@@ -25,8 +26,8 @@ public class BPActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hg);
         webhg= (WebView) findViewById(R.id.webhg);
         tvtime= (TextView) findViewById(R.id.tvtime);
-        tvhigh= (TextView) findViewById(R.id.tvhigh);
-        tvavg= (TextView) findViewById(R.id.tvavg);
+        tvavgsys= (TextView) findViewById(R.id.tvavgsys);
+        tvavgdia= (TextView) findViewById(R.id.tvavgdia);
 
         Intent in = getIntent();
         bp_sys_buffer = in.getDoubleArrayExtra("bp_sys_buffer");
@@ -52,6 +53,16 @@ public class BPActivity extends AppCompatActivity {
         String url_ref = htmlurl + "?" + para;
         Log.d(TAG, "URL REF : " + url_ref);
 
+        for(int i=0;i<7;i++){
+            sumdia+=bp_dia_buffer[i];
+            sumsys+=bp_sys_buffer[i];
+        }
+        avgdia=sumdia/7;
+        avgsys=sumsys/7;
+        avgdia=((Math.round(avgdia*100.0))/100.0);
+        avgsys=((Math.round(avgsys*100.0))/100.0);
+        tvavgsys.setText("本週平均心肌收縮壓為： "+avgsys);
+        tvavgdia.setText("本週平均心肌舒張壓為： "+avgdia);
         //webhg.loadUrl("http://45.55.213.89/nabu_connect/mmhg.html?hmon=200&htue=225&hwed=240&hthr=260&hfri=215&hsat=270&hsun=234&lmon=100&ltue=125&lwed=140&lthr=160&lfri=115&lsat=170&lsun=134");
         webhg.loadUrl(url_ref);
         webhg.setWebViewClient(new WebViewClient());
