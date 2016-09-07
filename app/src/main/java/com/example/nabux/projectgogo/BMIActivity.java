@@ -64,5 +64,6 @@ public class BMIActivity extends AppCompatActivity {
         webbmi.setWebViewClient(new WebViewClient());
         WebSettings webSettings = webbmi.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setBuiltInZoomControls(true);
     }
 }

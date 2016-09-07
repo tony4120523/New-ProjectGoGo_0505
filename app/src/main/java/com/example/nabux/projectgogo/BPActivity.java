@@ -68,5 +68,6 @@ public class BPActivity extends AppCompatActivity {
         webhg.setWebViewClient(new WebViewClient());
         WebSettings webSettings = webhg.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setBuiltInZoomControls(true);
     }
 }

@@ -55,6 +55,7 @@ public class StepActivity extends AppCompatActivity {
         webstep.setWebViewClient(new WebViewClient());
         WebSettings webSettings = webstep.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setBuiltInZoomControls(true);
     }
 /*
     public boolean onKeyDown(int keyCode, KeyEvent event) {
