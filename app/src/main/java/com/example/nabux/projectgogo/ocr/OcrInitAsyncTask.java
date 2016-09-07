@@ -132,7 +132,7 @@ final class OcrInitAsyncTask extends AsyncTask<String, String, Boolean> {
         isCubeSupported = true;   
       }
     }
-    destinationFilenameBase = "tesseract-ocr-3.02." + languageCode + ".tar";   
+
 
     // Check for, and create if necessary, folder to hold model data
     String destinationDirBase = params[0]; // The storage directory, minus the
@@ -272,14 +272,6 @@ final class OcrInitAsyncTask extends AsyncTask<String, String, Boolean> {
         }
       }
 
-      // Untar the OSD tar file
-      try {
-        untar(new File(tessdataDir.toString() + File.separator + CaptureActivity.OSD_FILENAME), 
-            tessdataDir);
-      } catch (IOException e) {
-        Log.e(TAG, "Untar failed");
-        return false;
-      }
 
     } else {
       Log.d(TAG, "OSD file already present in " + tessdataDir.toString());
