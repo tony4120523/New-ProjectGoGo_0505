@@ -44,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final int requistCode = 100;
 
     TextView txvhi;
-    Button btnreport,btnhelp, btn_ocr, btn_input,btnreportpage,btnchartselect;
+    Button btnreport,btnhelp, btn_ocr, btn_input,btnreportpage,btnchartselect,btnhealth,btnmail;
 
 
     @Override
@@ -63,6 +63,8 @@ public class HomeActivity extends AppCompatActivity {
         btnhelp= (Button) findViewById(R.id.btnhelp);
         btn_input = (Button) findViewById(R.id.btn_input);
         btnreportpage= (Button) findViewById(R.id.btnreportpage);
+        btnhealth= (Button) findViewById(R.id.btnhealth);
+        btnmail= (Button) findViewById(R.id.btnmail);
         Intent in = getIntent();
         String nickname = session.getNickName();
         Log.d(TAG, "Nickname : " + nickname);
@@ -70,6 +72,13 @@ public class HomeActivity extends AppCompatActivity {
 
         txvhi.setText("HOLA！！！" + nickname + " 尼好");
 
+        btnhealth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in =new Intent(getApplicationContext(),health.class);
+                startActivity(in);
+            }
+        });
         btnchartselect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -118,6 +127,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 Intent in = new Intent(getApplicationContext(), tabbed.class);
+                startActivity(in);
+            }
+        });
+
+        btnmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(getApplicationContext(),mailtest.class);
                 startActivity(in);
             }
         });

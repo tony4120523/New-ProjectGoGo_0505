@@ -91,7 +91,9 @@
         -->
 
         <activity android:name=".chartlist" />
-        <activity android:name=".chartselect"></activity>
+        <activity android:name=".chartselect" />
+        <activity android:name=".health" />
+        <activity android:name=".mailtest"></activity>
     </application>
 
 </manifest>

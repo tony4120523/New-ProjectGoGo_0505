@@ -60,16 +60,24 @@
         android:layout_alignEnd="@+id/btnbmi" />
 
     <Button
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="我的健康報告"
+        android:id="@+id/btnhealth"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="我的健康報告TEST1"
         android:id="@+id/btnreportpage"
         android:layout_marginTop="27dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="我的健康報告test"
+        android:text="我的健康報告test2"
         android:id="@+id/btnreport"
         android:layout_below="@+id/btnhg"
         android:layout_alignParentLeft="true"
@@ -77,6 +85,14 @@
         android:layout_marginTop="27dp"
         android:layout_alignRight="@+id/btnhelp"
         android:layout_alignEnd="@+id/btnhelp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="預警系統信件範例"
+        android:id="@+id/btnmail"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp" />
 
 </LinearLayout>
 </ScrollView>
