@@ -40,41 +40,12 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="步數里程圖"
-        android:id="@+id/btnstep"
-        android:layout_below="@+id/txv_hi"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textAlignment="center"
+        android:text="我的健康圖表"
+        android:id="@+id/btnchartselect"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="bmi變化圖"
-        android:id="@+id/btnbmi"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/btnstep"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/btnstep"
-        android:layout_alignEnd="@+id/btnstep" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="血壓記錄圖"
-        android:id="@+id/btnhg"
-        android:layout_marginTop="22dp"
-        android:layout_below="@+id/btnbmi"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/btnhelp"
-        android:layout_alignEnd="@+id/btnhelp" />
 
     <Button
         android:layout_width="match_parent"
@@ -89,9 +60,16 @@
         android:layout_alignEnd="@+id/btnbmi" />
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="我的健康報告"
+        android:id="@+id/btnreportpage"
+        android:layout_marginTop="27dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="我的健康報告test"
         android:id="@+id/btnreport"
         android:layout_below="@+id/btnhg"
         android:layout_alignParentLeft="true"
@@ -99,13 +77,6 @@
         android:layout_marginTop="27dp"
         android:layout_alignRight="@+id/btnhelp"
         android:layout_alignEnd="@+id/btnhelp" />
-
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="我的健康報告 pager ver."
-        android:id="@+id/btnreportpage"
-        android:layout_marginTop="27dp" />
 
 </LinearLayout>
 </ScrollView>
