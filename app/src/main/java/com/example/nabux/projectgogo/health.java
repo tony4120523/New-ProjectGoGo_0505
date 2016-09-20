@@ -1,9 +1,12 @@
 package com.example.nabux.projectgogo;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -39,5 +42,25 @@ public class health extends AppCompatActivity {
         );
 
         listrange.setAdapter(adapter);
+
+        listrange.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        Intent in=new Intent(getApplicationContext(),health_thisweek.class);
+                        startActivity(in);
+                        break;
+                    case 1:
+                        Intent it=new Intent(getApplicationContext(),health_lastweek.class);
+                        startActivity(it);
+                        break;
+                    case 2:
+                        Intent ii=new Intent(getApplicationContext(),health_nearmonth.class);
+                        startActivity(ii);
+                        break;
+                }
+            }
+        });
     }
 }

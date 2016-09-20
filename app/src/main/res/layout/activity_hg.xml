@@ -27,7 +27,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="4/1 -4/7 血壓趨勢圖"
+        android:text="9/18 -9/24 血壓變化圖"
         android:id="@+id/tvtime"
         android:textSize="15sp"
         android:layout_below="@+id/linearLayout19"
@@ -37,7 +37,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvavgsys"
+        android:id="@+id/tvavgbs"
         android:textSize="15sp"
         android:layout_below="@+id/tvtime"
         android:layout_alignParentLeft="true"
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:text="本週平均血壓為 222"
         android:id="@+id/tvavgdia"
-        android:layout_below="@+id/tvavgsys"
+        android:layout_below="@+id/tvavgbs"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="31dp"

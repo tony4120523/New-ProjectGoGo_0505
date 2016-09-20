@@ -70,7 +70,7 @@ public class HomeActivity extends AppCompatActivity {
         Log.d(TAG, "Nickname : " + nickname);
 
 
-        txvhi.setText("HOLA！！！" + nickname + " 尼好");
+        txvhi.setText(nickname + " 您好!");
 
         btnhealth.setOnClickListener(new View.OnClickListener() {
             @Override

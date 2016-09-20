@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".BMIActivity">
+    tools:context=".BPActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -15,46 +15,33 @@
         android:layout_height="350sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout18">
+        android:id="@+id/linearLayout19">
 
         <WebView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/webbmi"
+            android:layout_height="fill_parent"
+            android:id="@+id/webpulse"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2016 1-12 BMI變化圖"
+        android:text="9/18 -9/24 脈搏變化圖"
         android:id="@+id/tvtime"
         android:textSize="15sp"
-        android:layout_below="@+id/linearLayout18"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/linearLayout19"
+        android:layout_alignRight="@+id/linearLayout19"
+        android:layout_alignEnd="@+id/linearLayout19" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BMI最高在 7 月"
-        android:id="@+id/tvavgbs"
+        android:id="@+id/tvavgpulse"
         android:textSize="15sp"
         android:layout_below="@+id/tvtime"
-        android:layout_alignLeft="@+id/linearLayout18"
-        android:layout_alignStart="@+id/linearLayout18" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="2016年1-12月平均BMI：22.4"
-        android:id="@+id/tvavgdia"
-        android:layout_below="@+id/tvavgbs"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp"
-        android:textSize="15sp"
-        android:layout_alignRight="@+id/tvtime"
-        android:layout_alignEnd="@+id/tvtime" />
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>

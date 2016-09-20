@@ -90,10 +90,14 @@
         </receiver>
         -->
 
-        <activity android:name=".chartlist" />
         <activity android:name=".chartselect" />
         <activity android:name=".health" />
-        <activity android:name=".mailtest"></activity>
+        <activity android:name=".mailtest" />
+        <activity android:name=".BSActivity" />
+        <activity android:name=".pulseActivity" />
+        <activity android:name=".health_thisweek" />
+        <activity android:name=".health_lastweek" />
+        <activity android:name=".health_nearmonth"></activity>
     </application>
 
 </manifest>
