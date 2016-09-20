@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class chartselect extends AppCompatActivity {
-    Button btnstep,btnbmi,btnhg,btnbs,btnhb;
+    Button btnstep,btnbmi,btnhg,btnbs,btnpulse;
     Handler myHandler;
     private ProgressDialog pDialog;
     private MyReceiver receiver;
@@ -36,8 +36,10 @@ public class chartselect extends AppCompatActivity {
     private static final String url_bp_detials = "http://www.hth96.me/nabu_connect/query_bp_weekly.php";
     private static final String url_bs_detials = "http://45.55.213.89/nabu_connect/query_bs_weekly.php";
     private static final String url_bmi_detials = "http://www.hth96.me/nabu_connect/query_bmi.php";
+    private static final String url_pulse_detials = "http://45.55.213.89/nabu_connect/query_pulse_weekly.php";
     int[] step_buffer;
     int[]bs_buffer;
+    int[]pulse_buffer;
     double[] bmi_buffer;
     double[] bp_sys_buffer;
     double[] bp_dia_buffer;
@@ -54,10 +56,11 @@ public class chartselect extends AppCompatActivity {
         btnbmi= (Button) findViewById(R.id.btnbmi);
         btnhg= (Button) findViewById(R.id.btnhg);
         btnbs= (Button) findViewById(R.id.btnbs);
-        btnhb= (Button) findViewById(R.id.btnhb);
+        btnpulse= (Button) findViewById(R.id.btnpulse);
         Intent in = getIntent();
         step_buffer = new int[100];
         bs_buffer=new int[100];
+        pulse_buffer=new int[100];
         bmi_buffer = new double[100];
         bp_sys_buffer = new double[100];
         bp_dia_buffer = new double[100];
@@ -178,11 +181,32 @@ public class chartselect extends AppCompatActivity {
             }
         });
 
-        btnhb.setOnClickListener(new View.OnClickListener() {
+        btnpulse.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-                Intent in=new Intent(getApplicationContext(),HBActivity.class);
-                startActivity(in);
+            public void onClick(View arg0) {
+                //Intent in = new Intent(getApplicationContext(), BMIActivity.class);
+                //startActivity(in);
+
+                myHandler = new Handler() {
+
+                    @Override
+                    public void handleMessage(Message msg) {
+                        switch (msg.what) {
+                            case 0:
+                                Log.d(TAG, "NOW PULSE_BUFFER[0] : " + pulse_buffer[0]);
+                                Intent in = new Intent(getApplicationContext(), pulseActivity.class);
+                                in.putExtra("pulse_buffer", pulse_buffer);
+                                startActivity(in);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                };
+
+                // Getting data in background thread
+                new Getdata("pulse").execute();
             }
         });
 
@@ -308,6 +332,29 @@ public class chartselect extends AppCompatActivity {
 
                             bs_buffer[i] = Integer.parseInt(userArr.getString(i));
                             Log.d(TAG, "EVERY BS SHOW HERE : " + Integer.toString(bs_buffer[i]));
+                        }
+
+                    }else{
+                        // user with id not found
+                        Log.d(TAG, "QUERY BS NOT FOUND");
+                    }
+                }else if(describe.equals("pulse")) {
+                    JSONObject json = jsonParser.makeHttpRequest(url_pulse_detials, "GET", params);
+                    // check your log for json response
+                    Log.d(TAG, "RETURN JSON : " + json.toString());
+                    // json success tag
+                    int success;
+                    success = json.getInt("success");
+                    if (success == 1) {
+                        // successfully received json
+                        JSONArray userArr = json.getJSONArray("pulse"); // JSON Array
+                        Log.d(TAG, "The userArr is" + userArr.toString());
+
+                        //each bmi is here
+                        for(int i=0; i<userArr.length(); i++) {
+
+                            pulse_buffer[i] = Integer.parseInt(userArr.getString(i));
+                            Log.d(TAG, "EVERY PULSE SHOW HERE : " + Integer.toString(pulse_buffer[i]));
                         }
 
                     }else{

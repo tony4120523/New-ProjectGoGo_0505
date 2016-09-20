@@ -20,7 +20,7 @@
         <WebView
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/webhb"
+            android:id="@+id/webpulse"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
@@ -37,10 +37,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvavghb"
+        android:id="@+id/tvavgpulse"
         android:textSize="15sp"
         android:layout_below="@+id/tvtime"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>

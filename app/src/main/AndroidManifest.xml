@@ -94,7 +94,7 @@
         <activity android:name=".health" />
         <activity android:name=".mailtest" />
         <activity android:name=".BSActivity" />
-        <activity android:name=".HBActivity"></activity>
+        <activity android:name=".pulseActivity"></activity>
     </application>
 
 </manifest>

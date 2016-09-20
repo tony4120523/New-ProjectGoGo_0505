@@ -26,14 +26,6 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="bmi變化圖(建置中)"
-            android:id="@+id/btnbmi"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="血壓變化圖"
             android:id="@+id/btnhg"
             android:layout_gravity="center_horizontal"
@@ -50,9 +42,16 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="脈搏變化圖(建置中)"
-            android:id="@+id/btnhb"
+            android:text="脈搏變化圖"
+            android:id="@+id/btnpulse"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="bmi變化圖(建置中)"
+            android:id="@+id/btnbmi"
             android:layout_marginTop="20dp" />
     </LinearLayout>
 </RelativeLayout>
