@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -24,16 +24,16 @@
         </activity>
 
         <!-- Log in Activity -->
-       <activity
+        <activity
             android:name=".LogInActivity"
-            android:parentActivityName=".MainScreenActivity"
-            android:label="@string/login_label" />
+            android:label="@string/login_label"
+            android:parentActivityName=".MainScreenActivity" />
 
         <!-- Regist Activity -->
         <activity
             android:name=".RegistActivity"
-            android:parentActivityName=".MainScreenActivity"
-            android:label="@string/regist_label" />
+            android:label="@string/regist_label"
+            android:parentActivityName=".MainScreenActivity" />
 
         <!-- Home Activity -->
         <activity
@@ -71,18 +71,15 @@
         </activity>
         <activity android:name=".ocr.PreferencesActivity" />
         <activity android:name=".ReceiverActivity" />
-
         <activity
             android:name=".InputDataActivity"
-            android:parentActivityName=".HomeActivity"
-            android:label="@string/input_data_label" />
-
+            android:label="@string/input_data_label"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".tabbed"
             android:label="@string/title_activity_tabbed"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
-                
         <receiver android:name=".AlarmReceiver" />
 
         <!--
@@ -93,7 +90,10 @@
         </receiver>
         -->
 
-
+        <activity android:name=".chartlist" />
+        <activity android:name=".chartselect" />
+        <activity android:name=".health" />
+        <activity android:name=".mailtest"></activity>
     </application>
 
 </manifest>
