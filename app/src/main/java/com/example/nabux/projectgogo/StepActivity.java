@@ -24,7 +24,7 @@ public class StepActivity extends AppCompatActivity {
         setContentView(R.layout.activity_step);
         webstep= (WebView) findViewById(R.id.webstep);
         tvtime= (TextView) findViewById(R.id.tvtime);
-        tvhigh= (TextView) findViewById(R.id.tvavgsys);
+        tvhigh= (TextView) findViewById(R.id.tvavgbs);
         tvavg= (TextView) findViewById(R.id.tvavgdia);
 
         Intent in = getIntent();
@@ -50,7 +50,8 @@ public class StepActivity extends AppCompatActivity {
         }
         avgstep=sumstep/7;
         tvhigh.setText("最高步數出現在 "+max_day+" !!");
-        tvavg.setText("本周步數平均值 為："+avgstep);
+        //tvavg.setText("本周步數平均值 為："+avgstep+" 步");
+        tvavg.setText("本周步數平均值 為："+avgstep+" 步");
         webstep.loadUrl(url_ref);
         webstep.setWebViewClient(new WebViewClient());
         WebSettings webSettings = webstep.getSettings();

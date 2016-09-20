@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class chartselect extends AppCompatActivity {
-    Button btnstep,btnbmi,btnhg;
+    Button btnstep,btnbmi,btnhg,btnbs,btnhb;
     Handler myHandler;
     private ProgressDialog pDialog;
     private MyReceiver receiver;
@@ -33,8 +34,10 @@ public class chartselect extends AppCompatActivity {
     JSONParser jsonParser = new JSONParser();
     private static final String url_step_detials = "http://www.hth96.me/nabu_connect/query_steps_weekly.php";
     private static final String url_bp_detials = "http://www.hth96.me/nabu_connect/query_bp_weekly.php";
+    private static final String url_bs_detials = "http://45.55.213.89/nabu_connect/query_bs_weekly.php";
     private static final String url_bmi_detials = "http://www.hth96.me/nabu_connect/query_bmi.php";
     int[] step_buffer;
+    int[]bs_buffer;
     double[] bmi_buffer;
     double[] bp_sys_buffer;
     double[] bp_dia_buffer;
@@ -42,14 +45,19 @@ public class chartselect extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chartselect);
+        ActionBar actionBar = this.getSupportActionBar();
+        actionBar.setTitle("我的健康圖表");
         receiver = new MyReceiver(new Handler());
         registerReceiver(receiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
         session = new Session(getApplicationContext());
         btnstep= (Button) findViewById(R.id.btnstep);
         btnbmi= (Button) findViewById(R.id.btnbmi);
         btnhg= (Button) findViewById(R.id.btnhg);
+        btnbs= (Button) findViewById(R.id.btnbs);
+        btnhb= (Button) findViewById(R.id.btnhb);
         Intent in = getIntent();
         step_buffer = new int[100];
+        bs_buffer=new int[100];
         bmi_buffer = new double[100];
         bp_sys_buffer = new double[100];
         bp_dia_buffer = new double[100];
@@ -141,6 +149,42 @@ public class chartselect extends AppCompatActivity {
             }
         });
 
+        btnbs.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                //Intent in = new Intent(getApplicationContext(), BMIActivity.class);
+                //startActivity(in);
+
+                myHandler = new Handler() {
+
+                    @Override
+                    public void handleMessage(Message msg) {
+                        switch (msg.what) {
+                            case 0:
+                                Log.d(TAG, "NOW BS_BUFFER[0] : " + bs_buffer[0]);
+                                Intent in = new Intent(getApplicationContext(), BSActivity.class);
+                                in.putExtra("bs_buffer", bs_buffer);
+                                startActivity(in);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                };
+
+                // Getting data in background thread
+                new Getdata("bs").execute();
+            }
+        });
+
+        btnhb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(getApplicationContext(),HBActivity.class);
+                startActivity(in);
+            }
+        });
 
     }
     class Getdata extends AsyncTask<String, String, String> {
@@ -247,7 +291,32 @@ public class chartselect extends AppCompatActivity {
                         // user with id not found
                         Log.d(TAG, "QUERY BP NOT FOUND");
                     }
-                }else {
+                }else if(describe.equals("bs")) {
+                    JSONObject json = jsonParser.makeHttpRequest(url_bs_detials, "GET", params);
+                    // check your log for json response
+                    Log.d(TAG, "RETURN JSON : " + json.toString());
+                    // json success tag
+                    int success;
+                    success = json.getInt("success");
+                    if (success == 1) {
+                        // successfully received json
+                        JSONArray userArr = json.getJSONArray("bloodsugar"); // JSON Array
+                        Log.d(TAG, "The userArr is" + userArr.toString());
+
+                        //each bmi is here
+                        for(int i=0; i<userArr.length(); i++) {
+
+                            bs_buffer[i] = Integer.parseInt(userArr.getString(i));
+                            Log.d(TAG, "EVERY BS SHOW HERE : " + Integer.toString(bs_buffer[i]));
+                        }
+
+                    }else{
+                        // user with id not found
+                        Log.d(TAG, "QUERY BS NOT FOUND");
+                    }
+                }
+
+                else {
                     //wait to add...
                 }
 

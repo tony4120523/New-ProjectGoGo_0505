@@ -24,7 +24,7 @@ public class BMIActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bmi);
         webbmi= (WebView) findViewById(R.id.webbmi);
         tvtime= (TextView) findViewById(R.id.tvtime);
-        tvhigh= (TextView) findViewById(R.id.tvavgsys);
+        tvhigh= (TextView) findViewById(R.id.tvavgbs);
         tvavg= (TextView) findViewById(R.id.tvavgdia);
 
         Intent in = getIntent();
