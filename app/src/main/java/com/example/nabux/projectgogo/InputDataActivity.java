@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
@@ -20,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class InputDataActivity extends AppCompatActivity {
@@ -28,13 +30,17 @@ public class InputDataActivity extends AppCompatActivity {
     private Session session;
     JSONParser jsonParser;
     private static final String url_insertdata = "http://www.hth96.me/nabu_connect/insert_data.php";
+    private static final String url_insertdata_first_day = "http://www.hth96.me/nabu_connect/insert_data_first_day.php";
     private static final String TAG_SUCCESS = "success";
 
     ImageView ima_step, ima_sys, ima_dia, ima_bs, ima_pulse;
-    EditText edit_step, edit_bp_sys, edit_bp_dia, edit_pulse, edit_bs;
+    EditText edit_step, edit_bp_sys, edit_bp_dia, edit_pulse, edit_bs, edit_height, edit_weight;
     Button btn_save;
     Handler handler;
-    String input_step, input_sys, input_dia, input_pulse, input_bs;
+    String input_step, input_sys, input_dia, input_pulse, input_bs, input_height, input_weight;
+    LinearLayout linear_exp, linear_height, linear_weight;
+    int day;
+    double bmi;
     private static final String TAG = InputDataActivity.class.getSimpleName();
 
     @Override
@@ -54,6 +60,11 @@ public class InputDataActivity extends AppCompatActivity {
         edit_bp_dia = (EditText) findViewById(R.id.edit_dia);
         edit_pulse = (EditText) findViewById(R.id.edit_pulse);
         edit_bs = (EditText) findViewById(R.id.edit_bs);
+        edit_height = (EditText) findViewById(R.id.edit_height);
+        edit_weight = (EditText) findViewById(R.id.edit_weight);
+        linear_exp = (LinearLayout) findViewById(R.id.linear_exp);
+        linear_height = (LinearLayout) findViewById(R.id.linear_height);
+        linear_weight = (LinearLayout) findViewById(R.id.linear_weight);
         btn_save = (Button) findViewById(R.id.btn_save);
 
         ima_step.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +115,8 @@ public class InputDataActivity extends AppCompatActivity {
                 input_dia = edit_bp_dia.getText().toString();
                 input_pulse = edit_pulse.getText().toString();
                 input_bs = edit_bs.getText().toString();
+                input_height = edit_height.getText().toString();
+                input_weight = edit_weight.getText().toString();
 
                 handler = new Handler() {
 
@@ -122,6 +135,14 @@ public class InputDataActivity extends AppCompatActivity {
                 new InsertData().execute();
             }
         });
+
+        Calendar c = Calendar.getInstance();
+        day = c.get(Calendar.DAY_OF_MONTH);
+        if(day != 1) {
+            linear_exp.setVisibility(View.GONE);
+            linear_height.setVisibility(View.GONE);
+            linear_weight.setVisibility(View.GONE);
+        }
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent intent){
@@ -161,6 +182,7 @@ public class InputDataActivity extends AppCompatActivity {
 
         protected String doInBackground(String... args) {
 
+            JSONObject json;
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("id", session.getUserID()));
             params.add(new BasicNameValuePair("steps", input_step));
@@ -168,9 +190,16 @@ public class InputDataActivity extends AppCompatActivity {
             params.add(new BasicNameValuePair("bp_dia", input_dia));
             params.add(new BasicNameValuePair("pulse", input_pulse));
             params.add(new BasicNameValuePair("bs", input_bs));
-
-            JSONObject json = jsonParser.makeHttpRequest(url_insertdata, "POST", params);
-
+            if(day == 1) {
+                params.add(new BasicNameValuePair("height", input_height));
+                params.add(new BasicNameValuePair("weight", input_weight));
+                String str_bmi = String.valueOf(Double.parseDouble(input_weight)/Double.parseDouble(input_height)/Double.parseDouble(input_height)*10000);
+                params.add(new BasicNameValuePair("bmi", str_bmi));
+                json = jsonParser.makeHttpRequest(url_insertdata_first_day, "POST", params);
+            }
+            else {
+                json = jsonParser.makeHttpRequest(url_insertdata, "POST", params);
+            }
 
             Log.d(TAG + " json", json.toString());
 

@@ -16,6 +16,77 @@
     android:weightSum="1">
 
     <LinearLayout
+        android:id="@+id/linear_exp"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_weight="0.06">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/textView_first_day"
+            android:text="今日為本月的第一天\n輸入身高體重來完成健康記錄哦"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/linear_height"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_weight="0.06">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/textView_height"
+            android:hint="請輸入身高"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textSize="25sp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/edit_height"
+            android:layout_weight="1"
+            android:textSize="35sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_weight"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_weight="0.06">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/textView_weight"
+            android:hint="請輸入體重"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textSize="25sp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/edit_weight"
+            android:layout_weight="1"
+            android:textSize="35sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#019858" />
+
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="80dp"

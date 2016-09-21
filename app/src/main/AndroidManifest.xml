@@ -50,9 +50,11 @@
             android:label="@string/bp_label" />
         <activity
             android:name=".ReportActivity"
+            android:parentActivityName=".HomeActivity"
             android:label="@string/report_label" />
         <activity
             android:name=".HelpActivity"
+            android:parentActivityName=".HomeActivity"
             android:label="@string/helper_label" />
         <activity
             android:name=".ocr.CaptureActivity"
@@ -90,9 +92,16 @@
         </receiver>
         -->
 
-        <activity android:name=".chartselect" />
-        <activity android:name=".health" />
-        <activity android:name=".mailtest" />
+        <activity
+            android:name=".chartselect"
+            android:parentActivityName=".HomeActivity"/>
+        <activity
+            android:name=".health"
+            android:parentActivityName=".HomeActivity"/>
+        <activity
+            android:name=".mailtest"
+            android:label="@string/mail_test_label"
+            android:parentActivityName=".HomeActivity"/>
         <activity android:name=".BSActivity" />
         <activity android:name=".pulseActivity" />
         <activity android:name=".health_thisweek" />
