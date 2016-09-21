@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:text="2016 1-12 BMI變化圖"
         android:id="@+id/tvtime"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:layout_below="@+id/linearLayout18"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -38,8 +38,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="BMI最高在 7 月"
-        android:id="@+id/tvavgbs"
-        android:textSize="15sp"
+        android:id="@+id/tvavgsys"
+        android:textSize="20sp"
         android:layout_below="@+id/tvtime"
         android:layout_alignLeft="@+id/linearLayout18"
         android:layout_alignStart="@+id/linearLayout18" />
@@ -49,11 +49,11 @@
         android:layout_height="wrap_content"
         android:text="2016年1-12月平均BMI：22.4"
         android:id="@+id/tvavgdia"
-        android:layout_below="@+id/tvavgbs"
+        android:layout_below="@+id/tvavgsys"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="23dp"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:layout_alignRight="@+id/tvtime"
         android:layout_alignEnd="@+id/tvtime" />
 
