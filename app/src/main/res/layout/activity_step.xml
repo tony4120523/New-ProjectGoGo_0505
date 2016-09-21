@@ -31,17 +31,18 @@
         android:layout_height="wrap_content"
         android:text="9/18 到 9/24 之步數累積圖"
         android:id="@+id/tvtime"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/linearLayout17" />
+        android:layout_below="@+id/linearLayout17"
+        android:textIsSelectable="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="本週最高步數累積在 星期二!"
-        android:id="@+id/tvavgbs"
-        android:textSize="15sp"
+        android:id="@+id/tvavgsys"
+        android:textSize="20sp"
         android:layout_marginBottom="17dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -57,6 +58,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="80dp"
-        android:layout_below="@+id/tvavgbs"
-        android:layout_alignRight="@+id/tvtime" />
+        android:layout_below="@+id/tvavgsys"
+        android:layout_alignRight="@+id/tvtime"
+        android:textSize="20sp" />
 </RelativeLayout>

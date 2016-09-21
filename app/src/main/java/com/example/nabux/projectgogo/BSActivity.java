@@ -22,7 +22,7 @@ public class BSActivity extends AppCompatActivity {
         ActionBar actionBar = this.getSupportActionBar();
         actionBar.setTitle("血糖變化圖");
         webbs= (WebView) findViewById(R.id.webbs);
-        tvavgbs= (TextView) findViewById(R.id.tvavgbs);
+        tvavgbs= (TextView) findViewById(R.id.tvavgsys);
         tvtime= (TextView) findViewById(R.id.tvtime);
         Intent in = getIntent();
         bs_buffer = in.getIntArrayExtra("bs_buffer");

@@ -27,7 +27,8 @@
             android:id="@+id/textView_step"
             android:hint="請輸入步數"
             android:layout_weight="1"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:textSize="25sp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -55,9 +56,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/textView_bp_sys"
-            android:hint="請輸入血壓( 高 ex:130)"
+            android:hint="請輸入收縮壓(高)"
             android:layout_weight="1"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:textSize="19sp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -86,9 +88,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/textView_bp_dia"
-            android:hint="請輸入血壓(低  ex:80)"
+            android:hint="請輸入舒張壓(低)"
             android:layout_weight="1"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:textSize="19sp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -119,7 +122,8 @@
             android:id="@+id/textView_pulse"
             android:hint="請輸入脈搏"
             android:layout_weight="1"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:textSize="20sp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -151,7 +155,8 @@
             android:hint="請輸入血糖"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="請輸入血糖(飯後2小時)" />
+            android:text="請輸入血糖(飯後2小時)"
+            android:textSize="25sp" />
 
         <EditText
             android:layout_width="match_parent"

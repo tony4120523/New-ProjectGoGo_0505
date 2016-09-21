@@ -50,7 +50,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="健康小知識"
+        android:text="健康小知識(建置中)"
         android:id="@+id/btnhelp"
         android:layout_marginTop="27dp"
         android:layout_below="@+id/btnreport"

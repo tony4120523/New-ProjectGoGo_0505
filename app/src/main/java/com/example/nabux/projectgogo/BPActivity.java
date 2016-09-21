@@ -26,7 +26,7 @@ public class BPActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hg);
         webhg= (WebView) findViewById(R.id.webhg);
         tvtime= (TextView) findViewById(R.id.tvtime);
-        tvavgsys= (TextView) findViewById(R.id.tvavgbs);
+        tvavgsys= (TextView) findViewById(R.id.tvavgsys);
         tvavgdia= (TextView) findViewById(R.id.tvavgdia);
 
         Intent in = getIntent();

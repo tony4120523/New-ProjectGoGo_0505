@@ -97,7 +97,11 @@
         <activity android:name=".pulseActivity" />
         <activity android:name=".health_thisweek" />
         <activity android:name=".health_lastweek" />
-        <activity android:name=".health_nearmonth"></activity>
+        <activity android:name=".health_nearmonth" />
+        <activity
+            android:name=".know"
+            android:label="@string/title_activity_know"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

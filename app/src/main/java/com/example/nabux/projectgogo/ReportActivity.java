@@ -215,11 +215,6 @@ public class ReportActivity extends AppCompatActivity {
                         // successfully received json
                         JSONArray bp_sys_Arr = json3.getJSONArray("bp_sys"); // JSON Array
                         JSONArray bp_dia_Arr = json3.getJSONArray("bp_dia");
-
-
-
-
-
                         for(int i=0; i<bp_sys_Arr.length(); i++) {
 
                             bp_sys_buffer[i] = Double.parseDouble(bp_sys_Arr.getString(i));
