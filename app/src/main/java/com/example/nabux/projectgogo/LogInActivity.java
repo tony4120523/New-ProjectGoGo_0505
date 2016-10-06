@@ -1,6 +1,9 @@
 package com.example.nabux.projectgogo;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -19,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.os.Handler;
@@ -39,6 +43,7 @@ public class LogInActivity extends AppCompatActivity {
     // single user url
     private static final String url_user_detials = "http://45.55.213.89/nabu_connect/query_login.php";
     private static final String TAG = LogInActivity.class.getSimpleName();
+    private static final int requestCode = 100;
 
     EditText edtAccount, edtpsd;
     Button btnLog, btnRes;
@@ -112,6 +117,21 @@ public class LogInActivity extends AppCompatActivity {
                 final String psd = edtpsd.getText().toString();
                 global_Account = edtAccount.getText().toString();
 
+
+                //設定定期通知通知
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.HOUR_OF_DAY, 19);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.SECOND, 0);
+
+                Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+                AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 *24 , pi);
+
+
+
                 myHandler = new Handler() {
 
                     @Override
@@ -144,12 +164,8 @@ public class LogInActivity extends AppCompatActivity {
                 };
 
 
-
-
                 // Getting user details in background thread
                 new CheckUserDetails().execute();
-
-
 
             }
         });

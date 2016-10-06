@@ -93,22 +93,22 @@
         -->
 
         <activity
-            android:name=".chartselect"
+            android:name=".SelectChartActivity"
             android:parentActivityName=".HomeActivity"/>
         <activity
             android:name=".health"
             android:parentActivityName=".HomeActivity"/>
         <activity
-            android:name=".mailtest"
+            android:name=".TestMailActivity"
             android:label="@string/mail_test_label"
             android:parentActivityName=".HomeActivity"/>
         <activity android:name=".BSActivity" />
-        <activity android:name=".pulseActivity" />
+        <activity android:name=".PulseActivity" />
         <activity android:name=".health_thisweek" />
         <activity android:name=".health_lastweek" />
         <activity android:name=".health_nearmonth" />
         <activity
-            android:name=".know"
+            android:name=".KnowledgeActivity"
             android:label="@string/title_activity_know"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

@@ -1,18 +1,11 @@
 package com.example.nabux.projectgogo;
 
 import android.app.AlarmManager;
-import android.app.AlertDialog;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -21,27 +14,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
 
-    private MyReceiver receiver;
+
+    public NetworkStateReceiver networkStateReceiver;
     private Session session;
 
-
+    private static final int requestCode = 100;
     private static final String TAG = HomeActivity.class.getSimpleName();
-    private static final int requistCode = 100;
+
 
     TextView txvhi;
     Button btnreport,btnhelp, btn_ocr, btn_input,btnreportpage,btnchartselect,btnhealth,btnmail;
@@ -52,8 +37,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        receiver = new MyReceiver(new Handler());
-        registerReceiver(receiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+
+        networkStateReceiver = new NetworkStateReceiver();
 
         session = new Session(getApplicationContext());
 
@@ -82,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
         btnchartselect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent in =new Intent(getApplicationContext(),chartselect.class);
+                Intent in =new Intent(getApplicationContext(),SelectChartActivity.class);
                 startActivity(in);
 
             }
@@ -106,7 +91,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                Intent in = new Intent(getApplicationContext(), know.class);
+                Intent in = new Intent(getApplicationContext(), KnowledgeActivity.class);
                 startActivity(in);
 
             }
@@ -134,15 +119,17 @@ public class HomeActivity extends AppCompatActivity {
         btnmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(getApplicationContext(),mailtest.class);
+                Intent in=new Intent(getApplicationContext(),TestMailActivity.class);
                 startActivity(in);
             }
         });
 
+
+        /*
         //通知
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 14);
-        calendar.set(Calendar.MINUTE, 13);
+        calendar.set(Calendar.HOUR_OF_DAY, 19);
+        calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
 
         Intent intent = new Intent(this, AlarmReceiver.class);
@@ -150,6 +137,20 @@ public class HomeActivity extends AppCompatActivity {
 
         AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 , pi);
+        */
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerReceiver(networkStateReceiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+    }
+
+    @Override
+    public void onPause() {
+        unregisterReceiver(networkStateReceiver);
+        super.onPause();
     }
 
     @Override
@@ -175,6 +176,11 @@ public class HomeActivity extends AppCompatActivity {
             session.setUserPSD("");
             session.setUserID("");
 
+            //Reset AlarmManager
+            Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+            PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            am.cancel(pi);
 
             // Launching MainScreen Activity
             Intent in = new Intent(getApplicationContext(), MainScreenActivity.class);
@@ -193,14 +199,13 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-
-
-    public class MyReceiver extends BroadcastReceiver {
+    /*
+    public class CheckNetworkReceiver extends BroadcastReceiver {
 
         private final Handler handler; // Handler used to execute code on the UI thread
         private boolean firstDisConnect = true;
 
-        public MyReceiver(Handler handler) {
+        public CheckNetworkReceiver(Handler handler) {
             this.handler = handler;
         }
 
@@ -213,6 +218,7 @@ public class HomeActivity extends AppCompatActivity {
                     IsNetworkConnected inc = new IsNetworkConnected(getApplicationContext());
                     if (!inc.isOnline() && firstDisConnect) {
                         firstDisConnect = false;
+                        //close current Activity, go to MainScreenActivity
                         finish();
                         Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -224,5 +230,6 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
     }
+    */
 
 }

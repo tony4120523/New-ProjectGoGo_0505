@@ -9,7 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-public class pulseActivity extends AppCompatActivity {
+public class PulseActivity extends AppCompatActivity {
     WebView webpulse;
     TextView tvtime,tvavgpulse;
     int pulse_buffer[];

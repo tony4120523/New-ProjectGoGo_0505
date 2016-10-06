@@ -640,7 +640,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
       showErrorMessage("Error", "Required external storage (such as an SD card) is unavailable for data storage.");
     } else {
     	// Something else is wrong. It may be one of many other states, but all we need
-      // to know is we can neither read nor write
+      // to KnowledgeActivity is we can neither read nor write
     	Log.e(TAG, "External storage is unavailable");
     	showErrorMessage("Error", "Required external storage (such as an SD card) is unavailable or corrupted.");
     }

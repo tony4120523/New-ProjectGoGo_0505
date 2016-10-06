@@ -14,6 +14,15 @@ public class IsNetworkConnected {
     public IsNetworkConnected(Context myContext) {
         this.myContext = myContext;
     }
+
+
+
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) myContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnected();
+    }
+
     public static boolean isInternetAvailable() {
         try {
             InetAddress ipAddr = InetAddress.getByName("google.com");
@@ -23,14 +32,12 @@ public class IsNetworkConnected {
             return false;
         }
     }
+
     public boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) myContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         return cm.getActiveNetworkInfo() != null;
     }
-    public boolean isOnline() {
-        ConnectivityManager cm = (ConnectivityManager) myContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnected();
-    }
+
+
 }

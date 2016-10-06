@@ -1,8 +1,6 @@
 package com.example.nabux.projectgogo;
 
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
@@ -24,13 +22,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class chartselect extends AppCompatActivity {
+public class SelectChartActivity extends AppCompatActivity {
+
     Button btnstep,btnbmi,btnhg,btnbs,btnpulse;
     Handler myHandler;
     private ProgressDialog pDialog;
-    private MyReceiver receiver;
     private Session session;
-    private static final String TAG = chartselect.class.getSimpleName();
+    private static final String TAG = SelectChartActivity.class.getSimpleName();
     JSONParser jsonParser = new JSONParser();
     private static final String url_step_detials = "http://www.hth96.me/nabu_connect/query_steps_weekly.php";
     private static final String url_bp_detials = "http://www.hth96.me/nabu_connect/query_bp_weekly.php";
@@ -43,14 +41,14 @@ public class chartselect extends AppCompatActivity {
     double[] bmi_buffer;
     double[] bp_sys_buffer;
     double[] bp_dia_buffer;
+    public NetworkStateReceiver networkStateReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chartselect);
         ActionBar actionBar = this.getSupportActionBar();
         actionBar.setTitle("我的健康圖表");
-        receiver = new MyReceiver(new Handler());
-        registerReceiver(receiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
         session = new Session(getApplicationContext());
         btnstep= (Button) findViewById(R.id.btnstep);
         btnbmi= (Button) findViewById(R.id.btnbmi);
@@ -64,6 +62,9 @@ public class chartselect extends AppCompatActivity {
         bmi_buffer = new double[100];
         bp_sys_buffer = new double[100];
         bp_dia_buffer = new double[100];
+        networkStateReceiver = new NetworkStateReceiver();
+
+
         btnstep.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -195,7 +196,7 @@ public class chartselect extends AppCompatActivity {
                         switch (msg.what) {
                             case 0:
                                 Log.d(TAG, "NOW PULSE_BUFFER[0] : " + pulse_buffer[0]);
-                                Intent in = new Intent(getApplicationContext(), pulseActivity.class);
+                                Intent in = new Intent(getApplicationContext(), PulseActivity.class);
                                 in.putExtra("pulse_buffer", pulse_buffer);
                                 startActivity(in);
                                 break;
@@ -211,6 +212,21 @@ public class chartselect extends AppCompatActivity {
         });
 
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerReceiver(networkStateReceiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+    }
+
+    @Override
+    public void onPause() {
+        unregisterReceiver(networkStateReceiver);
+        super.onPause();
+    }
+
+
     class Getdata extends AsyncTask<String, String, String> {
         String describe;
         Getdata(String desc) {
@@ -220,7 +236,7 @@ public class chartselect extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(chartselect.this);
+            pDialog = new ProgressDialog(SelectChartActivity.this);
             pDialog.setMessage("Loading ...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
@@ -385,33 +401,5 @@ public class chartselect extends AppCompatActivity {
     public void onBackPressed() {
         finish();
     }
-    public class MyReceiver extends BroadcastReceiver {
 
-        private final Handler handler; // Handler used to execute code on the UI thread
-        private boolean firstDisConnect = true;
-
-        public MyReceiver(Handler handler) {
-            this.handler = handler;
-        }
-
-        @Override
-        public void onReceive(final Context context, Intent intent) {
-
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    IsNetworkConnected inc = new IsNetworkConnected(getApplicationContext());
-                    if (!inc.isOnline() && firstDisConnect) {
-                        firstDisConnect = false;
-                        finish();
-                        Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                        startActivity(intent);
-                    }
-                }
-            });
-        }
-    }
 }

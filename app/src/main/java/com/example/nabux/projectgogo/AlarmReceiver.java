@@ -39,7 +39,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         //Toast.makeText(context, "Alarm !!!!!!!!!!", Toast.LENGTH_LONG).show();
 
-        final int notifyID = 100;
+        final int notifyID = 101;
         session = new Session(context);
 
         //get 系統通知服務
@@ -59,8 +59,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                     .setColor(Color.rgb(0, 204, 102))
                     //.setVibrate(new long[]{0, 300, 200, 100, 100, 100, 100, 100})
                     .setSmallIcon(R.drawable.house)
-                    .setContentTitle("Notification")
-                    .setContentText("~ Haven't Input Data ~")
+                    .setContentTitle("銀髮族健康管理APP關心您")
+                    .setContentText("今天尚未輸入資料哦 ... !!")
                     .setAutoCancel(true)
                     .setContentIntent(resultPendingIntent)
                     .build();

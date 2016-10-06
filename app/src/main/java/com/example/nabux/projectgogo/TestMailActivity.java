@@ -8,7 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 
-public class mailtest extends AppCompatActivity {
+public class TestMailActivity extends AppCompatActivity {
     Button btnsend;
     WebView web1;
 
@@ -16,8 +16,11 @@ public class mailtest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mailtest);
+
+
         btnsend= (Button) findViewById(R.id.btnsend);
         web1= (WebView) findViewById(R.id.web1);
+
         btnsend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

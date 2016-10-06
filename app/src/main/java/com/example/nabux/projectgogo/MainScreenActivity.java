@@ -26,7 +26,7 @@ public class MainScreenActivity extends AppCompatActivity {
     Button btnLogin;
     Button btnRegist;
     ImageView network_image;
-    private MyReceiver receiver;
+    private CheckNetworkReceiver checknetworkReceiver;
     String status;
 
     @Override
@@ -35,8 +35,7 @@ public class MainScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_screen);
         ActionBar actionBar = this.getSupportActionBar();
         actionBar.setTitle("銀髮族健康管理app");
-        receiver = new MyReceiver(new Handler());
-        registerReceiver(receiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+        checknetworkReceiver = new CheckNetworkReceiver(new Handler());
         network_image = (ImageView) findViewById(R.id.network);
         status = "";
 
@@ -96,12 +95,25 @@ public class MainScreenActivity extends AppCompatActivity {
         }
     }
 
-    public class MyReceiver extends BroadcastReceiver {
+    @Override
+    public void onResume() {
+        super.onResume();
+        //registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
+        registerReceiver(checknetworkReceiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+    }
+
+    @Override
+    public void onPause() {
+        unregisterReceiver(checknetworkReceiver);
+        super.onPause();
+    }
+
+    public class CheckNetworkReceiver extends BroadcastReceiver {
 
         private final Handler handler; // Handler used to execute code on the UI thread
         private boolean firstDisConnect = true;
 
-        public MyReceiver(Handler handler) {
+        public CheckNetworkReceiver(Handler handler) {
             this.handler = handler;
         }
 
@@ -116,6 +128,7 @@ public class MainScreenActivity extends AppCompatActivity {
                     if(inc.isOnline()) {
                         network_image.setVisibility(View.GONE);
                         if(status.equals("E"))  {
+                            //restart MainScreenActivity
                             finish();
                             startActivity(getIntent());
                         }
