@@ -20,19 +20,22 @@
         android:layout_height="wrap_content"
         android:text="請輸入帳號："
         android:id="@+id/tvrgid"
-        android:textSize="20sp" />
+        android:textSize="30sp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edrgid" />
+        android:id="@+id/edrgid"
+        android:maxLines="1"
+        android:inputType="text"
+        android:nextFocusDown="@+id/edrgpwd"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="請輸入密碼："
         android:id="@+id/tvrgpsd"
-        android:textSize="20sp" />
+        android:textSize="30sp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -46,7 +49,7 @@
         android:layout_height="wrap_content"
         android:text="再輸入密碼："
         android:id="@+id/tvrgpsd2"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:layout_above="@+id/linearLayout12" />
 
     <EditText
@@ -61,20 +64,23 @@
         android:layout_height="wrap_content"
         android:text="暱           稱："
         android:id="@+id/tvrgnickname"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:layout_below="@+id/linearLayout13" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edrgnickname" />
+        android:id="@+id/edrgnickname"
+        android:maxLines="1"
+        android:inputType="text"
+        android:nextFocusDown="@+id/edit_cp_email" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="聯絡人信箱 :"
         android:id="@+id/txv_cp_email"
-        android:textSize="20sp" />
+        android:textSize="30sp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -87,26 +93,27 @@
         android:layout_height="wrap_content"
         android:text="高血壓"
         android:id="@+id/chk_hyper"
-        android:textSize="20sp" />
+        android:textSize="30sp" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="糖尿病"
         android:id="@+id/chk_diabetes"
-        android:textSize="20sp" />
+        android:textSize="30sp" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="心臟病"
         android:id="@+id/chk_heart"
-        android:textSize="20sp" />
+        android:textSize="30sp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="提交"
+        android:textSize="30dp"
         android:id="@+id/btnrgsubmit"
         android:layout_gravity="center_horizontal" />
 
@@ -114,6 +121,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="清除"
+        android:textSize="30dp"
         android:id="@+id/btnrgreset"
         android:layout_gravity="center_horizontal" />
 

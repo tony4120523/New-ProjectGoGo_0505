@@ -48,7 +48,10 @@
                 android:hint="帳號"
                 android:textSize="30sp"
                 android:textAlignment="center"
-                android:gravity="center" />
+                android:gravity="center"
+                android:maxLines="1"
+                android:inputType="text"
+                android:nextFocusDown="@+id/ed2" />
         </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
@@ -90,6 +93,7 @@
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:text="登入"
+                android:textSize="30dp"
                 android:id="@+id/btnlogin"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center" />
@@ -98,6 +102,7 @@
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:text="註冊"
+                android:textSize="30dp"
                 android:id="@+id/btnregist"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center" />

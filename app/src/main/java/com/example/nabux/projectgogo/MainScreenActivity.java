@@ -33,8 +33,7 @@ public class MainScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-        ActionBar actionBar = this.getSupportActionBar();
-        actionBar.setTitle("銀髮族健康管理app");
+
         checknetworkReceiver = new CheckNetworkReceiver(new Handler());
         network_image = (ImageView) findViewById(R.id.network);
         status = "";
