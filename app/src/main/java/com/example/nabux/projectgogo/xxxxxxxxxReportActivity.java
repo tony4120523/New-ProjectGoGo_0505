@@ -1,7 +1,6 @@
 package com.example.nabux.projectgogo;
 
 import android.app.ProgressDialog;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,11 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +25,7 @@ import java.util.List;
 
 
 
-public class ReportActivity extends AppCompatActivity {
+public class xxxxxxxxxReportActivity extends AppCompatActivity {
     //WebView webreport;
     TextView avgbmishow,avgstepshow,avgdiabpshow,avgsysbpshow;
     Handler myHandler;
@@ -48,7 +43,7 @@ public class ReportActivity extends AppCompatActivity {
     private static final String url_bmi_detials = "http://www.hth96.me/nabu_connect/query_bmi.php";
     private static final String url_step_detials = "http://www.hth96.me/nabu_connect/query_steps_weekly.php";
     private static final String url_bp_detials = "http://www.hth96.me/nabu_connect/query_bp_weekly.php";
-    private static final String TAG = ReportActivity.class.getSimpleName();
+    private static final String TAG = xxxxxxxxxReportActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,7 +124,7 @@ public class ReportActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(ReportActivity.this);
+            pDialog = new ProgressDialog(xxxxxxxxxReportActivity.this);
             pDialog.setMessage("Loading ...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);

@@ -15,8 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Calendar;
-
 public class HomeActivity extends AppCompatActivity {
 
 
@@ -47,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
         btnreport= (Button) findViewById(R.id.btnreport);
         btnhelp= (Button) findViewById(R.id.btnhelp);
         btn_input = (Button) findViewById(R.id.btn_input);
-        btnreportpage= (Button) findViewById(R.id.btnreportpage);
+        //btnreportpage= (Button) findViewById(R.id.btnreportpage);
         btnhealth= (Button) findViewById(R.id.btnhealth);
         btnmail= (Button) findViewById(R.id.btnmail);
         Intent in = getIntent();
@@ -77,15 +75,15 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-        btnreport.setOnClickListener(new View.OnClickListener() {
+        /*btnreport.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                Intent in = new Intent(getApplicationContext(), ReportActivity.class);
+                Intent in = new Intent(getApplicationContext(), xxxxxxxxxReportActivity.class);
                 startActivity(in);
 
             }
-        });
+        });*/
 
         btnhelp.setOnClickListener(new View.OnClickListener() {
 
@@ -107,14 +105,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-       btnreportpage.setOnClickListener(new View.OnClickListener() {
+       /*btnreportpage.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                Intent in = new Intent(getApplicationContext(), tabbed.class);
+                Intent in = new Intent(getApplicationContext(), xxxxxtabbed.class);
                 startActivity(in);
             }
-        });
+        });*/
 
         btnmail.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -52,7 +52,7 @@ public class health_lastweek extends AppCompatActivity {
         setContentView(R.layout.activity_health_lastweek);
         list_health_lastweek= (ListView) findViewById(R.id.list_health_lastweek);
         ActionBar actionBar = this.getSupportActionBar();
-        actionBar.setTitle("上週健康報告 9/11 - 9/17");
+        actionBar.setTitle("上週健康報告 10/3 - 10/9");
         session = new Session(getApplicationContext());
 
 

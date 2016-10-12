@@ -34,8 +34,8 @@ public class health extends AppCompatActivity {
     private SimpleAdapter adapter;
 
     ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
-    String[]range=new String[]{"上週","本週(建置中)","最近三個月(90天)(建置中)"};
-    String[]date=new String[]{"2016/9/11 - 2016/9/17","2016/9/18 - 2016/9/24","2016/6/19 - 2016/9/19"};
+    String[]range=new String[]{"上週","本週至今天(建置中)","最近三個月(90天)(建置中)"};
+    String[]date=new String[]{"2016/10/03 - 2016/10/09","2016/10/10 - 2016/10/12","2016/7/12 - 2016/10/12"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

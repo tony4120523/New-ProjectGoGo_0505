@@ -20,6 +20,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -50,13 +51,13 @@
             android:name=".BPActivity"
             android:label="@string/bp_label" />
         <activity
-            android:name=".ReportActivity"
-            android:parentActivityName=".HomeActivity"
-            android:label="@string/report_label" />
+            android:name=".xxxxxxxxxReportActivity"
+            android:label="@string/report_label"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".HelpActivity"
-            android:parentActivityName=".HomeActivity"
-            android:label="@string/helper_label" />
+            android:label="@string/helper_label"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".ocr.CaptureActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -79,7 +80,7 @@
             android:label="@string/input_data_label"
             android:parentActivityName=".HomeActivity" />
         <activity
-            android:name=".tabbed"
+            android:name=".xxxxxtabbed"
             android:label="@string/title_activity_tabbed"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -95,14 +96,14 @@
 
         <activity
             android:name=".SelectChartActivity"
-            android:parentActivityName=".HomeActivity"/>
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".health"
-            android:parentActivityName=".HomeActivity"/>
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".TestMailActivity"
             android:label="@string/mail_test_label"
-            android:parentActivityName=".HomeActivity"/>
+            android:parentActivityName=".HomeActivity" />
         <activity android:name=".BSActivity" />
         <activity android:name=".PulseActivity" />
         <activity android:name=".health_thisweek" />
@@ -111,7 +112,13 @@
         <activity
             android:name=".KnowledgeActivity"
             android:label="@string/title_activity_know"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".know_bmi" />
+        <activity android:name=".know_bp" />
+        <activity android:name=".konw_step" />
+        <activity android:name=".know_step" />
+        <activity android:name=".know_bs" />
+        <activity android:name=".know_pulse"></activity>
     </application>
 
 </manifest>

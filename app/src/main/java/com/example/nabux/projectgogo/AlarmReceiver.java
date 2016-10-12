@@ -97,7 +97,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            /*pDialog = new ProgressDialog(ReportActivity.this);
+            /*pDialog = new ProgressDialog(xxxxxxxxxReportActivity.this);
             pDialog.setMessage("Loading ...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
