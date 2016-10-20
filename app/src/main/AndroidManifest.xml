@@ -118,7 +118,32 @@
         <activity android:name=".konw_step" />
         <activity android:name=".know_step" />
         <activity android:name=".know_bs" />
-        <activity android:name=".know_pulse"></activity>
+        <activity android:name=".know_pulse" />
+        <activity
+            android:name=".MyHealthChart.BP_chart.BP_TABBED"
+            android:label="@string/title_activity_bp__tabbed"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MyHealthChart.BP_chart.BP_lastweek" />
+        <activity android:name=".MyHealthChart.BP_chart.BP_thisweek" />
+        <activity android:name=".MyHealthChart.BP_chart.BP_nearmonth" />
+        <activity
+            android:name=".MyHealthChart.Step_chart.STEP_TEBBED"
+            android:label="@string/title_activity_step__tebbed"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MyHealthChart.Step_chart.Step_lastweek" />
+        <activity android:name=".MyHealthChart.Step_chart.Step_thisweek" />
+        <activity android:name=".MyHealthChart.Step_chart.Step_nearmonth" />
+        <activity
+            android:name=".MyHealthChart.BS_chart.BS_TEBBED"
+            android:label="@string/title_activity_bs__tebbed"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyHealthChart.Pulse_chart.PULSE_TABBED"
+            android:label="@string/title_activity_pulse__tabbed"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MyHealthChart.BS_chart.Bs_lastweek" />
+        <activity android:name=".MyHealthChart.BS_chart.Bs_thisweek" />
+        <activity android:name=".MyHealthChart.BS_chart.Bs_nearmonth"></activity>
     </application>
 
 </manifest>

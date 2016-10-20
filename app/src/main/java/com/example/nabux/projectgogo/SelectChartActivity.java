@@ -13,6 +13,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.nabux.projectgogo.MyHealthChart.BP_chart.BP_TABBED;
+import com.example.nabux.projectgogo.MyHealthChart.BS_chart.BS_TEBBED;
+import com.example.nabux.projectgogo.MyHealthChart.Pulse_chart.PULSE_TABBED;
+import com.example.nabux.projectgogo.MyHealthChart.Step_chart.STEP_TEBBED;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -51,7 +56,7 @@ public class SelectChartActivity extends AppCompatActivity {
         actionBar.setTitle("我的健康圖表");
         session = new Session(getApplicationContext());
         btnstep= (Button) findViewById(R.id.btnstep);
-        btnbmi= (Button) findViewById(R.id.btnbmi);
+        //btnbmi= (Button) findViewById(R.id.btnbmi);
         btnhg= (Button) findViewById(R.id.btnhg);
         btnbs= (Button) findViewById(R.id.btnbs);
         btnpulse= (Button) findViewById(R.id.btnpulse);
@@ -76,7 +81,7 @@ public class SelectChartActivity extends AppCompatActivity {
                         switch (msg.what) {
                             case 0:
 
-                                Intent in = new Intent(getApplicationContext(), StepActivity.class);
+                                Intent in = new Intent(getApplicationContext(), STEP_TEBBED.class);
                                 in.putExtra("step_buffer", step_buffer);
                                 startActivity(in);
                                 break;
@@ -93,7 +98,7 @@ public class SelectChartActivity extends AppCompatActivity {
             }
         });
 
-        btnbmi.setOnClickListener(new View.OnClickListener() {
+        /*btnbmi.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -120,7 +125,7 @@ public class SelectChartActivity extends AppCompatActivity {
                 // Getting data in background thread
                 new Getdata("bmi").execute();
             }
-        });
+        });*/
 
         btnhg.setOnClickListener(new View.OnClickListener() {
 
@@ -136,7 +141,7 @@ public class SelectChartActivity extends AppCompatActivity {
                             case 0:
                                 Log.d(TAG, "NOW BP_SYS_BUFFER[0] : " + bp_sys_buffer[0]);
                                 Log.d(TAG, "NOW BP_DIA_BUFFER[0] : " + bp_dia_buffer[0]);
-                                Intent in = new Intent(getApplicationContext(), BPActivity.class);
+                                Intent in = new Intent(getApplicationContext(), BP_TABBED.class);
                                 in.putExtra("bp_sys_buffer", bp_sys_buffer);
                                 in.putExtra("bp_dia_buffer", bp_dia_buffer);
                                 startActivity(in);
@@ -167,7 +172,7 @@ public class SelectChartActivity extends AppCompatActivity {
                         switch (msg.what) {
                             case 0:
                                 Log.d(TAG, "NOW BS_BUFFER[0] : " + bs_buffer[0]);
-                                Intent in = new Intent(getApplicationContext(), BSActivity.class);
+                                Intent in = new Intent(getApplicationContext(), BS_TEBBED.class);
                                 in.putExtra("bs_buffer", bs_buffer);
                                 startActivity(in);
                                 break;
@@ -196,7 +201,7 @@ public class SelectChartActivity extends AppCompatActivity {
                         switch (msg.what) {
                             case 0:
                                 Log.d(TAG, "NOW PULSE_BUFFER[0] : " + pulse_buffer[0]);
-                                Intent in = new Intent(getApplicationContext(), PulseActivity.class);
+                                Intent in = new Intent(getApplicationContext(), PULSE_TABBED.class);
                                 in.putExtra("pulse_buffer", pulse_buffer);
                                 startActivity(in);
                                 break;
