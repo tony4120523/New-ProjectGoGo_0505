@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MyHealthChart.BS_chart.Bs_nearmonth">
+    tools:context=".MyHealthChart.Pulse_chart.Pulse_thisweek">
 
     <LinearLayout
         android:orientation="vertical"
@@ -20,14 +20,14 @@
         <WebView
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/webbs"
+            android:id="@+id/webpulse"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="最近三個月 血糖變化圖"
+        android:text="本週 脈搏變化圖"
         android:id="@+id/tvtime"
         android:textSize="20sp"
         android:layout_below="@+id/linearLayout19"
@@ -37,8 +37,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvavgsys"
-        android:textSize="18sp"
+        android:id="@+id/tvavgpulse"
+        android:textSize="20sp"
         android:layout_below="@+id/tvtime"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

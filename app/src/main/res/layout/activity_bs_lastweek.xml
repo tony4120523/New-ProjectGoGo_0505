@@ -27,7 +27,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="9/18 -9/24 血糖變化圖"
+        android:text="上週 血糖變化圖"
         android:id="@+id/tvtime"
         android:textSize="20sp"
         android:layout_below="@+id/linearLayout19"

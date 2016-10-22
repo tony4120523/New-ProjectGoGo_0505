@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
         btn_input = (Button) findViewById(R.id.btn_input);
         //btnreportpage= (Button) findViewById(R.id.btnreportpage);
         btnhealth= (Button) findViewById(R.id.btnhealth);
-        btnmail= (Button) findViewById(R.id.btnmail);
+        //btnmail= (Button) findViewById(R.id.btnmail);
         Intent in = getIntent();
         String nickname = session.getNickName();
         Log.d(TAG, "Nickname : " + nickname);
@@ -114,13 +114,13 @@ public class HomeActivity extends AppCompatActivity {
             }
         });*/
 
-        btnmail.setOnClickListener(new View.OnClickListener() {
+       /* btnmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in=new Intent(getApplicationContext(),TestMailActivity.class);
                 startActivity(in);
             }
-        });
+        });*/
 
 
         /*

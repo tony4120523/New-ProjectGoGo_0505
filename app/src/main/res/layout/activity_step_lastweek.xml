@@ -29,7 +29,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="9/18 到 9/24 之步數累積圖"
+        android:text="上週之步數累積圖"
         android:id="@+id/tvtime"
         android:textSize="20sp"
         android:layout_alignParentRight="true"

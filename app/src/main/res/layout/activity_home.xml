@@ -67,13 +67,5 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="預警系統信件範例"
-        android:id="@+id/btnmail"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp" />
-
 </LinearLayout>
 </ScrollView>

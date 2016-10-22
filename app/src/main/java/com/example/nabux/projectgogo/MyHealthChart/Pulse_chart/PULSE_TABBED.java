@@ -114,9 +114,9 @@ public class PULSE_TABBED extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
-                case 0:return PlaceholderFragment.newInstance(position + 1);
-                case 1:return PlaceholderFragment.newInstance(position + 1);
-                case 2:return PlaceholderFragment.newInstance(position + 1);
+                case 0:return Pulse_lastweek.newInstance();
+                case 1:return Pulse_thisweek.newInstance();
+                case 2:return Pulse_nearmonth.newInstance();
             }
             return null;
         }

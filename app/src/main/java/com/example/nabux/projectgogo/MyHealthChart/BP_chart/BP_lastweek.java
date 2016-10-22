@@ -16,7 +16,7 @@ import com.example.nabux.projectgogo.R;
 public class BP_lastweek extends Fragment {
     WebView webhg;
     TextView tvtime,tvavgsys,tvavgdia;
-    double avgsys,avgdia,sumsys,sumdia;
+
     double[] bp_sys_buffer;
     double[] bp_dia_buffer;
     String para = "";
@@ -40,8 +40,8 @@ public class BP_lastweek extends Fragment {
         tvavgsys= (TextView) rootView.findViewById(R.id.tvavgsys);
         tvavgdia= (TextView) rootView.findViewById(R.id.tvavgdia);
         Intent in = getActivity().getIntent();
-        bp_sys_buffer = in.getDoubleArrayExtra("bp_sys_buffer");
-        bp_dia_buffer = in.getDoubleArrayExtra("bp_dia_buffer");
+        bp_sys_buffer = in.getDoubleArrayExtra("last_bp_sys_buffer");
+        bp_dia_buffer = in.getDoubleArrayExtra("last_bp_dia_buffer");
         para = "hmon=" + bp_sys_buffer[0] + "&&" +
                 "htue=" + bp_sys_buffer[1] + "&&" +
                 "hwed=" + bp_sys_buffer[2] + "&&" +
@@ -60,6 +60,8 @@ public class BP_lastweek extends Fragment {
 
 
         String url_ref = htmlurl + "?" + para;
+        double avgsys,avgdia,sumsys =0.0;
+        double sumdia=0.0;
         for(int i=0;i<7;i++){
             sumdia+=bp_dia_buffer[i];
             sumsys+=bp_sys_buffer[i];

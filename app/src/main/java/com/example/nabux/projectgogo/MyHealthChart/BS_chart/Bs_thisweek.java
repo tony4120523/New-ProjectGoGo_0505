@@ -18,7 +18,7 @@ public class Bs_thisweek extends Fragment {
     WebView webbs;
     TextView tvtime,tvavgbs;
     int[] bs_buffer;
-    int sumbs,avgbs;
+
     private static final String htmlurl = "http://www.hth96.me/nabu_connect/bs.html";
     public static com.example.nabux.projectgogo.MyHealthChart.BS_chart.Bs_thisweek newInstance() {
 
@@ -38,7 +38,7 @@ public class Bs_thisweek extends Fragment {
         tvavgbs= (TextView) rootView.findViewById(R.id.tvavgsys);
         tvtime= (TextView) rootView.findViewById(R.id.tvtime);
         Intent in = getActivity().getIntent();
-        bs_buffer = in.getIntArrayExtra("bs_buffer");
+        bs_buffer = in.getIntArrayExtra("this_bs_buffer");
         String para = "mon="+bs_buffer[0]+"&&"+
                 "tue="+bs_buffer[1]+"&&"+
                 "wed="+bs_buffer[2]+"&&"+
@@ -48,7 +48,7 @@ public class Bs_thisweek extends Fragment {
                 "sun="+bs_buffer[6];
 
         String url_ref = htmlurl + "?" + para;
-
+        int avgbs,sumbs=0;
         for(int i=0;i<7;i++){
             sumbs+=bs_buffer[i];
         }

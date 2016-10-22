@@ -19,7 +19,7 @@ public class Step_thisweek extends Fragment {
     TextView tvtime,tvhigh,tvavg;
 
     int[] step_buffer;
-    int max_week_step,sumstep,avgstep;
+    int max_week_step;
     String max_day;
     String[] weekday=new String[]{"星期一","星期二","星期三","星期四","星期五","星期六","星期日"};
     private static final String htmlurl = "http://www.hth96.me/nabu_connect/steps.html";
@@ -42,7 +42,7 @@ public class Step_thisweek extends Fragment {
         tvhigh= (TextView) rootView.findViewById(R.id.tvavgsys);
         tvavg= (TextView) rootView.findViewById(R.id.tvavgdia);
         Intent in = getActivity().getIntent();
-        step_buffer = in.getIntArrayExtra("step_buffer");
+        step_buffer = in.getIntArrayExtra("this_step_buffer");
         String para = "aa="+step_buffer[0]+"&&"+
                 "bb="+step_buffer[1]+"&&"+
                 "cc="+step_buffer[2]+"&&"+
@@ -59,6 +59,7 @@ public class Step_thisweek extends Fragment {
             }
 
         }
+        int avgstep,sumstep=0;
         for(int i=0;i<7;i++){
             sumstep+=step_buffer[i];
         }

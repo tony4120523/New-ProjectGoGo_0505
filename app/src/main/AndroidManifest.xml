@@ -143,7 +143,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MyHealthChart.BS_chart.Bs_lastweek" />
         <activity android:name=".MyHealthChart.BS_chart.Bs_thisweek" />
-        <activity android:name=".MyHealthChart.BS_chart.Bs_nearmonth"></activity>
+        <activity android:name=".MyHealthChart.BS_chart.Bs_nearmonth" />
+        <activity android:name=".MyHealthChart.Pulse_chart.Pulse_lastweek" />
+        <activity android:name=".MyHealthChart.Pulse_chart.Pulse_thisweek" />
+        <activity android:name=".MyHealthChart.Pulse_chart.Pulse_nearmonth"></activity>
     </application>
 
 </manifest>
