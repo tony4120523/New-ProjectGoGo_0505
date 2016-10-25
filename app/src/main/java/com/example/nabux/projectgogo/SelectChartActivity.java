@@ -328,7 +328,7 @@ public class SelectChartActivity extends AppCompatActivity {
                     this_success = thisjson.getInt("success");
                     last_success = lastjson.getInt("success");
                     month_success = monthjson.getInt("success");
-                    if (this_success == 1 && last_success == 1 && month_success == 1) {
+                    if (this_success == 1 || last_success == 1 || month_success == 1) {
                         // successfully received json
                         JSONArray this_userArr = thisjson.getJSONArray("steps"); // JSON Array
                         JSONArray last_userArr = lastjson.getJSONArray("steps"); // JSON Array
@@ -393,7 +393,7 @@ public class SelectChartActivity extends AppCompatActivity {
                     lastsuccess = lastjson.getInt("success");
                     monthsuccess = monthjson.getInt("success");
 
-                    if (thissuccess == 1 && lastsuccess == 1 && monthsuccess == 1) {
+                    if (thissuccess == 1 || lastsuccess == 1 || monthsuccess == 1) {
                         // successfully received json
                         JSONArray this_bp_sys_Arr = thisjson.getJSONArray("bp_sys"); // JSON Array
                         JSONArray this_bp_dia_Arr = thisjson.getJSONArray("bp_dia");
@@ -448,7 +448,7 @@ public class SelectChartActivity extends AppCompatActivity {
                     thissuccess = thisjson.getInt("success");
                     lastsuccess = lastjson.getInt("success");
                     monthsuccess = monthjson.getInt("success");
-                    if (thissuccess == 1 && lastsuccess == 1 && monthsuccess == 1) {
+                    if (thissuccess == 1 || lastsuccess == 1 || monthsuccess == 1) {
                         // successfully received json
                         JSONArray thisuserArr = thisjson.getJSONArray("bloodsugar"); // JSON Array
                         JSONArray lastuserArr = lastjson.getJSONArray("bloodsugar"); // JSON Array
@@ -491,7 +491,7 @@ public class SelectChartActivity extends AppCompatActivity {
                     thissuccess = thisjson.getInt("success");
                     lastsuccess = lastjson.getInt("success");
                     monthsuccess = monthjson.getInt("success");
-                    if (thissuccess == 1 && lastsuccess == 1 && monthsuccess == 1) {
+                    if (thissuccess == 1 || lastsuccess == 1 || monthsuccess == 1) {
                         // successfully received json
                         JSONArray thisuserArr = thisjson.getJSONArray("pulse"); // JSON Array
                         JSONArray lastuserArr = lastjson.getJSONArray("pulse"); // JSON Array
