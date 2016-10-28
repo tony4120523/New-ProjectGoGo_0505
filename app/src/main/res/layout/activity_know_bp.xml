@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_know_bp"
     android:layout_width="match_parent"
@@ -8,15 +9,34 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.nabux.projectgogo.know_bp">
+    tools:context="com.example.nabux.projectgogo.HealthKnowledge.know_bp">
 
-    <TextView
-        android:text="血壓"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textView2"
-        android:textStyle="normal|bold"
-        android:textSize="50sp" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="240dp"
+            app:srcCompat="@drawable/bp"
+            android:id="@+id/img_bp"
+            android:adjustViewBounds="false"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="234dp"
+            android:id="@+id/tv_bp"
+            android:text="1231321"
+            android:textColor="?attr/editTextColor"
+            android:textSize="25sp"
+            android:layout_below="@+id/linearLayout5"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </LinearLayout>
+
 </RelativeLayout>

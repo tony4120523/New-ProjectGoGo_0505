@@ -37,9 +37,9 @@ public class health_nearmonth extends AppCompatActivity {
     private SimpleAdapter adapter;
     ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
     private static final String url_bmi_detials = "http://www.hth96.me/nabu_connect/query_bmi.php";
-    private static final String url_step_detials = "http://www.hth96.me/nabu_connect/query_steps_weekly.php";
-    private static final String url_bp_detials = "http://www.hth96.me/nabu_connect/query_bp_weekly.php";
-    private static final String url_bs_detials = "http://45.55.213.89/nabu_connect/query_bs_weekly.php";
+    private static final String url_step_detials = "http://45.55.213.89/nabu_connect/query_steps_3month.php";
+    private static final String url_bp_detials = "http://45.55.213.89/nabu_connect/query_bp_3month.php";
+    private static final String url_bs_detials = "http://45.55.213.89/nabu_connect/query_bs_3month.php";
     private static final String url_pulse_detials = "http://45.55.213.89/nabu_connect/query_pulse_weekly.php";
     private static final String TAG = health_lastweek.class.getSimpleName();
     String bmians,stepans,sysbpans,diabpans,bsans,pulseans;
@@ -51,7 +51,7 @@ public class health_nearmonth extends AppCompatActivity {
         setContentView(R.layout.activity_health_nearmonth);
         list_health_nearmonth= (ListView) findViewById(R.id.list_health_nearmonth);
         ActionBar actionBar = this.getSupportActionBar();
-        actionBar.setTitle("最近三個月健康報告 7/12 - 10/12");
+        actionBar.setTitle("最近三個月健康報告");
         session = new Session(getApplicationContext());
 
 
@@ -67,14 +67,14 @@ public class health_nearmonth extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 0:
-                        count_bmi();
+                        //count_bmi();
                         count_step();
                         count_sysbp();
                         count_diabp();
                         count_bs();
                         count_pulse();
-                        String[]state=new String[]{"平均bmi為："+avgbmi,"平均步數為："+avgstep+" 步","平均心肌收縮壓為："+avgsysbp+" mmhg","平均心肌舒張壓為："+avgdiabp+" mmhg","平均血糖為："+avgbs+" mg/dl","平均脈搏為："+avgpulse+" 下/每分"};
-                        String[]compare=new String[]{bmians,stepans,sysbpans,diabpans,bsans,pulseans};
+                        String[]state=new String[]{"平均步數為："+avgstep+" 步","平均心肌收縮壓為："+avgsysbp+" mmhg","平均心肌舒張壓為："+avgdiabp+" mmhg","平均血糖為："+avgbs+" mg/dl","平均脈搏為："+avgpulse+" 下/每分"};
+                        String[]compare=new String[]{stepans,sysbpans,diabpans,bsans,pulseans};
                         for(int i=0; i<state.length; i++){
                             HashMap<String,String> item = new HashMap<String,String>();
                             item.put( "stated", state[i]);
@@ -142,6 +142,7 @@ public class health_nearmonth extends AppCompatActivity {
                 Log.d(TAG, json.toString());
                 // json success tag
                 int success;
+                int avg_step_by=0;
                 success = json.getInt("success");
                 if (success == 1) {
                     // successfully received json
@@ -149,9 +150,12 @@ public class health_nearmonth extends AppCompatActivity {
                     //each step is here
                     for(int i=0; i<userArr.length(); i++) {
                         step_buffer[i] = Integer.parseInt(userArr.getString(i));
-                        sumstep+=step_buffer[i];
+                        if(step_buffer[i]>0) {
+                            sumstep += step_buffer[i];
+                            avg_step_by++;
+                        }
                     }
-                    avgstep=sumstep/userArr.length();
+                    avgstep=sumstep/avg_step_by;
                 }else{
                     // user with id not found
 
@@ -189,6 +193,7 @@ public class health_nearmonth extends AppCompatActivity {
                 Log.d(TAG, json3.toString());
                 // json success tag
                 int success3;
+                int avg_bp_by1=0,avg_bp_by2=0;
                 success3 = json3.getInt("success");
                 if (success3 == 1) {
                     // successfully received json
@@ -198,16 +203,22 @@ public class health_nearmonth extends AppCompatActivity {
 
                         bp_sys_buffer[i] = Double.parseDouble(bp_sys_Arr.getString(i));
                         bp_dia_buffer[i] = Double.parseDouble(bp_dia_Arr.getString(i));
-                        sumsysbp+=bp_sys_buffer[i];
-                        sumdiabp+=bp_dia_buffer[i];
+                        if(bp_sys_buffer[i]>0) {
+                            sumsysbp += bp_sys_buffer[i];
+                            avg_bp_by1++;
+                        }
+                        if(bp_dia_buffer[i]>0) {
+                            sumdiabp += bp_dia_buffer[i];
+                            avg_bp_by2++;
+                        }
 
 
                     }
 
-                    avgsysbp=sumsysbp/bp_sys_Arr.length();
+                    avgsysbp=sumsysbp/avg_bp_by1;
                     avgsysbp=((Math.round(avgsysbp*100.0))/100.0);
 
-                    avgdiabp=sumdiabp/bp_dia_Arr.length();
+                    avgdiabp=sumdiabp/avg_bp_by2;
                     avgdiabp=((Math.round(avgdiabp*100.0))/100.0);
 
                 }else{
@@ -220,15 +231,19 @@ public class health_nearmonth extends AppCompatActivity {
                 Log.d(TAG, json4.toString());
                 // json success tag
                 int success4;
+                int avg_bs_by=0;
                 success4 = json4.getInt("success");
                 if (success4 == 1) {
                     // successfully received json
                     JSONArray bs_Arr = json4.getJSONArray("bloodsugar"); // JSON Array
                     for(int i=0; i<bs_Arr.length(); i++) {
                         bs_buffer[i] = Integer.parseInt(bs_Arr.getString(i));
-                        sumbs+=bs_buffer[i];
+                        if(bs_buffer[i]>0){
+                            sumbs+=bs_buffer[i];
+                            avg_bs_by++;
+                        }
                     }
-                    avgbs=sumbs/bs_Arr.length();
+                    avgbs=sumbs/avg_bs_by;
 
                 }else{
                     // user with id not found
@@ -240,15 +255,19 @@ public class health_nearmonth extends AppCompatActivity {
                 Log.d(TAG, json5.toString());
                 // json success tag
                 int success5;
+                int avg_pulse_by=0;
                 success5 = json5.getInt("success");
                 if (success5 == 1) {
                     // successfully received json
                     JSONArray pulse_Arr = json5.getJSONArray("pulse"); // JSON Array
                     for(int i=0; i<pulse_Arr.length(); i++) {
                         pulse_buffer[i] = Integer.parseInt(pulse_Arr.getString(i));
-                        sumpulse+=pulse_buffer[i];
+                        if(pulse_buffer[i]>0) {
+                            sumpulse += pulse_buffer[i];
+                            avg_pulse_by++;
+                        }
                     }
-                    avgpulse=sumpulse/pulse_Arr.length();
+                    avgpulse=sumpulse/avg_pulse_by;
 
                 }else{
                     // user with id not found
@@ -270,7 +289,7 @@ public class health_nearmonth extends AppCompatActivity {
 
         }
     }
-    public String count_bmi(){
+    /*public String count_bmi(){
         if(avgbmi<18.5){
             bmians="您的體位為 過輕";
 
@@ -298,7 +317,7 @@ public class health_nearmonth extends AppCompatActivity {
         }
 
         return bmians;
-    }
+    }*/
     public String count_step(){
         if(avgstep<6000.0){
             stepans="距離建議步數還有 "+(6000-avgstep)+" 步";

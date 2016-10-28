@@ -1,8 +1,6 @@
-package com.example.nabux.projectgogo;
+package com.example.nabux.projectgogo.HealthKnowledge;
 
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -12,12 +10,17 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+
+import com.example.nabux.projectgogo.HealthKnowledge.know_bmi;
+import com.example.nabux.projectgogo.HealthKnowledge.know_bp;
+import com.example.nabux.projectgogo.HealthKnowledge.know_bs;
+import com.example.nabux.projectgogo.HealthKnowledge.know_pulse;
+import com.example.nabux.projectgogo.HealthKnowledge.know_step;
+import com.example.nabux.projectgogo.R;
 
 public class KnowledgeActivity extends AppCompatActivity {
 
@@ -111,11 +114,11 @@ public class KnowledgeActivity extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch(position) {
-                case 0:return know_bmi.newInstance();
-                case 1:return know_bp.newInstance();
-                case 2:return know_step.newInstance();
-                case 3:return know_bs.newInstance();
-                case 4:return know_pulse.newInstance();
+                //case 0:return know_bmi.newInstance();
+                case 0:return know_bp.newInstance();
+                case 1:return know_step.newInstance();
+                case 2:return know_bs.newInstance();
+                case 3:return know_pulse.newInstance();
             }
             return null;
         }
@@ -123,21 +126,21 @@ public class KnowledgeActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 5;
+            return 4;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
+                //case 0:
+                   // return "BMI";
                 case 0:
-                    return "BMI";
-                case 1:
                     return "血壓";
-                case 2:
+                case 1:
                     return "步數";
-                case 3:
+                case 2:
                     return "血糖";
-                case 4:
+                case 3:
                     return "脈搏";
             }
             return null;

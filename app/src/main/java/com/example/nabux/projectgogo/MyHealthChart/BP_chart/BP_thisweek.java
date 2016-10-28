@@ -20,7 +20,7 @@ public class BP_thisweek extends Fragment {
     double[] bp_sys_buffer;
     double[] bp_dia_buffer;
     String para = "";
-    private static final String htmlurl = "http://www.hth96.me/nabu_connect/mmhg.html";
+    private static final String htmlurl = "http://www.hth96.me/nabu_connect/mmhg/mmhg_new.html";
     public static BP_thisweek newInstance() {
 
         BP_thisweek fragment = new BP_thisweek();
@@ -42,7 +42,7 @@ public class BP_thisweek extends Fragment {
         Intent in = getActivity().getIntent();
         bp_sys_buffer = in.getDoubleArrayExtra("this_bp_sys_buffer");
         bp_dia_buffer = in.getDoubleArrayExtra("this_bp_dia_buffer");
-        para = "hmon=" + bp_sys_buffer[0] + "&&" +
+        /*para = "hmon=" + bp_sys_buffer[0] + "&&" +
                 "htue=" + bp_sys_buffer[1] + "&&" +
                 "hwed=" + bp_sys_buffer[2] + "&&" +
                 "hthr=" + bp_sys_buffer[3] + "&&" +
@@ -56,18 +56,29 @@ public class BP_thisweek extends Fragment {
                 "lthr=" + bp_dia_buffer[3] + "&&" +
                 "lfri=" + bp_dia_buffer[4] + "&&" +
                 "lsat=" + bp_dia_buffer[5] + "&&" +
-                "lsun=" + bp_dia_buffer[6] ;
+                "lsun=" + bp_dia_buffer[6] ;*/
 
 
-        String url_ref = htmlurl + "?" + para;
+        String para="";
+        for(int i=0;i<7;i++){
+            para+=bp_sys_buffer[i]+"+"+bp_dia_buffer[i]+"+";
+        }
+        String url_ref = htmlurl + "?something=" + para;
         double avgsys,avgdia,sumsys =0.0;
         double sumdia=0.0;
+        int avgby1=0,avgby2=0;
         for(int i=0;i<7;i++){
-            sumdia+=bp_dia_buffer[i];
-            sumsys+=bp_sys_buffer[i];
+            if(bp_dia_buffer[i]>0) {
+                sumdia += bp_dia_buffer[i];
+                avgby1++;
+            }
+            if(bp_sys_buffer[i]>0) {
+                sumsys += bp_sys_buffer[i];
+                avgby2++;
+            }
         }
-        avgdia=sumdia/7;
-        avgsys=sumsys/7;
+        avgdia=sumdia/avgby1;
+        avgsys=sumsys/avgby2;
         avgdia=((Math.round(avgdia*100.0))/100.0);
         avgsys=((Math.round(avgsys*100.0))/100.0);
         tvavgsys.setText("本週平均心肌收縮壓為： "+avgsys);

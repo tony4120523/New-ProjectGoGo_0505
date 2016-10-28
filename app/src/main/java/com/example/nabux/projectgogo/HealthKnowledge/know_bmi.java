@@ -1,17 +1,12 @@
-package com.example.nabux.projectgogo;
+package com.example.nabux.projectgogo.HealthKnowledge;
 
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
-import java.util.HashMap;
+import com.example.nabux.projectgogo.R;
 
 public class know_bmi extends Fragment {
 
