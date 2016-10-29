@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.nabux.projectgogo.HealthKnowledge.KnowledgeActivity;
@@ -30,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
 
     TextView txvhi;
     Button btnreport,btnhelp, btn_ocr, btn_input,btnreportpage,btnchartselect,btnhealth,btnmail;
-
+    ImageButton imgbtn_input, imgbtn_chart, imgbtn_report, imgbtn_knowledge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
 
         session = new Session(getApplicationContext());
 
-        txvhi = (TextView) findViewById(R.id.txv_hi);
+        /*txvhi = (TextView) findViewById(R.id.txv_hi);
         btnchartselect= (Button) findViewById(R.id.btnchartselect);
         btnreport= (Button) findViewById(R.id.btnreport);
         btnhelp= (Button) findViewById(R.id.btnhelp);
@@ -54,17 +55,20 @@ public class HomeActivity extends AppCompatActivity {
         String nickname = session.getNickName();
         Log.d(TAG, "Nickname : " + nickname);
 
+        txvhi.setText(nickname + " 您好!");*/
+        imgbtn_input = (ImageButton) findViewById(R.id.imageButtoninput);
+        imgbtn_chart = (ImageButton) findViewById(R.id.imageButtonchart);
+        imgbtn_report = (ImageButton) findViewById(R.id.imageButtonreport);
+        imgbtn_knowledge = (ImageButton) findViewById(R.id.imageButtonknowledge);
 
-        txvhi.setText(nickname + " 您好!");
-
-        btnhealth.setOnClickListener(new View.OnClickListener() {
+        imgbtn_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in =new Intent(getApplicationContext(),health.class);
                 startActivity(in);
             }
         });
-        btnchartselect.setOnClickListener(new View.OnClickListener() {
+        imgbtn_chart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 Intent in =new Intent(getApplicationContext(),SelectChartActivity.class);
@@ -72,8 +76,6 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-
-
 
 
 
@@ -87,7 +89,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });*/
 
-        btnhelp.setOnClickListener(new View.OnClickListener() {
+        imgbtn_knowledge.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -98,7 +100,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-        btn_input.setOnClickListener(new View.OnClickListener() {
+        imgbtn_input.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
