@@ -43,19 +43,22 @@ public class HomeActivity extends AppCompatActivity {
 
         session = new Session(getApplicationContext());
 
-        /*txvhi = (TextView) findViewById(R.id.txv_hi);
-        btnchartselect= (Button) findViewById(R.id.btnchartselect);
-        btnreport= (Button) findViewById(R.id.btnreport);
-        btnhelp= (Button) findViewById(R.id.btnhelp);
-        btn_input = (Button) findViewById(R.id.btn_input);
-        //btnreportpage= (Button) findViewById(R.id.btnreportpage);
-        btnhealth= (Button) findViewById(R.id.btnhealth);
-        //btnmail= (Button) findViewById(R.id.btnmail);
-        Intent in = getIntent();
-        String nickname = session.getNickName();
-        Log.d(TAG, "Nickname : " + nickname);
+        /**
+        *txvhi = (TextView) findViewById(R.id.txv_hi);
+        *btnchartselect= (Button) findViewById(R.id.btnchartselect);
+        *btnreport= (Button) findViewById(R.id.btnreport);
+        *btnhelp= (Button) findViewById(R.id.btnhelp);
+        *btn_input = (Button) findViewById(R.id.btn_input);
+        *btnreportpage= (Button) findViewById(R.id.btnreportpage);
+        *btnhealth= (Button) findViewById(R.id.btnhealth);
+        *btnmail= (Button) findViewById(R.id.btnmail);
+        *Intent in = getIntent();
+        *String nickname = session.getNickName();
+        *Log.d(TAG, "Nickname : " + nickname);
 
-        txvhi.setText(nickname + " 您好!");*/
+        *txvhi.setText(nickname + " 您好!");
+         **/
+
         imgbtn_input = (ImageButton) findViewById(R.id.imageButtoninput);
         imgbtn_chart = (ImageButton) findViewById(R.id.imageButtonchart);
         imgbtn_report = (ImageButton) findViewById(R.id.imageButtonreport);
@@ -186,8 +189,9 @@ public class HomeActivity extends AppCompatActivity {
 
             // Launching MainScreen Activity
             Intent in = new Intent(getApplicationContext(), MainScreenActivity.class);
-            startActivity(in);
+
             finish();
+            startActivity(in);
             return true;
         }
 

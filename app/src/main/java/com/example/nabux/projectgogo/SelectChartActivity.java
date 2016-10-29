@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.nabux.projectgogo.MyHealthChart.BP_chart.BP_TABBED;
 import com.example.nabux.projectgogo.MyHealthChart.BS_chart.BS_TEBBED;
@@ -29,7 +30,9 @@ import java.util.List;
 
 public class SelectChartActivity extends AppCompatActivity {
 
-    Button btnstep,btnbmi,btnhg,btnbs,btnpulse;
+    //Button btnstep,btnbmi,btnhg,btnbs,btnpulse;
+
+    ImageButton imgbtn_step, imgbtn_bp, imgbtn_pulse, imgbtn_bs;
     Handler myHandler;
     private ProgressDialog pDialog;
     private Session session;
@@ -78,11 +81,19 @@ public class SelectChartActivity extends AppCompatActivity {
         ActionBar actionBar = this.getSupportActionBar();
         actionBar.setTitle("我的健康圖表");
         session = new Session(getApplicationContext());
-        btnstep= (Button) findViewById(R.id.btnstep);
-        //btnbmi= (Button) findViewById(R.id.btnbmi);
-        btnhg= (Button) findViewById(R.id.btnhg);
-        btnbs= (Button) findViewById(R.id.btnbs);
-        btnpulse= (Button) findViewById(R.id.btnpulse);
+
+        /**
+        *btnstep= (Button) findViewById(R.id.btnstep);
+        *btnbmi= (Button) findViewById(R.id.btnbmi);
+        *btnhg= (Button) findViewById(R.id.btnhg);
+        *btnbs= (Button) findViewById(R.id.btnbs);
+        *btnpulse= (Button) findViewById(R.id.btnpulse);
+        **/
+
+        imgbtn_step = (ImageButton) findViewById(R.id.imageButtonstep);
+        imgbtn_bp = (ImageButton) findViewById(R.id.imageButtonbp);
+        imgbtn_pulse = (ImageButton) findViewById(R.id.imageButtonpulse);
+        imgbtn_bs = (ImageButton) findViewById(R.id.imageButtonbs);
         Intent in = getIntent();
         last_step_buffer = new int[100];
         this_step_buffer = new int[100];
@@ -103,7 +114,7 @@ public class SelectChartActivity extends AppCompatActivity {
         networkStateReceiver = new NetworkStateReceiver();
 
 
-        btnstep.setOnClickListener(new View.OnClickListener() {
+        imgbtn_step.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -162,7 +173,7 @@ public class SelectChartActivity extends AppCompatActivity {
             }
         });*/
 
-        btnhg.setOnClickListener(new View.OnClickListener() {
+        imgbtn_bp.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -201,7 +212,7 @@ public class SelectChartActivity extends AppCompatActivity {
             }
         });
 
-        btnbs.setOnClickListener(new View.OnClickListener() {
+        imgbtn_bs.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -234,7 +245,7 @@ public class SelectChartActivity extends AppCompatActivity {
             }
         });
 
-        btnpulse.setOnClickListener(new View.OnClickListener() {
+        imgbtn_pulse.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {

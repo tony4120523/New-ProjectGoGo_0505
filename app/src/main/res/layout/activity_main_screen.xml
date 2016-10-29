@@ -30,16 +30,18 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="2">
+        android:layout_weight="0.5">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="\n\n\n\n歡迎加入\n\n銀髮族健康APP"
-            android:textSize="45dp"
-            android:textColor="#092e29"
-            />
+            android:text="\n\n\n\n 歡迎加入\n\n  銀髮族健康APP"
+            android:textAppearance="@style/TextInputHint"
+            android:fontFamily="monospace"
+            android:textSize="36sp"
+            android:lineSpacingExtra="18sp"
+            android:textAllCaps="false" />
     </LinearLayout>
 
     <LinearLayout
@@ -50,27 +52,31 @@
             <Button
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginTop="0dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="0dp"
+                android:layout_weight="1"
                 android:background="@android:color/holo_green_dark"
+                android:alpha="0.7"
                 android:text="登入"
-                android:textSize="45dp"
+                android:textSize="30dp"
                 android:textColor="#fff"
                 style="@style/Widget.AppCompat.Button" />
 
             <Button
                 android:id="@+id/btn_regist"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="0dp"
+                android:layout_weight="1"
                 android:background="@android:color/holo_green_light"
+                android:alpha="0.7"
                 android:text="註冊"
-                android:textSize="45dp"
+                android:textSize="30dp"
                 android:textColor="#fff" />
     </LinearLayout>
 
