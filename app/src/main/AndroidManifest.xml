@@ -18,11 +18,7 @@
         <activity
             android:name=".MainScreenActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <!-- Log in Activity -->
@@ -146,7 +142,15 @@
         <activity android:name=".MyHealthChart.BS_chart.Bs_nearmonth" />
         <activity android:name=".MyHealthChart.Pulse_chart.Pulse_lastweek" />
         <activity android:name=".MyHealthChart.Pulse_chart.Pulse_thisweek" />
-        <activity android:name=".MyHealthChart.Pulse_chart.Pulse_nearmonth"></activity>
+        <activity android:name=".MyHealthChart.Pulse_chart.Pulse_nearmonth" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
