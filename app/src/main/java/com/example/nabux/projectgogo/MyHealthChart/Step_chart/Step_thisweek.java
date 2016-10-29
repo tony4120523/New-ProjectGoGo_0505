@@ -22,7 +22,7 @@ public class Step_thisweek extends Fragment {
     int max_week_step;
     String max_day;
     String[] weekday=new String[]{"星期一","星期二","星期三","星期四","星期五","星期六","星期日"};
-    private static final String htmlurl = "http://www.hth96.me/nabu_connect/steps.html";
+    private static final String htmlurl = "http://www.hth96.me/nabu_connect/step/step_new.html";
     public static com.example.nabux.projectgogo.MyHealthChart.Step_chart.Step_thisweek newInstance() {
 
         com.example.nabux.projectgogo.MyHealthChart.Step_chart.Step_thisweek fragment = new com.example.nabux.projectgogo.MyHealthChart.Step_chart.Step_thisweek();
@@ -43,15 +43,19 @@ public class Step_thisweek extends Fragment {
         tvavg= (TextView) rootView.findViewById(R.id.tvavgdia);
         Intent in = getActivity().getIntent();
         step_buffer = in.getIntArrayExtra("this_step_buffer");
-        String para = "aa="+step_buffer[0]+"&&"+
+        /*String para = "aa="+step_buffer[0]+"&&"+
                 "bb="+step_buffer[1]+"&&"+
                 "cc="+step_buffer[2]+"&&"+
                 "dd="+step_buffer[3]+"&&"+
                 "ee="+step_buffer[4]+"&&"+
                 "ff="+step_buffer[5]+"&&"+
-                "gg="+step_buffer[6];
+                "gg="+step_buffer[6];*/
 
-        String url_ref = htmlurl + "?" + para;
+        String para="";
+         for(int i=0;i<7;i++){
+            para+=step_buffer[i]+"+";
+        }
+        String url_ref = htmlurl + "?something=" + para;
         for(int i=0;i<7;i++){
             if(step_buffer[i]>max_week_step){
                 max_week_step=step_buffer[i];
@@ -59,11 +63,15 @@ public class Step_thisweek extends Fragment {
             }
 
         }
-        int avgstep,sumstep=0;
+        int avgstep,sumstep=0,avgby=0;
         for(int i=0;i<7;i++){
-            sumstep+=step_buffer[i];
+            if(step_buffer[i]>0) {
+                sumstep += step_buffer[i];
+                avgby++;
+            }
         }
-        avgstep=sumstep/7;
+        //int gg=step_buffer.length;
+        avgstep=sumstep/avgby;
         tvhigh.setText("本週最高步數出現在 "+max_day+" !!");
         //tvavg.setText("本周步數平均值 為："+avgstep+" 步");
         tvavg.setText("本週步數平均值 為："+avgstep+" 步");

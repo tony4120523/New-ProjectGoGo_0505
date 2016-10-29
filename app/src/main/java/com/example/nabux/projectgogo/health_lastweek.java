@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -18,7 +19,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,10 +43,10 @@ public class health_lastweek extends AppCompatActivity {
     private SimpleAdapter adapter;
     ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
     private static final String url_bmi_detials = "http://www.hth96.me/nabu_connect/query_bmi.php";
-    private static final String url_step_detials = "http://www.hth96.me/nabu_connect/query_steps_weekly.php";
-    private static final String url_bp_detials = "http://www.hth96.me/nabu_connect/query_bp_weekly.php";
-    private static final String url_bs_detials = "http://45.55.213.89/nabu_connect/query_bs_weekly.php";
-    private static final String url_pulse_detials = "http://45.55.213.89/nabu_connect/query_pulse_weekly.php";
+    private static final String url_step_detials = "http://45.55.213.89/nabu_connect/query_steps_lastweek.php";
+    private static final String url_bp_detials = "http://45.55.213.89/nabu_connect/query_bp_lastweek.php";
+    private static final String url_bs_detials = "http://45.55.213.89/nabu_connect/query_bs_lastweek.php";
+    private static final String url_pulse_detials = "http://45.55.213.89/nabu_connect/query_pulse_lastweek.php";
     private static final String TAG = health_lastweek.class.getSimpleName();
     String bmians,stepans,sysbpans,diabpans,bsans,pulseans;
     double sumbmi,avgbmi,sumsysbp,sumdiabp,avgsysbp,avgdiabp;
@@ -52,7 +57,15 @@ public class health_lastweek extends AppCompatActivity {
         setContentView(R.layout.activity_health_lastweek);
         list_health_lastweek= (ListView) findViewById(R.id.list_health_lastweek);
         ActionBar actionBar = this.getSupportActionBar();
-        actionBar.setTitle("上週健康報告 10/3 - 10/9");
+        SimpleDateFormat sdf=new SimpleDateFormat("MM/dd");
+        //String todaydate=sdf.format(new java.util.Date());
+        Calendar cal = GregorianCalendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DAY_OF_WEEK, -7);
+        String daysBeforeweek = sdf.format(cal.getTime());
+        cal.add(Calendar.DAY_OF_WEEK, -7);
+        String daysyes = sdf.format(cal.getTime());
+        actionBar.setTitle("上週健康報告");
         session = new Session(getApplicationContext());
 
 
@@ -68,14 +81,14 @@ public class health_lastweek extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 0:
-                        count_bmi();
+                        //count_bmi();
                         count_step();
                         count_sysbp();
                         count_diabp();
                         count_bs();
                         count_pulse();
-                        String[]state=new String[]{"平均bmi為："+avgbmi,"平均步數為："+avgstep+" 步","平均心肌收縮壓為："+avgsysbp+" mmhg","平均心肌舒張壓為："+avgdiabp+" mmhg","平均血糖為："+avgbs+" mg/dl","平均脈搏為："+avgpulse+" 下/每分"};
-                        String[]compare=new String[]{bmians,stepans,sysbpans,diabpans,bsans,pulseans};
+                        String[]state=new String[]{"平均步數為："+avgstep+" 步","平均心肌收縮壓為："+avgsysbp+" mmhg","平均心肌舒張壓為："+avgdiabp+" mmhg","平均血糖為："+avgbs+" mg/dl","平均脈搏為："+avgpulse+" 下/每分"};
+                        String[]compare=new String[]{stepans,sysbpans,diabpans,bsans,pulseans};
                         for(int i=0; i<state.length; i++){
                             HashMap<String,String> item = new HashMap<String,String>();
                             item.put( "stated", state[i]);
@@ -148,11 +161,15 @@ public class health_lastweek extends AppCompatActivity {
                     // successfully received json
                     JSONArray userArr = json.getJSONArray("steps"); // JSON Array
                     //each step is here
+                    int avg_step_by=0;
                     for(int i=0; i<userArr.length(); i++) {
                         step_buffer[i] = Integer.parseInt(userArr.getString(i));
-                        sumstep+=step_buffer[i];
+                        if(step_buffer[i]>0) {
+                            sumstep += step_buffer[i];
+                            avg_step_by++;
+                        }
                     }
-                    avgstep=sumstep/userArr.length();
+                    avgstep=sumstep/avg_step_by;
                 }else{
                     // user with id not found
 
@@ -190,25 +207,33 @@ public class health_lastweek extends AppCompatActivity {
                 Log.d(TAG, json3.toString());
                 // json success tag
                 int success3;
+                int avg_bp_by1=0,avg_bp_by2=0;
                 success3 = json3.getInt("success");
                 if (success3 == 1) {
                     // successfully received json
                     JSONArray bp_sys_Arr = json3.getJSONArray("bp_sys"); // JSON Array
                     JSONArray bp_dia_Arr = json3.getJSONArray("bp_dia");
+
                     for(int i=0; i<bp_sys_Arr.length(); i++) {
 
                         bp_sys_buffer[i] = Double.parseDouble(bp_sys_Arr.getString(i));
                         bp_dia_buffer[i] = Double.parseDouble(bp_dia_Arr.getString(i));
-                        sumsysbp+=bp_sys_buffer[i];
-                        sumdiabp+=bp_dia_buffer[i];
+                        if(bp_sys_buffer[i]>0) {
+                            sumsysbp += bp_sys_buffer[i];
+                            avg_bp_by1++;
+                        }
+                        if(bp_dia_buffer[i]>0) {
+                            sumdiabp += bp_dia_buffer[i];
+                            avg_bp_by2++;
+                        }
 
 
                     }
 
-                    avgsysbp=sumsysbp/bp_sys_Arr.length();
+                    avgsysbp=sumsysbp/avg_bp_by1;
                     avgsysbp=((Math.round(avgsysbp*100.0))/100.0);
 
-                    avgdiabp=sumdiabp/bp_dia_Arr.length();
+                    avgdiabp=sumdiabp/avg_bp_by2;
                     avgdiabp=((Math.round(avgdiabp*100.0))/100.0);
 
                 }else{
@@ -221,15 +246,20 @@ public class health_lastweek extends AppCompatActivity {
                 Log.d(TAG, json4.toString());
                 // json success tag
                 int success4;
+                int avg_bs_by=0;
                 success4 = json4.getInt("success");
                 if (success4 == 1) {
                     // successfully received json
                     JSONArray bs_Arr = json4.getJSONArray("bloodsugar"); // JSON Array
                     for(int i=0; i<bs_Arr.length(); i++) {
                        bs_buffer[i] = Integer.parseInt(bs_Arr.getString(i));
-                       sumbs+=bs_buffer[i];
+                        if(bs_buffer[i]>0){
+                            sumbs+=bs_buffer[i];
+                            avg_bs_by++;
+                        }
+
                     }
-                    avgbs=sumbs/bs_Arr.length();
+                    avgbs=sumbs/avg_bs_by;
 
                 }else{
                     // user with id not found
@@ -241,15 +271,19 @@ public class health_lastweek extends AppCompatActivity {
                 Log.d(TAG, json5.toString());
                 // json success tag
                 int success5;
+                int avg_pulse_by=0;
                 success5 = json5.getInt("success");
                 if (success5 == 1) {
                     // successfully received json
                     JSONArray pulse_Arr = json5.getJSONArray("pulse"); // JSON Array
                     for(int i=0; i<pulse_Arr.length(); i++) {
                         pulse_buffer[i] = Integer.parseInt(pulse_Arr.getString(i));
-                        sumpulse+=pulse_buffer[i];
+                        if(pulse_buffer[i]>0) {
+                            sumpulse += pulse_buffer[i];
+                            avg_pulse_by++;
+                        }
                     }
-                    avgpulse=sumpulse/pulse_Arr.length();
+                    avgpulse=sumpulse/avg_pulse_by;
 
                 }else{
                     // user with id not found
@@ -271,7 +305,7 @@ public class health_lastweek extends AppCompatActivity {
 
         }
     }
-    public String count_bmi(){
+    /*public String count_bmi(){
         if(avgbmi<18.5){
             bmians="您的體位為 過輕";
 
@@ -299,7 +333,7 @@ public class health_lastweek extends AppCompatActivity {
         }
 
         return bmians;
-    }
+    }*/
     public String count_step(){
         if(avgstep<6000.0){
             stepans="距離建議步數還有 "+(6000-avgstep)+" 步";
