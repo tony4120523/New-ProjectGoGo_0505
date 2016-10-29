@@ -84,8 +84,11 @@
             android:label="@string/title_activity_tabbed"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <receiver android:name=".AlarmReceiver" />
-
+        <receiver android:name=".AlarmReceiver">
+            <intent-filter>
+                <action android:name="setReminder" />
+            </intent-filter>
+        </receiver>
         <!--
         <receiver
             android:name=".AlarmReceiver"
@@ -115,7 +118,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".know_bmi" />
         <activity android:name=".know_bp" />
-        <activity android:name=".konw_step" />
         <activity android:name=".know_step" />
         <activity android:name=".know_bs" />
         <activity android:name=".know_pulse" />
@@ -146,7 +148,24 @@
         <activity android:name=".MyHealthChart.BS_chart.Bs_nearmonth" />
         <activity android:name=".MyHealthChart.Pulse_chart.Pulse_lastweek" />
         <activity android:name=".MyHealthChart.Pulse_chart.Pulse_thisweek" />
-        <activity android:name=".MyHealthChart.Pulse_chart.Pulse_nearmonth"></activity>
+        <activity android:name=".MyHealthChart.Pulse_chart.Pulse_nearmonth" />
+
+        <service
+            android:name=".ReceiveFCMService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".FirebaseIDService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

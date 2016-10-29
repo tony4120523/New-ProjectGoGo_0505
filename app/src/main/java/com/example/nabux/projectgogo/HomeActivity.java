@@ -5,7 +5,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -15,16 +17,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeActivity extends AppCompatActivity {
 
 
 
     public NetworkStateReceiver networkStateReceiver;
     private Session session;
+    private String tmp_account_for_thread;
 
     private static final int requestCode = 100;
     private static final String TAG = HomeActivity.class.getSimpleName();
-
+    private static final String url_delete_token = "http://45.55.213.89/nabu_connect/delete_token.php";
 
     TextView txvhi;
     Button btnreport,btnhelp, btn_ocr, btn_input,btnreportpage,btnchartselect,btnhealth,btnmail;
@@ -73,18 +82,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-
-
-        /*btnreport.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                Intent in = new Intent(getApplicationContext(), xxxxxxxxxReportActivity.class);
-                startActivity(in);
-
-            }
-        });*/
-
         btnhelp.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -104,39 +101,6 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(in);
             }
         });
-
-       /*btnreportpage.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                Intent in = new Intent(getApplicationContext(), xxxxxtabbed.class);
-                startActivity(in);
-            }
-        });*/
-
-       /* btnmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in=new Intent(getApplicationContext(),TestMailActivity.class);
-                startActivity(in);
-            }
-        });*/
-
-
-        /*
-        //通知
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 19);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        PendingIntent pi = PendingIntent.getBroadcast(this, requistCode, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-
-        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 , pi);
-        */
-
     }
 
     @Override
@@ -170,9 +134,13 @@ public class HomeActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement, Log out...
         if (id == R.id.action_logout) {
 
-            session.setUserAccount("");
-            session.setUserPSD("");
-            session.setUserID("");
+            tmp_account_for_thread = session.getUserAccount();
+            new Thread(networkTask).start();
+
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.clear();
+            editor.commit();
 
             //Reset AlarmManager
             Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
@@ -195,39 +163,17 @@ public class HomeActivity extends AppCompatActivity {
         finish();
     }
 
-
-
-    /*
-    public class CheckNetworkReceiver extends BroadcastReceiver {
-
-        private final Handler handler; // Handler used to execute code on the UI thread
-        private boolean firstDisConnect = true;
-
-        public CheckNetworkReceiver(Handler handler) {
-            this.handler = handler;
-        }
-
+    Runnable networkTask = new Runnable() {
         @Override
-        public void onReceive(final Context context, Intent intent) {
-
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    IsNetworkConnected inc = new IsNetworkConnected(getApplicationContext());
-                    if (!inc.isOnline() && firstDisConnect) {
-                        firstDisConnect = false;
-                        //close current Activity, go to MainScreenActivity
-                        finish();
-                        Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                        startActivity(intent);
-                    }
-                }
-            });
+        public void run() {
+            Log.d(TAG, "in networkTask");
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("account", tmp_account_for_thread));
+            JSONParser jsonparser = new JSONParser();
+            jsonparser.makeHttpRequest(url_delete_token, "POST", params);
         }
-    }
-    */
+    };
+
+
 
 }

@@ -24,11 +24,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 
 public class RegistActivity extends AppCompatActivity {
 
 
     Handler myHandler;
+    Session session;
 
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -39,7 +42,7 @@ public class RegistActivity extends AppCompatActivity {
     private static final String TAG_SUCCESS = "success";
 
     // url to create new product
-    private static final String url_create_user = "http://www.hth96.me/nabu_connect/create_user.php";
+    private static final String url_create_user = "http://45.55.213.89/nabu_connect/create_user_token.php";
     private static final String TAG = RegistActivity.class.getSimpleName();
 
     TextView tvrgid,tvrgpsd,tvrgpsd2,tvrgnickname;
@@ -53,6 +56,8 @@ public class RegistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist);
+
+        session = new Session(getApplicationContext());
 
         tvrgid= (TextView) findViewById(R.id.tvrgid);
         tvrgpsd= (TextView) findViewById(R.id.tvrgpsd);
@@ -158,6 +163,7 @@ public class RegistActivity extends AppCompatActivity {
             params.add(new BasicNameValuePair("isHyper", hypertension));
             params.add(new BasicNameValuePair("isDiabetes", diabetes));
             params.add(new BasicNameValuePair("isHeart", heart_disease));
+            params.add(new BasicNameValuePair("token", FirebaseInstanceId.getInstance().getToken()));
 
             // getting JSON Object
             // Note that create_user url accepts POST method

@@ -7,9 +7,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.AlarmClock;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
@@ -37,59 +41,70 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        //Toast.makeText(context, "Alarm !!!!!!!!!!", Toast.LENGTH_LONG).show();
 
-        final int notifyID = 101;
-        session = new Session(context);
+        String purpose = intent.getStringExtra("purpose");
+        if("sendNotification".equals(purpose)) {
+            //Log.d(TAG,"Send Notification in AlarmReceiver");
 
-        //get 系統通知服務
-        final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            final int notifyID = 101;
+            session = new Session(context);
 
-        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            //get 系統通知服務
+            final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-            Intent resultIntent = new Intent(context, InputDataActivity.class);
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-            // Adds the back stack
-            stackBuilder.addParentStack(InputDataActivity.class);
-            // Adds the Intent to the top of the stack
-            stackBuilder.addNextIntent(resultIntent);
-            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
 
-            notification = new NotificationCompat.Builder(context)
-                    .setColor(Color.rgb(0, 204, 102))
-                    //.setVibrate(new long[]{0, 300, 200, 100, 100, 100, 100, 100})
-                    .setSmallIcon(R.drawable.house)
-                    .setContentTitle("銀髮族健康管理APP關心您")
-                    .setContentText("今天尚未輸入資料哦 ... !!")
-                    .setAutoCancel(true)
-                    .setContentIntent(resultPendingIntent)
-                    .build();
+                Intent resultIntent = new Intent(context, InputDataActivity.class);
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+                // Adds the back stack
+                stackBuilder.addParentStack(InputDataActivity.class);
+                // Adds the Intent to the top of the stack
+                stackBuilder.addNextIntent(resultIntent);
+                PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            IsNetworkConnected isnetworkconnected = new IsNetworkConnected(context);
+                notification = new NotificationCompat.Builder(context)
+                        .setColor(Color.rgb(0, 204, 102))
+                        //.setVibrate(new long[]{0, 300, 200, 100, 100, 100, 100, 100})
+                        .setSmallIcon(R.drawable.house)
+                        .setContentTitle("銀髮族健康管理APP關心您")
+                        .setContentText("今天尚未輸入資料哦 ... !!")
+                        .setAutoCancel(true)
+                        .setContentIntent(resultPendingIntent)
+                        .build();
 
-            jsonParser = new JSONParser();
-            isDataInserted = false;
+                IsNetworkConnected isnetworkconnected = new IsNetworkConnected(context);
 
-            if(isnetworkconnected.isOnline()) {
+                jsonParser = new JSONParser();
+                isDataInserted = false;
 
-                myHandler = new Handler() {
+                if (isnetworkconnected.isOnline()) {
 
-                    @Override
-                    public void handleMessage(Message msg) {
-                        switch (msg.what) {
-                            case 0:
-                                if(!isDataInserted){
-                                    notificationManager.notify(notifyID, notification);
-                                    Log.d(TAG, "Send Notification");
-                                }
+                    myHandler = new Handler() {
+
+                        @Override
+                        public void handleMessage(Message msg) {
+                            switch (msg.what) {
+                                case 0:
+                                    if (!isDataInserted) {
+                                        notificationManager.notify(notifyID, notification);
+                                        Log.d(TAG, "Send Notification");
+                                    }
+                            }
                         }
-                    }
-                };
-                new Getdata().execute();
+                    };
+                    new Getdata().execute();
+                }
             }
+            //Log.d(TAG, "Notification");
         }
+        else if("setReminder".equals(purpose)) {
+            Log.d(TAG, "Do Reminder");
+            
 
-        //Log.d(TAG, "Notification");
+
+
+
+        }
     }
 
     class Getdata extends AsyncTask<String, String, String> {

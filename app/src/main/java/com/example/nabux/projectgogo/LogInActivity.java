@@ -28,6 +28,8 @@ import java.util.List;
 import android.os.Handler;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 public class LogInActivity extends AppCompatActivity {
 
 
@@ -41,7 +43,7 @@ public class LogInActivity extends AppCompatActivity {
     JSONParser jsonParser = new JSONParser();
 
     // single user url
-    private static final String url_user_detials = "http://45.55.213.89/nabu_connect/query_login.php";
+    private static final String url_user_detials = "http://45.55.213.89/nabu_connect/login_token.php";
     private static final String TAG = LogInActivity.class.getSimpleName();
     private static final int requestCode = 100;
 
@@ -125,12 +127,18 @@ public class LogInActivity extends AppCompatActivity {
                 calendar.set(Calendar.SECOND, 0);
 
                 Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                intent.putExtra("purpose", "sendNotification");
                 PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
                 AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 *24 , pi);
 
 
+                //初始化提醒事項通知
+                Intent remind_intent = new Intent();
+                remind_intent.setAction("setReminder");
+                remind_intent.putExtra("purpose", "setReminder");
+                sendBroadcast(remind_intent);
 
                 myHandler = new Handler() {
 
@@ -216,16 +224,15 @@ public class LogInActivity extends AppCompatActivity {
                 //public void run() {
                     String Account = global_Account;
 
-                    Log.d(TAG, "In doInBackground");
+                    Log.d(TAG, "In doInBackground "+Account);
                     try {
                         // Building Parameters
                         List<NameValuePair> params = new ArrayList<NameValuePair>();
-                        params.add(new BasicNameValuePair("Account", Account));
+                        params.add(new BasicNameValuePair("account", Account));
+                        params.add(new BasicNameValuePair("token", FirebaseInstanceId.getInstance().getToken()));
 
-                        // getting user details by making HTTP request
-                        // Note that user details url will use GET request
                         JSONObject json = jsonParser.makeHttpRequest(
-                                url_user_detials, "GET", params);
+                                url_user_detials, "POST", params);
 
                         // check your log for json response
                         Log.d(TAG, "JSON : " + json.toString());
