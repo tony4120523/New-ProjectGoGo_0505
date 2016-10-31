@@ -24,9 +24,20 @@ public class ReceiveFCMService extends FirebaseMessagingService {
         // If the application is in the foreground handle both data and notification messages here.
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated.
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
-        Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
-        Log.d(TAG, FirebaseInstanceId.getInstance().getToken());
+        //Log.d(TAG, "From: " + remoteMessage.getFrom());
+        //Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
+        //Log.d(TAG, FirebaseInstanceId.getInstance().getToken());
+        /**if i only use getData(), the app can in background or closed will call this method
+         * in foreground , 3 case are all worked.
+         * if i use getNotification(), only foreground will call this method
+         * background and closed will use notification center to display notification
+          */
+        Log.d(TAG, remoteMessage.getData().get("message"));
+        Intent i = new Intent();
+        i.setClass(this, ReminderActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.putExtra("message", remoteMessage.getData().get("message"));
+        startActivity(i);
     }
 
 }

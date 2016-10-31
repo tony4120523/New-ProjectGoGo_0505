@@ -97,13 +97,27 @@ public class AlarmReceiver extends BroadcastReceiver {
             }
             //Log.d(TAG, "Notification");
         }
-        else if("setReminder".equals(purpose)) {
-            Log.d(TAG, "Do Reminder");
-            
-
-
-
-
+        else if("judge7".equals(purpose)) {
+            Log.d(TAG, "Judge7");
+            IsNetworkConnected isnetworkconnected = new IsNetworkConnected(context);
+            if(isnetworkconnected.isOnline()){
+                JSONParser jsonParser = new JSONParser();
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("id", session.getUserID()));
+                jsonParser.makeHttpRequest("http;//45.55.213.89/nabu_connect/judge_lastweek.php",
+                        "POST", params);
+            }
+        }
+        else if("judge30".equals(purpose)){
+            Log.d(TAG, "Judge30");
+            IsNetworkConnected isnetworkconnected = new IsNetworkConnected(context);
+            if(isnetworkconnected.isOnline()) {
+                JSONParser jsonParser = new JSONParser();
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("id", session.getUserID()));
+                jsonParser.makeHttpRequest("http;//45.55.213.89/nabu_connect/judge_three_month.php",
+                        "POST", params);
+            }
         }
     }
 

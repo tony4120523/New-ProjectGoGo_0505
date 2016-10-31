@@ -134,11 +134,28 @@ public class LogInActivity extends AppCompatActivity {
                 am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 *24 , pi);
 
 
-                //初始化提醒事項通知
-                Intent remind_intent = new Intent();
-                remind_intent.setAction("setReminder");
-                remind_intent.putExtra("purpose", "setReminder");
-                sendBroadcast(remind_intent);
+                //判斷異常
+                Calendar calendar2 = Calendar.getInstance();
+                calendar2.set(Calendar.HOUR_OF_DAY, 19);
+                calendar2.set(Calendar.MINUTE, 0);
+                calendar2.set(Calendar.SECOND, 0);
+                Intent intent2 = new Intent(getApplicationContext(), AlarmReceiver.class);
+                intent2.putExtra("purpose", "judge7");
+                PendingIntent pi2 = PendingIntent.getBroadcast(getApplicationContext(), requestCode, intent2, PendingIntent.FLAG_CANCEL_CURRENT);
+                AlarmManager am2 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                am2.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 *24*7 , pi2);
+
+                //
+                Calendar calendar3 = Calendar.getInstance();
+                calendar3.set(Calendar.HOUR_OF_DAY, 19);
+                calendar3.set(Calendar.MINUTE, 0);
+                calendar3.set(Calendar.SECOND, 0);
+                Intent intent3 = new Intent(getApplicationContext(), AlarmReceiver.class);
+                intent2.putExtra("purpose", "judge30");
+                PendingIntent pi3 = PendingIntent.getBroadcast(getApplicationContext(), requestCode, intent2, PendingIntent.FLAG_CANCEL_CURRENT);
+                AlarmManager am3 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                am3.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 *24*30 , pi3);
+
 
                 myHandler = new Handler() {
 
