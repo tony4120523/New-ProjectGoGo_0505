@@ -18,15 +18,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-<<<<<<< HEAD
 import com.example.nabux.projectgogo.HealthKnowledge.KnowledgeActivity;
-=======
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
 import java.util.List;
->>>>>>> Reminder
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -92,7 +89,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-<<<<<<< HEAD
         /*btnreport.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -104,9 +100,6 @@ public class HomeActivity extends AppCompatActivity {
         });*/
 
         imgbtn_knowledge.setOnClickListener(new View.OnClickListener() {
-=======
-        btnhelp.setOnClickListener(new View.OnClickListener() {
->>>>>>> Reminder
 
             @Override
             public void onClick(View arg0) {
