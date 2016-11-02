@@ -7,9 +7,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.AlarmClock;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
@@ -37,59 +41,76 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        //Toast.makeText(context, "Alarm !!!!!!!!!!", Toast.LENGTH_LONG).show();
 
-        final int notifyID = 101;
+        String purpose = intent.getStringExtra("purpose");
         session = new Session(context);
 
-        //get 系統通知服務
-        final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if("sendNotification".equals(purpose)) {
+            Log.d(TAG, "Do Notification in AlarmReceiver");
 
-        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            final int notifyID = 101;
 
-            Intent resultIntent = new Intent(context, InputDataActivity.class);
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-            // Adds the back stack
-            stackBuilder.addParentStack(InputDataActivity.class);
-            // Adds the Intent to the top of the stack
-            stackBuilder.addNextIntent(resultIntent);
-            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+            //get 系統通知服務
+            final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-            notification = new NotificationCompat.Builder(context)
-                    .setColor(Color.rgb(0, 204, 102))
-                    //.setVibrate(new long[]{0, 300, 200, 100, 100, 100, 100, 100})
-                    .setSmallIcon(R.drawable.house)
-                    .setContentTitle("銀髮族健康管理APP關心您")
-                    .setContentText("今天尚未輸入資料哦 ... !!")
-                    .setAutoCancel(true)
-                    .setContentIntent(resultPendingIntent)
-                    .build();
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
 
-            IsNetworkConnected isnetworkconnected = new IsNetworkConnected(context);
+                Intent resultIntent = new Intent(context, InputDataActivity.class);
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+                // Adds the back stack
+                stackBuilder.addParentStack(InputDataActivity.class);
+                // Adds the Intent to the top of the stack
+                stackBuilder.addNextIntent(resultIntent);
+                PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            jsonParser = new JSONParser();
-            isDataInserted = false;
+                notification = new NotificationCompat.Builder(context)
+                        .setColor(Color.rgb(0, 204, 102))
+                        //.setVibrate(new long[]{0, 300, 200, 100, 100, 100, 100, 100})
+                        .setSmallIcon(R.drawable.notifi)
+                        .setContentTitle("銀髮族健康管理APP關心您")
+                        .setContentText("今天尚未輸入資料哦 ... !!")
+                        .setAutoCancel(true)
+                        .setContentIntent(resultPendingIntent)
+                        .build();
 
-            if(isnetworkconnected.isOnline()) {
+                IsNetworkConnected isnetworkconnected = new IsNetworkConnected(context);
 
-                myHandler = new Handler() {
+                jsonParser = new JSONParser();
+                isDataInserted = false;
 
-                    @Override
-                    public void handleMessage(Message msg) {
-                        switch (msg.what) {
-                            case 0:
-                                if(!isDataInserted){
-                                    notificationManager.notify(notifyID, notification);
-                                    Log.d(TAG, "Send Notification");
-                                }
+                if (isnetworkconnected.isOnline()) {
+
+                    myHandler = new Handler() {
+
+                        @Override
+                        public void handleMessage(Message msg) {
+                            switch (msg.what) {
+                                case 0:
+                                    if (!isDataInserted) {
+                                        notificationManager.notify(notifyID, notification);
+                                        Log.d(TAG, "Send Notification");
+                                    }
+                            }
                         }
-                    }
-                };
-                new Getdata().execute();
+                    };
+                    new Getdata().execute();
+                }
             }
         }
-
-        //Log.d(TAG, "Notification");
+        else if("judge7".equals(purpose)) {
+            Log.d(TAG, "Do Judge7 in Alarm manager");
+            IsNetworkConnected isnetworkconnected = new IsNetworkConnected(context);
+            if(isnetworkconnected.isOnline()){
+                new Thread(networkTask7).start();
+            }
+        }
+        else if("judge3m".equals(purpose)){
+            Log.d(TAG, "Do Judge3m in Alarm manager");
+            IsNetworkConnected isnetworkconnected = new IsNetworkConnected(context);
+            if(isnetworkconnected.isOnline()) {
+                new Thread(networkTask3m).start();
+            }
+        }
     }
 
     class Getdata extends AsyncTask<String, String, String> {
@@ -145,4 +166,25 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         }
     }
+
+    Runnable networkTask7 = new Runnable() {
+        @Override
+        public void run() {
+            Log.d(TAG, "in networkTask7");
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("id", session.getUserID()));
+            JSONParser jsonparser = new JSONParser();
+            jsonparser.makeHttpRequest("http://45.55.213.89/nabu_connect/judge_lastweek.php", "GET", params);
+        }
+    };
+    Runnable networkTask3m = new Runnable() {
+        @Override
+        public void run() {
+            Log.d(TAG, "in networkTask3m");
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("id", session.getUserID()));
+            JSONParser jsonparser = new JSONParser();
+            jsonparser.makeHttpRequest("http://45.55.213.89/nabu_connect/judge_three_month.php", "GET", params);
+        }
+    };
 }

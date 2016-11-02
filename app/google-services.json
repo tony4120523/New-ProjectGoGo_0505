@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "346450803937",
+    "firebase_url": "https://new-projectgogo.firebaseio.com",
+    "project_id": "new-projectgogo",
+    "storage_bucket": "new-projectgogo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346450803937:android:c83a1382ee791556",
+        "android_client_info": {
+          "package_name": "com.example.nabux.projectgogo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346450803937-c4mml5r4jlo514ii2qp8tp602hlsdcts.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxlcn5RwUyknIAwpdykSBsh86m6WBdF-s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

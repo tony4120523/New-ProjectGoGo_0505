@@ -53,5 +53,12 @@ public class Session {
         String NickName = prefs.getString("NickName","");
         return NickName;
     }
+    public void setToken(String token) {
+        prefs.edit().putString("token", token).commit();
+    }
+    public String getToken() {
+        String token = prefs.getString("token","");
+        return token;
+    }
 }
 

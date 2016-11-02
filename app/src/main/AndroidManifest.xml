@@ -19,7 +19,14 @@
         <activity
             android:name=".MainScreenActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
+<<<<<<< HEAD
 
+=======
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+>>>>>>> Reminder
         </activity>
 
         <!-- Log in Activity -->
@@ -81,8 +88,11 @@
             android:label="@string/title_activity_tabbed"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <receiver android:name=".AlarmReceiver" />
-
+        <receiver android:name=".AlarmReceiver">
+            <intent-filter>
+                <action android:name="setReminder" />
+            </intent-filter>
+        </receiver>
         <!--
         <receiver
             android:name=".AlarmReceiver"
@@ -110,12 +120,20 @@
             android:name=".HealthKnowledge.KnowledgeActivity"
             android:label="@string/title_activity_know"
             android:theme="@style/AppTheme.NoActionBar" />
+<<<<<<< HEAD
         <activity android:name=".HealthKnowledge.know_bmi" />
         <activity android:name=".HealthKnowledge.know_bp" />
         <activity android:name=".konw_step" />
         <activity android:name=".HealthKnowledge.know_step" />
         <activity android:name=".HealthKnowledge.know_bs" />
         <activity android:name=".HealthKnowledge.know_pulse" />
+=======
+        <activity android:name=".know_bmi" />
+        <activity android:name=".know_bp" />
+        <activity android:name=".know_step" />
+        <activity android:name=".know_bs" />
+        <activity android:name=".know_pulse" />
+>>>>>>> Reminder
         <activity
             android:name=".MyHealthChart.BP_chart.BP_TABBED"
             android:label="@string/title_activity_bp__tabbed"
@@ -144,6 +162,7 @@
         <activity android:name=".MyHealthChart.Pulse_chart.Pulse_lastweek" />
         <activity android:name=".MyHealthChart.Pulse_chart.Pulse_thisweek" />
         <activity android:name=".MyHealthChart.Pulse_chart.Pulse_nearmonth" />
+<<<<<<< HEAD
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
@@ -152,6 +171,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+=======
+
+        <service
+            android:name=".ReceiveFCMService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".FirebaseIDService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".ReminderActivity"
+            android:label="提醒"></activity>
+>>>>>>> Reminder
     </application>
 
 </manifest>
