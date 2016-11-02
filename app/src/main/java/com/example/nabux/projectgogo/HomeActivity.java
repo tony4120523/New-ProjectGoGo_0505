@@ -31,7 +31,6 @@ public class HomeActivity extends AppCompatActivity {
     private Session session;
     private String tmp_account_for_thread;
 
-    private static final int requestCode = 100;
     private static final String TAG = HomeActivity.class.getSimpleName();
     private static final String url_delete_token = "http://45.55.213.89/nabu_connect/delete_token.php";
 
@@ -144,9 +143,17 @@ public class HomeActivity extends AppCompatActivity {
 
             //Reset AlarmManager
             Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-            PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+            Intent intent2 = new Intent(getApplicationContext(), AlarmReceiver.class);
+            PendingIntent pi2 = PendingIntent.getBroadcast(getApplicationContext(), 101, intent2, PendingIntent.FLAG_CANCEL_CURRENT);
+
+            Intent intent3 = new Intent(getApplicationContext(), AlarmReceiver.class);
+            PendingIntent pi3 = PendingIntent.getBroadcast(getApplicationContext(), 102, intent3, PendingIntent.FLAG_CANCEL_CURRENT);
             AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             am.cancel(pi);
+            am.cancel(pi2);
+            am.cancel(pi3);
 
             // Launching MainScreen Activity
             Intent in = new Intent(getApplicationContext(), MainScreenActivity.class);

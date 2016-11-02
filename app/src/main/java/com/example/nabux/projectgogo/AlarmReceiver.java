@@ -43,11 +43,12 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         String purpose = intent.getStringExtra("purpose");
+        session = new Session(context);
+
         if("sendNotification".equals(purpose)) {
-            //Log.d(TAG,"Send Notification in AlarmReceiver");
+            Log.d(TAG, "Do Notification in AlarmReceiver");
 
             final int notifyID = 101;
-            session = new Session(context);
 
             //get 系統通知服務
             final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -65,7 +66,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 notification = new NotificationCompat.Builder(context)
                         .setColor(Color.rgb(0, 204, 102))
                         //.setVibrate(new long[]{0, 300, 200, 100, 100, 100, 100, 100})
-                        .setSmallIcon(R.drawable.house)
+                        .setSmallIcon(R.drawable.notifi)
                         .setContentTitle("銀髮族健康管理APP關心您")
                         .setContentText("今天尚未輸入資料哦 ... !!")
                         .setAutoCancel(true)
@@ -95,28 +96,19 @@ public class AlarmReceiver extends BroadcastReceiver {
                     new Getdata().execute();
                 }
             }
-            //Log.d(TAG, "Notification");
         }
         else if("judge7".equals(purpose)) {
-            Log.d(TAG, "Judge7");
+            Log.d(TAG, "Do Judge7 in Alarm manager");
             IsNetworkConnected isnetworkconnected = new IsNetworkConnected(context);
             if(isnetworkconnected.isOnline()){
-                JSONParser jsonParser = new JSONParser();
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("id", session.getUserID()));
-                jsonParser.makeHttpRequest("http;//45.55.213.89/nabu_connect/judge_lastweek.php",
-                        "POST", params);
+                new Thread(networkTask7).start();
             }
         }
-        else if("judge30".equals(purpose)){
-            Log.d(TAG, "Judge30");
+        else if("judge3m".equals(purpose)){
+            Log.d(TAG, "Do Judge3m in Alarm manager");
             IsNetworkConnected isnetworkconnected = new IsNetworkConnected(context);
             if(isnetworkconnected.isOnline()) {
-                JSONParser jsonParser = new JSONParser();
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("id", session.getUserID()));
-                jsonParser.makeHttpRequest("http;//45.55.213.89/nabu_connect/judge_three_month.php",
-                        "POST", params);
+                new Thread(networkTask3m).start();
             }
         }
     }
@@ -174,4 +166,25 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         }
     }
+
+    Runnable networkTask7 = new Runnable() {
+        @Override
+        public void run() {
+            Log.d(TAG, "in networkTask7");
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("id", session.getUserID()));
+            JSONParser jsonparser = new JSONParser();
+            jsonparser.makeHttpRequest("http://45.55.213.89/nabu_connect/judge_lastweek.php", "GET", params);
+        }
+    };
+    Runnable networkTask3m = new Runnable() {
+        @Override
+        public void run() {
+            Log.d(TAG, "in networkTask3m");
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("id", session.getUserID()));
+            JSONParser jsonparser = new JSONParser();
+            jsonparser.makeHttpRequest("http://45.55.213.89/nabu_connect/judge_three_month.php", "GET", params);
+        }
+    };
 }

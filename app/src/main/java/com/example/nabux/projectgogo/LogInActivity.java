@@ -45,7 +45,6 @@ public class LogInActivity extends AppCompatActivity {
     // single user url
     private static final String url_user_detials = "http://45.55.213.89/nabu_connect/login_token.php";
     private static final String TAG = LogInActivity.class.getSimpleName();
-    private static final int requestCode = 100;
 
     EditText edtAccount, edtpsd;
     Button btnLog, btnRes;
@@ -120,43 +119,6 @@ public class LogInActivity extends AppCompatActivity {
                 global_Account = edtAccount.getText().toString();
 
 
-                //設定定期通知通知
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.HOUR_OF_DAY, 19);
-                calendar.set(Calendar.MINUTE, 0);
-                calendar.set(Calendar.SECOND, 0);
-
-                Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-                intent.putExtra("purpose", "sendNotification");
-                PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-
-                AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 *24 , pi);
-
-
-                //判斷異常
-                Calendar calendar2 = Calendar.getInstance();
-                calendar2.set(Calendar.HOUR_OF_DAY, 19);
-                calendar2.set(Calendar.MINUTE, 0);
-                calendar2.set(Calendar.SECOND, 0);
-                Intent intent2 = new Intent(getApplicationContext(), AlarmReceiver.class);
-                intent2.putExtra("purpose", "judge7");
-                PendingIntent pi2 = PendingIntent.getBroadcast(getApplicationContext(), requestCode, intent2, PendingIntent.FLAG_CANCEL_CURRENT);
-                AlarmManager am2 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                am2.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 *24*7 , pi2);
-
-                //
-                Calendar calendar3 = Calendar.getInstance();
-                calendar3.set(Calendar.HOUR_OF_DAY, 19);
-                calendar3.set(Calendar.MINUTE, 0);
-                calendar3.set(Calendar.SECOND, 0);
-                Intent intent3 = new Intent(getApplicationContext(), AlarmReceiver.class);
-                intent2.putExtra("purpose", "judge30");
-                PendingIntent pi3 = PendingIntent.getBroadcast(getApplicationContext(), requestCode, intent2, PendingIntent.FLAG_CANCEL_CURRENT);
-                AlarmManager am3 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                am3.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 *24*30 , pi3);
-
-
                 myHandler = new Handler() {
 
                     @Override
@@ -171,6 +133,43 @@ public class LogInActivity extends AppCompatActivity {
                                     session.setUserPSD(userpsd);
                                     session.setNickName(usernickname);
 
+                                    // 設定定期通知通知
+                                    Calendar calendar = Calendar.getInstance();
+                                    calendar.set(Calendar.HOUR_OF_DAY, 19);
+                                    calendar.set(Calendar.MINUTE, 0);
+                                    calendar.set(Calendar.SECOND, 0);
+
+                                    Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                                    intent.putExtra("purpose", "sendNotification");
+                                    PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+                                    AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                                    am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 * 24, pi);
+
+
+                                    // 判斷異常 上週
+                                    Calendar calendar2 = Calendar.getInstance();
+                                    calendar2.set(Calendar.HOUR_OF_DAY, 19);
+                                    calendar2.set(Calendar.MINUTE, 0);
+                                    calendar2.set(Calendar.SECOND, 0);
+                                    Intent intent2 = new Intent(getApplicationContext(), AlarmReceiver.class);
+                                    intent2.putExtra("purpose", "judge7");
+                                    PendingIntent pi2 = PendingIntent.getBroadcast(getApplicationContext(), 101, intent2, PendingIntent.FLAG_CANCEL_CURRENT);
+                                    AlarmManager am2 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                                    am2.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 * 24*7 , pi2);
+
+                                    // 判斷異常 三個月
+                                    Calendar calendar3 = Calendar.getInstance();
+                                    calendar3.set(Calendar.HOUR_OF_DAY, 19);
+                                    calendar3.set(Calendar.MINUTE, 0);
+                                    calendar3.set(Calendar.SECOND, 0);
+                                    Intent intent3 = new Intent(getApplicationContext(), AlarmReceiver.class);
+                                    intent3.putExtra("purpose", "judge3m");
+                                    PendingIntent pi3 = PendingIntent.getBroadcast(getApplicationContext(), 102, intent3, PendingIntent.FLAG_CANCEL_CURRENT);
+                                    AlarmManager am3 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                                    am3.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 *24*90 , pi3);
+
+                                    // 開啟主畫面活動
                                     Intent homein = new Intent(getApplicationContext(), HomeActivity.class);
                                     homein.putExtra(TAG_NICKNAME, usernickname);
                                     homein.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -179,7 +178,7 @@ public class LogInActivity extends AppCompatActivity {
                                     startActivity(homein);
                                     finish();
                                 }else{
-                                    Toast.makeText(getApplication(), "Log in failed.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplication(), " 登入失敗 ", Toast.LENGTH_SHORT).show();
                                 }
                                 break;
                             default:
