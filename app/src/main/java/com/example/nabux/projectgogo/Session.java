@@ -68,7 +68,7 @@ public class Session {
         return CPemail;
     }
     public void setHypertension(String user_hypertension) {
-        prefs.edit().putString("hypertemsion", user_hypertension).commit();
+        prefs.edit().putString("hypertension", user_hypertension).commit();
     }
     public String getHypertension() {
         String hypertension = prefs.getString("hypertension","");

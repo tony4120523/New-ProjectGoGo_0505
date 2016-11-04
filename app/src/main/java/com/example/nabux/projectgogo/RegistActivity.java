@@ -154,6 +154,7 @@ public class RegistActivity extends AppCompatActivity {
         protected String doInBackground(String... args) {
 
             Log.d(TAG, "DoInBackground ID : " + id);
+            Log.d(TAG, hypertension+diabetes+heart_disease);
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("id", id));

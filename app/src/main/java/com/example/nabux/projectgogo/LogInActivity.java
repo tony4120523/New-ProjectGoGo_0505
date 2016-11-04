@@ -137,6 +137,8 @@ public class LogInActivity extends AppCompatActivity {
                                     session.setDiabetes(user_diabetes);
                                     session.setDisease(user_disease);
 
+                                    Log.d(TAG, user_hypertension + user_diabetes + user_disease);
+
                                     // 設定定期通知通知
                                     Calendar calendar = Calendar.getInstance();
                                     calendar.set(Calendar.HOUR_OF_DAY, 19);
@@ -277,7 +279,8 @@ public class LogInActivity extends AppCompatActivity {
                             user_cp_email = user.getString("cp_email");
                             user_hypertension = user.getString("hypertension");
                             user_diabetes = user.getString("diabetes");
-                            user_disease = user.getString("disease");
+                            user_disease = user.getString("heart_disease");
+
                         }else{
                             // user with Account not found
                             Log.d(TAG, "Success is 0");

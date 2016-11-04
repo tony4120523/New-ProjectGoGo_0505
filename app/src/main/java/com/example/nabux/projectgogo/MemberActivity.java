@@ -40,17 +40,17 @@ public class MemberActivity extends AppCompatActivity {
         } else {
             tmp_email = "無";
         }
-        if(session.getHypertension() != null && !session.getHypertension().isEmpty()){
+        if(session.getHypertension() != null && !session.getHypertension().isEmpty() && "1".equals(session.getHypertension()) ){
             tmp_hy = "有";
         } else {
             tmp_hy = "無";
         }
-        if(session.getDiabetes() != null && !session.getDiabetes().isEmpty()){
+        if(session.getDiabetes() != null && !session.getDiabetes().isEmpty() && "1".equals(session.getDiabetes()) ){
             tmp_diabetes = "有";
         } else {
             tmp_diabetes = "無";
         }
-        if(session.getDisease() != null && !session.getDisease().isEmpty()){
+        if(session.getDisease() != null && !session.getDisease().isEmpty() && "1".equals(session.getDisease()) ){
             tmp_disease = "有";
         } else {
             tmp_disease = "無";
