@@ -49,8 +49,13 @@ public class Bs_nearmonth extends Fragment {
                 "sun="+bs_buffer[6];*/
 
         String para="";
-        for(int i=0;i<bs_buffer.length;i++){
-            para+=bs_buffer[i]+"+";
+        
+
+        para += bs_buffer[0];
+        for(int i=1;i<bs_buffer.length;i++){
+            if(bs_buffer[i]!=0) {
+                para += "+" + bs_buffer[i];
+            }
         }
         String url_ref = htmlurl + "?something=" + para;
         int avgbs,sumbs=0,avgby=0;

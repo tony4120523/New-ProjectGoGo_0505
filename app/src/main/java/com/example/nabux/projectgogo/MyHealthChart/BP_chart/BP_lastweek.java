@@ -60,8 +60,11 @@ public class BP_lastweek extends Fragment {
 */
 
         String para="";
-        for(int i=0;i<7;i++){
-            para+=bp_sys_buffer[i]+"+"+bp_dia_buffer[i]+"+";
+        para+=bp_sys_buffer[0]+"+"+bp_dia_buffer[0];
+        for(int i=1;i<7;i++){
+            if(bp_dia_buffer[i]!=0 && bp_sys_buffer[i] !=0) {
+                para += "+" + bp_sys_buffer[i] + "+" + bp_dia_buffer[i];
+            }
         }
         String url_ref = htmlurl + "?something=" + para;
         int avgby1=0,avgby2=0;

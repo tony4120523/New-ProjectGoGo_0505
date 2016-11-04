@@ -49,10 +49,11 @@ public class Bs_lastweek extends Fragment {
 
 
         String para="";
-        for(int i=0;i<7;i++){
-
-                para += bs_buffer[i] + "+";
-
+        para += bs_buffer[0];
+        for(int i=1;i<7;i++){
+                if(bs_buffer[i]!=0) {
+                    para += "+" + bs_buffer[i];
+                }
         }
         String url_ref = htmlurl + "?something=" + para;
         int avgbs,sumbs=0,avgby=0;

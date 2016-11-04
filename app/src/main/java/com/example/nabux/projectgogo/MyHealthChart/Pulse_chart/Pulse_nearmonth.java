@@ -48,8 +48,12 @@ public class Pulse_nearmonth extends Fragment {
                 "sun="+pulse_buffer[6];*/
 
         String para="";
-        for(int i=0;i<pulse_buffer.length;i++){
-            para+=pulse_buffer[i]+"+";
+
+        para += pulse_buffer[0];
+        for(int i=1;i<pulse_buffer.length;i++){
+            if(pulse_buffer[i]!=0) {
+                para += "+"+pulse_buffer[i];
+            }
         }
         String url_ref = htmlurl + "?something=" + para;
         int avgpulse,sumpulse=0,avgby=0;

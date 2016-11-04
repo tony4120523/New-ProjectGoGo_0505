@@ -3,6 +3,7 @@ package com.example.nabux.projectgogo.MyHealthChart.BP_chart;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import com.example.nabux.projectgogo.MyHealthChart.Step_chart.Step_lastweek;
 import com.example.nabux.projectgogo.R;
+
+import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
 public class BP_thisweek extends Fragment {
     WebView webhg;
+    private static final String TAG = BP_thisweek.class.getSimpleName();
+
     TextView tvtime,tvavgsys,tvavgdia;
     double avgsys,avgdia,sumsys,sumdia;
     double[] bp_sys_buffer;
@@ -60,9 +66,13 @@ public class BP_thisweek extends Fragment {
 
 
         String para="";
-        for(int i=0;i<7;i++){
-            para+=bp_sys_buffer[i]+"+"+bp_dia_buffer[i]+"+";
+        para+=bp_sys_buffer[0]+"+"+bp_dia_buffer[0];
+        for(int i=1;i<7;i++){
+            if(bp_dia_buffer[i]!=0 && bp_sys_buffer[i] !=0) {
+                para += "+" + bp_sys_buffer[i] + "+" + bp_dia_buffer[i];
+            }
         }
+        Log.d(TAG, "★★★"+para+"★★★");
         String url_ref = htmlurl + "?something=" + para;
         double avgsys,avgdia,sumsys =0.0;
         double sumdia=0.0;

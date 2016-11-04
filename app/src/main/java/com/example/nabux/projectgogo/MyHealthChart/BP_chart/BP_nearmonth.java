@@ -61,8 +61,12 @@ public class BP_nearmonth extends Fragment {
 */
 
         String para="";
-        for(int i=0;i<bp_sys_buffer.length;i++){
-            para+=bp_sys_buffer[i]+"+"+bp_dia_buffer[i]+"+";
+
+        para+=bp_sys_buffer[0]+"+"+bp_dia_buffer[0];
+        for(int i=1;i<bp_sys_buffer.length;i++){
+            if(bp_dia_buffer[i]!=0 && bp_sys_buffer[i] !=0) {
+                para += "+" + bp_sys_buffer[i] + "+" + bp_dia_buffer[i];
+            }
         }
         String url_ref = htmlurl + "?something=" + para;
         double avgsys,avgdia,sumsys =0.0;

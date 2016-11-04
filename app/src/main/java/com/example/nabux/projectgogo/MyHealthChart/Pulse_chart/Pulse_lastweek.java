@@ -48,8 +48,11 @@ public class Pulse_lastweek extends Fragment {
                 "sun="+pulse_buffer[6];*/
 
         String para="";
-        for(int i=0;i<7;i++){
-            para+=pulse_buffer[i]+"+";
+        para += pulse_buffer[0];
+        for(int i=1;i<7;i++){
+            if(pulse_buffer[i]!=0) {
+                para += "+"+pulse_buffer[i];
+            }
         }
         String url_ref = htmlurl + "?something=" + para;
         int avgpulse,sumpulse=0,avgby=0;
