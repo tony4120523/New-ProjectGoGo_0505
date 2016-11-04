@@ -22,4 +22,5 @@
     <string name="title_activity_step__tebbed">步數累積圖</string>
     <string name="title_activity_bs__tebbed">血糖變化圖</string>
     <string name="title_activity_pulse__tabbed">脈搏變化圖</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

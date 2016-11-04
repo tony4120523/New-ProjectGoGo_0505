@@ -48,7 +48,7 @@ public class LogInActivity extends AppCompatActivity {
 
     EditText edtAccount, edtpsd;
     Button btnLog, btnRes;
-    String usernickname, userAccount, userpsd, userID;
+    String usernickname, userAccount, userpsd, userID, user_cp_email, user_hypertension, user_diabetes, user_disease;
     String global_Account;
 
     // JSON Node names(depend on php)
@@ -132,6 +132,10 @@ public class LogInActivity extends AppCompatActivity {
                                     session.setUserAccount(userAccount);
                                     session.setUserPSD(userpsd);
                                     session.setNickName(usernickname);
+                                    session.setUserCPemail(user_cp_email);
+                                    session.setHypertension(user_hypertension);
+                                    session.setDiabetes(user_diabetes);
+                                    session.setDisease(user_disease);
 
                                     // 設定定期通知通知
                                     Calendar calendar = Calendar.getInstance();
@@ -270,10 +274,10 @@ public class LogInActivity extends AppCompatActivity {
                             userpsd = user.getString(TAG_PSD);
                             usernickname = user.getString(TAG_NICKNAME);
                             userID = user.getString(TAG_ID);
-
-
-
-
+                            user_cp_email = user.getString("cp_email");
+                            user_hypertension = user.getString("hypertension");
+                            user_diabetes = user.getString("diabetes");
+                            user_disease = user.getString("disease");
                         }else{
                             // user with Account not found
                             Log.d(TAG, "Success is 0");

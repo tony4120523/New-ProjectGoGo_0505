@@ -60,5 +60,33 @@ public class Session {
         String token = prefs.getString("token","");
         return token;
     }
+    public void setUserCPemail(String user_cp_email) {
+        prefs.edit().putString("CPemail", user_cp_email).commit();
+    }
+    public String getUserCPemail() {
+        String CPemail = prefs.getString("CPemail","");
+        return CPemail;
+    }
+    public void setHypertension(String user_hypertension) {
+        prefs.edit().putString("hypertemsion", user_hypertension).commit();
+    }
+    public String getHypertension() {
+        String hypertension = prefs.getString("hypertension","");
+        return hypertension;
+    }
+    public void setDiabetes(String user_diabetes) {
+        prefs.edit().putString("diabetes", user_diabetes).commit();
+    }
+    public String getDiabetes() {
+        String diabetes = prefs.getString("diabetes","");
+        return diabetes;
+    }
+    public void setDisease(String user_disease) {
+        prefs.edit().putString("disease", user_disease).commit();
+    }
+    public String getDisease() {
+        String disease = prefs.getString("disease","");
+        return disease;
+    }
 }
 

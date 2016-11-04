@@ -2,11 +2,15 @@ package com.example.nabux.projectgogo;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,13 +25,22 @@ import android.widget.TextView;
 import com.example.nabux.projectgogo.HealthKnowledge.KnowledgeActivity;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-
+    private static final String url_test_detials = "http://data.taipei/opendata/datalist/apiAccess";
+    String[]test_name;
+    String[]test_address;
+    String[]test_phone;
+    Handler myHandler;
+    private ProgressDialog pDialog;
+    GSONParser gsonParser = new GSONParser();
 
     public NetworkStateReceiver networkStateReceiver;
     private Session session;
@@ -38,16 +51,18 @@ public class HomeActivity extends AppCompatActivity {
 
     TextView txvhi;
     Button btnreport,btnhelp, btn_ocr, btn_input,btnreportpage,btnchartselect,btnhealth,btnmail;
-    ImageButton imgbtn_input, imgbtn_chart, imgbtn_report, imgbtn_knowledge;
+    ImageButton imgbtn_input, imgbtn_chart, imgbtn_report, imgbtn_knowledge, imgbtn_hospital, imgbtn_member;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        test_name = new String[30];
+        test_address = new String[30];
+        test_phone = new String[30];
 
         networkStateReceiver = new NetworkStateReceiver();
-
         session = new Session(getApplicationContext());
 
         /**
@@ -70,6 +85,8 @@ public class HomeActivity extends AppCompatActivity {
         imgbtn_chart = (ImageButton) findViewById(R.id.imageButtonchart);
         imgbtn_report = (ImageButton) findViewById(R.id.imageButtonreport);
         imgbtn_knowledge = (ImageButton) findViewById(R.id.imageButtonknowledge);
+        imgbtn_hospital = (ImageButton) findViewById(R.id.imageButtonhospital);
+        imgbtn_member = (ImageButton) findViewById(R.id.imageButtonmember);
 
         imgbtn_report.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,17 +104,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
-
-        /*btnreport.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                Intent in = new Intent(getApplicationContext(), xxxxxxxxxReportActivity.class);
-                startActivity(in);
-
-            }
-        });*/
 
         imgbtn_knowledge.setOnClickListener(new View.OnClickListener() {
 
@@ -118,6 +124,48 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(in);
             }
         });
+
+        imgbtn_hospital.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                myHandler = new Handler() {
+
+                    @Override
+                    public void handleMessage(Message msg) {
+                        switch (msg.what) {
+                            case 0:
+                                Intent in = new Intent(getApplicationContext(), ShowHospitalActivity.class);
+                                in.putExtra("name", test_name);
+                                in.putExtra("address", test_address);
+                                in.putExtra("phone",test_phone);
+                                startActivity(in);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                };
+                new Getdata("test").execute();
+            }
+        });
+
+        imgbtn_member.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent in = new Intent(getApplicationContext(), MemberActivity.class);
+                startActivity(in);
+            }
+        });
+
+        /*btnreport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent in = new Intent(getApplicationContext(), xxxxxxxxxReportActivity.class);
+                startActivity(in);
+            }
+        });*/
     }
 
     @Override
@@ -200,6 +248,70 @@ public class HomeActivity extends AppCompatActivity {
         }
     };
 
+    class Getdata extends AsyncTask<String, String, String> {
+        String describe;
+        Getdata(String desc) {
+            describe = desc;
+        }
 
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(HomeActivity.this);
+            pDialog.setMessage("Loading ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+
+        protected String doInBackground(String... args) {
+
+            try {
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+
+                if(describe.equals("test")) {
+
+                    String ppap="scope=resourceAquire&rid=ca9b88ff-a881-4ca3-a3a4-b26747f3e3e7";
+                    Log.d(TAG, "★★★★★★★★★★ : " + ppap);
+                    JSONObject json = gsonParser.makeHttpRequest(url_test_detials, "GET", ppap);
+                    Log.d(TAG, "RETURN JSON : " + json.toString());
+                    JSONObject cc = json.getJSONObject("result");
+                    JSONArray aa = cc.getJSONArray("results");
+                    String str="";
+                    int kk=cc.getJSONArray("results").length();
+                    Log.d("★☆★☆★☆★☆★☆",""+kk);
+                    str += "\n--------\n";
+
+                    for(int i=0;i<30;i++){
+
+                        test_name[i]=aa.getJSONObject(i).getString("name");
+                        test_address[i]=aa.getJSONObject(i).getString("address_for_display");
+                        test_phone[i]=aa.getJSONObject(i).getString("telephone");
+                        str += "name: "+aa.getJSONObject(i).getString("name")+"\n";
+                        str += "address: "+aa.getJSONObject(i).getString("address_for_display")+"\n";
+                        str += "phone: "+aa.getJSONObject(i).getString("telephone")+"\n";
+                        str += "\n--------\n";
+                    }
+
+                    Log.d(TAG, str);
+                }
+
+                else {
+                    //wait to add...
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once got all details
+            pDialog.dismiss();
+            myHandler.sendEmptyMessage(0);
+
+        }
+    }
 
 }

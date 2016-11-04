@@ -98,9 +98,9 @@ public class RegistActivity extends AppCompatActivity {
                 psd = edrgpsd.getText().toString();
                 nickname = edrgnickname.getText().toString();
                 cp_email = edit_cp_email.getText().toString();
-                hypertension = chk_hyper.isChecked() ? "TRUE" : "FALSE";
-                diabetes = chk_diabetes.isChecked() ? "TRUE" : "FALSE";
-                heart_disease = chk_heart.isChecked() ? "TRUE" : "FALSE";
+                hypertension = chk_hyper.isChecked() ? "1" : "0";
+                diabetes = chk_diabetes.isChecked() ? "1" : "0";
+                heart_disease = chk_heart.isChecked() ? "1" : "0";
 
                 myHandler = new Handler() {
 
