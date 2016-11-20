@@ -46,6 +46,7 @@ dependencies {
     compile 'com.google.android.gms:play-services:9.8.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:multidex:1.0.1'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 }
 
 // Add to the bottom of the file

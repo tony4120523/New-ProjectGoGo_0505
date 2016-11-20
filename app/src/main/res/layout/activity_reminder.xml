@@ -17,8 +17,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/remindertextview"
-        android:textSize="50dp"
-        android:layout_weight="1" />
+        android:textSize="50dp" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/reminder_view"
+        android:layout_weight="3" />
     <Button
         android:text="OK"
         android:layout_width="match_parent"

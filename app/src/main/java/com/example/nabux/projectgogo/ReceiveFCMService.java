@@ -33,10 +33,17 @@ public class ReceiveFCMService extends FirebaseMessagingService {
          * background and closed will use notification center to display notification
           */
         Log.d(TAG, remoteMessage.getData().get("message"));
+        if(remoteMessage.getData().containsKey("link")){
+            Log.d(TAG, remoteMessage.getData().get("link"));
+        }
         Intent i = new Intent();
         i.setClass(this, ReminderActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.putExtra("message", remoteMessage.getData().get("message"));
+        if(remoteMessage.getData().containsKey("link")){
+            i.putExtra("link", remoteMessage.getData().get("link"));
+        }
+
         startActivity(i);
     }
 
